@@ -3,96 +3,120 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tantie Lorraine</title>
-  <meta name="description" content="Tantie Lorraine: apresentação, serviços e contactos.">
+  <title>Tantie Lorraine's | Sabores das Caraíbas</title>
+  <meta name="description" content="Molhos picantes, compotas de malagueta e sabores de Trindade e Tobago, feitos à mão em pequenos lotes. Brevemente em Portugal.">
   <link rel="canonical" href="https://tantielorraine.pt/">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Tantie Lorraine">
-  <meta property="og:title" content="Tantie Lorraine">
-  <meta property="og:description" content="Tantie Lorraine: apresentação, serviços e contactos.">
+  <meta property="og:site_name" content="Tantie Lorraine's">
+  <meta property="og:title" content="Tantie Lorraine's | Sabores das Caraíbas">
+  <meta property="og:description" content="Molhos picantes, compotas de malagueta e sabores de Trindade e Tobago, feitos à mão em pequenos lotes. Brevemente em Portugal.">
   <meta property="og:url" content="https://tantielorraine.pt/">
   <meta property="og:locale" content="pt_PT">
+  <link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/">
+  <link rel="alternate" hreflang="en-GB" href="https://www.tantielorraine.co.uk/">
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="preload" href="/assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/site.css">
   <script src="/assets/js/main.js" defer></script>
 </head>
 <body>
-  <a class="saltar" href="#conteudo">Saltar para o conteúdo</a>
+  <a class="saltar tl-text-ui" href="#conteudo">Saltar para o conteúdo</a>
 
-  <header class="cabecalho">
-    <div class="contentor">
-      <a class="marca" href="/">Tantie Lorraine</a>
-      <button class="menu-botao" type="button" aria-expanded="false" aria-controls="nav-principal">Menu</button>
-      <nav class="nav" id="nav-principal" aria-label="Navegação principal">
-        <ul>
-          <li><a href="/" aria-current="page">Início</a></li>
-          <li><a href="/sobre.html">Sobre</a></li>
-          <li><a href="/servicos.html">Serviços</a></li>
-          <li><a href="/galeria.html">Galeria</a></li>
-          <li><a href="/contactos.html">Contactos</a></li>
-        </ul>
-      </nav>
-    </div>
+  <header class="tl-header">
+    <!-- TODO: logótipo oficial -->
+    <div class="tl-wordmark"><a href="/">Tantie<br>Lorraine's</a></div>
+    <button class="menu-botao tl-text-nav" type="button" aria-expanded="false" aria-controls="nav-principal">Menu</button>
+    <nav class="tl-nav" id="nav-principal" aria-label="Principal"><a href="/loja.html">Loja</a><a href="/mercados.html">Mercados</a><a href="/receitas.html">Receitas</a><a href="/eventos.html">Eventos</a><a href="/sobre.html">Sobre</a></nav>
   </header>
 
   <main id="conteudo">
-    <section class="destaque">
+    <section class="hero">
+      <!-- TODO: fotografia desfocada a toda a largura (frascos sobre fundo verde escuro), ex.:
+           <img class="hero__foto" src="/assets/img/hero.webp" alt=""> -->
       <div class="contentor">
-        <h1>Tantie Lorraine</h1>
-        <p><span class="a-preencher">[A PREENCHER: frase de apresentação, uma ou duas linhas sobre o que a Tantie Lorraine faz e para quem]</span></p>
-        <a class="botao" href="contactos.html">Fale connosco</a>
-        <a class="botao botao-secundario" href="servicos.html">Ver serviços</a>
+        <h1 class="tl-text-hero-mega">Chilli Tings</h1>
+        <p class="tl-text-subhead">Molhos picantes, compotas de malagueta e sabores de Trindade e Tobago. Brevemente em Portugal.</p>
+        <a class="tl-btn tl-btn--hero" href="/loja.html">Ver loja</a>
       </div>
     </section>
 
-    <section class="seccao">
+    <section class="seccao centrado">
       <div class="contentor">
-        <h2>O que fazemos</h2>
-        <p class="seccao-intro"><span class="a-preencher">[A PREENCHER: introdução curta à oferta]</span></p>
-        <div class="grelha">
-          <article class="cartao">
-            <h3><span class="a-preencher">[A PREENCHER: serviço ou produto 1]</span></h3>
-            <p><span class="a-preencher">[A PREENCHER: descrição em duas ou três linhas]</span></p>
+        <h2 class="tl-text-statement">Sabores das Caraíbas, feitos à mão em Surrey</h2>
+        <div class="texto">
+          <p class="tl-text-body">Molhos picantes, compotas de malagueta e relishes premiados, feitos em pequenos lotes com ingredientes frescos e naturais. Sem conservantes nem aditivos artificiais.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccao seccao--mist">
+      <div class="contentor">
+        <h2 class="tl-text-section-title centrado">Os favoritos</h2>
+        <div class="grelha-produtos">
+          <article class="tl-card">
+            <div class="tl-card__media">Fotografia do produto</div>
+            <h3 class="tl-card__title">Scotch Bonnet Jam</h3>
+            <p class="tl-card__price">7,00 €</p>
+            <button class="tl-btn tl-btn--compact" type="button" disabled>Brevemente</button>
           </article>
-          <article class="cartao">
-            <h3><span class="a-preencher">[A PREENCHER: serviço ou produto 2]</span></h3>
-            <p><span class="a-preencher">[A PREENCHER: descrição em duas ou três linhas]</span></p>
+          <article class="tl-card">
+            <div class="tl-card__media">Fotografia do produto</div>
+            <h3 class="tl-card__title">Debe Pepper Sauce</h3>
+            <p class="tl-card__price">7,00 €</p>
+            <button class="tl-btn tl-btn--compact" type="button" disabled>Brevemente</button>
           </article>
-          <article class="cartao">
-            <h3><span class="a-preencher">[A PREENCHER: serviço ou produto 3]</span></h3>
-            <p><span class="a-preencher">[A PREENCHER: descrição em duas ou três linhas]</span></p>
+          <article class="tl-card">
+            <div class="tl-card__media">Fotografia do produto</div>
+            <h3 class="tl-card__title">Mayaro Pepper Sauce</h3>
+            <p class="tl-card__price">8,00 €</p>
+            <button class="tl-btn tl-btn--compact" type="button" disabled>Brevemente</button>
+          </article>
+          <article class="tl-card">
+            <div class="tl-card__media">Fotografia do produto</div>
+            <h3 class="tl-card__title">Tomato Chilli Jam</h3>
+            <p class="tl-card__price">7,00 €</p>
+            <button class="tl-btn tl-btn--compact" type="button" disabled>Brevemente</button>
           </article>
         </div>
+        <p class="centrado" style="margin-top:var(--space-gutter)"><a class="tl-btn tl-btn--compact" href="/loja.html">Ver toda a gama</a></p>
       </div>
     </section>
 
     <section class="seccao">
       <div class="contentor duas-colunas">
-        <div>
-          <h2>Quem somos</h2>
-          <p><span class="a-preencher">[A PREENCHER: resumo da história e do posicionamento, três a quatro linhas]</span></p>
-          <a class="botao botao-secundario" href="sobre.html">Conhecer a nossa história</a>
+        <div class="texto">
+          <h2 class="tl-text-section-title">Quem é a Tantie?</h2>
+          <p class="tl-text-body">Lorraine nasceu e cresceu em Trindade e Tobago, criada por tias e avós. Em Surrey, onde vive, transformou as receitas de casa numa marca artesanal premiada.</p>
+          <p class="tl-text-body"><a href="/sobre.html">Conhecer a história</a></p>
         </div>
-        <div class="imagem-reservada">Imagem de apresentação (assets/img/)</div>
+        <!-- TODO: fotografia (receita em grande plano, luz natural) -->
+        <div class="foto-reservada tl-text-ui">Fotografia</div>
       </div>
     </section>
 
-    <section class="seccao">
+    <section class="seccao seccao--vermelha centrado">
       <div class="contentor">
-        <h2>Vamos conversar?</h2>
-        <p class="seccao-intro"><span class="a-preencher">[A PREENCHER: convite ao contacto, por exemplo pedido de orçamento, encomenda ou marcação]</span></p>
-        <a class="botao" href="contactos.html">Contactos</a>
+        <h2 class="tl-text-quote-title">Diz-se por aí</h2>
+        <div class="texto" style="margin-top:var(--space-gutter)">
+          <p class="tl-text-body"><span class="a-preencher">[A PREENCHER: testemunhos reais de clientes, com nome e autorização para publicar]</span></p>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="rodape">
-    <div class="contentor">
-      <p>&copy; <span id="ano">2026</span> Tantie Lorraine. Todos os direitos reservados.</p>
-      <ul>
-        <li><a href="/privacidade.html">Privacidade e informação legal</a></li>
-        <li><a href="https://www.livroreclamacoes.pt" rel="noopener" target="_blank">Livro de Reclamações</a></li>
-      </ul>
+  <footer class="tl-footer">
+    <div class="tl-footer__links"><a href="/sobre.html">Sobre</a><a href="/entregas.html">Entregas e devoluções</a><a href="/loja.html">Loja</a><a href="/privacidade.html">Privacidade</a><a href="/contactos.html">Contactos</a><a href="https://www.livroreclamacoes.pt" rel="noopener" target="_blank">Livro de Reclamações</a></div>
+    <div class="tl-footer__social">
+      <a class="tl-text-nav" href="https://www.instagram.com/tantielorraine/" rel="noopener" target="_blank">Instagram</a>
+      <a class="tl-text-nav" href="https://www.tantielorraine.co.uk/" rel="noopener" target="_blank" hreflang="en-GB">Site do Reino Unido</a>
+    </div>
+    <div class="tl-footer__bottom">
+      <!-- TODO: logótipo oficial -->
+      <div class="tl-wordmark" style="font-size:28px">Tantie<br>Lorraine's</div>
+      <div class="tl-footer__legal">TANTIE LORRAINE &reg; <span id="ano">2026</span> TODOS OS DIREITOS RESERVADOS</div>
     </div>
   </footer>
 </body>

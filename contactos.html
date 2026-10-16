@@ -3,71 +3,65 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contactos | Tantie Lorraine</title>
-  <meta name="description" content="Contactos, morada e horário da Tantie Lorraine.">
+  <title>Contactos | Tantie Lorraine's</title>
+  <meta name="description" content="Contactos da Tantie Lorraine's em Portugal.">
   <link rel="canonical" href="https://tantielorraine.pt/contactos.html">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Tantie Lorraine">
-  <meta property="og:title" content="Contactos | Tantie Lorraine">
-  <meta property="og:description" content="Contactos, morada e horário da Tantie Lorraine.">
+  <meta property="og:site_name" content="Tantie Lorraine's">
+  <meta property="og:title" content="Contactos | Tantie Lorraine's">
+  <meta property="og:description" content="Contactos da Tantie Lorraine's em Portugal.">
   <meta property="og:url" content="https://tantielorraine.pt/contactos.html">
   <meta property="og:locale" content="pt_PT">
+  <link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/contactos.html">
+  <link rel="alternate" hreflang="en-GB" href="https://www.tantielorraine.co.uk/">
   <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="preload" href="/assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/site.css">
   <script src="/assets/js/main.js" defer></script>
 </head>
 <body>
-  <a class="saltar" href="#conteudo">Saltar para o conteúdo</a>
+  <a class="saltar tl-text-ui" href="#conteudo">Saltar para o conteúdo</a>
 
-  <header class="cabecalho">
-    <div class="contentor">
-      <a class="marca" href="/">Tantie Lorraine</a>
-      <button class="menu-botao" type="button" aria-expanded="false" aria-controls="nav-principal">Menu</button>
-      <nav class="nav" id="nav-principal" aria-label="Navegação principal">
-        <ul>
-          <li><a href="/">Início</a></li>
-          <li><a href="/sobre.html">Sobre</a></li>
-          <li><a href="/servicos.html">Serviços</a></li>
-          <li><a href="/galeria.html">Galeria</a></li>
-          <li><a href="/contactos.html" aria-current="page">Contactos</a></li>
-        </ul>
-      </nav>
-    </div>
+  <header class="tl-header">
+    <!-- TODO: logótipo oficial -->
+    <div class="tl-wordmark"><a href="/">Tantie<br>Lorraine's</a></div>
+    <button class="menu-botao tl-text-nav" type="button" aria-expanded="false" aria-controls="nav-principal">Menu</button>
+    <nav class="tl-nav" id="nav-principal" aria-label="Principal"><a href="/loja.html">Loja</a><a href="/mercados.html">Mercados</a><a href="/receitas.html">Receitas</a><a href="/eventos.html">Eventos</a><a href="/sobre.html">Sobre</a></nav>
   </header>
 
   <main id="conteudo">
-    <section class="cabecalho-pagina">
+    <section class="seccao">
       <div class="contentor">
-        <h1>Contactos</h1>
-        <p><span class="a-preencher">[A PREENCHER: frase de convite ao contacto]</span></p>
+        <h1 class="tl-text-section-title">Contactos</h1>
+        <p class="tl-text-ui-lg texto">Perguntas, encomendas para eventos ou interesse na loja: diga-nos o que precisa.</p>
       </div>
     </section>
 
     <section class="seccao">
-      <div class="contentor duas-colunas">
-        <ul class="lista-contactos">
-          <li><strong>Telefone</strong> <a href="tel:+351000000000"><span class="a-preencher">[A PREENCHER: +351 000 000 000]</span></a></li>
-          <li><strong>Email</strong> <a href="mailto:geral@tantielorraine.pt">geral@tantielorraine.pt</a> <span class="a-preencher">[A PREENCHER: confirmar endereço]</span></li>
-          <li><strong>Morada</strong> <span class="a-preencher">[A PREENCHER: rua, código postal, localidade]</span></li>
-          <li><strong>Horário</strong> <span class="a-preencher">[A PREENCHER: dias e horas]</span></li>
-          <li><strong>Redes sociais</strong> <span class="a-preencher">[A PREENCHER: ligações para Instagram, Facebook, etc.]</span></li>
+      <div class="contentor">
+        <ul class="lista-contactos texto">
+          <li><span class="tl-text-label-strong">Email</span> <span class="tl-text-body"><span class="a-preencher">[A PREENCHER: endereço de email para Portugal]</span></span></li>
+          <li><span class="tl-text-label-strong">Telefone</span> <span class="tl-text-body"><span class="a-preencher">[A PREENCHER: telefone, se aplicável]</span></span></li>
+          <li><span class="tl-text-label-strong">Instagram</span> <a class="tl-text-body" href="https://www.instagram.com/tantielorraine/" rel="noopener" target="_blank">@tantielorraine</a></li>
+          <li><span class="tl-text-label-strong">Reino Unido</span> <a class="tl-text-body" href="https://www.tantielorraine.co.uk/" rel="noopener" target="_blank" hreflang="en-GB">tantielorraine.co.uk</a></li>
         </ul>
-        <div>
-          <h2>Como chegar</h2>
-          <p><span class="a-preencher">[A PREENCHER: indicações de acesso e estacionamento]</span></p>
-          <p><a class="botao botao-secundario" href="https://www.google.com/maps/search/?api=1&amp;query=Tantie+Lorraine" rel="noopener" target="_blank">Abrir no mapa</a></p>
-        </div>
       </div>
     </section>
   </main>
 
-  <footer class="rodape">
-    <div class="contentor">
-      <p>&copy; <span id="ano">2026</span> Tantie Lorraine. Todos os direitos reservados.</p>
-      <ul>
-        <li><a href="/privacidade.html">Privacidade e informação legal</a></li>
-        <li><a href="https://www.livroreclamacoes.pt" rel="noopener" target="_blank">Livro de Reclamações</a></li>
-      </ul>
+  <footer class="tl-footer">
+    <div class="tl-footer__links"><a href="/sobre.html">Sobre</a><a href="/entregas.html">Entregas e devoluções</a><a href="/loja.html">Loja</a><a href="/privacidade.html">Privacidade</a><a href="/contactos.html" aria-current="page">Contactos</a><a href="https://www.livroreclamacoes.pt" rel="noopener" target="_blank">Livro de Reclamações</a></div>
+    <div class="tl-footer__social">
+      <a class="tl-text-nav" href="https://www.instagram.com/tantielorraine/" rel="noopener" target="_blank">Instagram</a>
+      <a class="tl-text-nav" href="https://www.tantielorraine.co.uk/" rel="noopener" target="_blank" hreflang="en-GB">Site do Reino Unido</a>
+    </div>
+    <div class="tl-footer__bottom">
+      <!-- TODO: logótipo oficial -->
+      <div class="tl-wordmark" style="font-size:28px">Tantie<br>Lorraine's</div>
+      <div class="tl-footer__legal">TANTIE LORRAINE &reg; <span id="ano">2026</span> TODOS OS DIREITOS RESERVADOS</div>
     </div>
   </footer>
 </body>

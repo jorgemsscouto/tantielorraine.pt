@@ -1,0 +1,157 @@
+/* Tantie Lorraine: tokens gerados a partir de tokens.json.
+   Cópia de .claude/skills/tantie-lorraine-design-system/tokens.css sem o @import do Google Fonts:
+   as fontes são servidas localmente por fonts.css. */
+
+:root {
+  --chilli-red: #ff2524;
+  --ink: #000000;
+  --paper: #ffffff;
+  --mist: #f0f0f0;
+  --plum-grey: #5e5362;
+  --muted: #adadad;
+  --overlay: rgba(0, 0, 0, 0.8);
+  --platform-blue: #0869d9;
+  --space-btn-compact-y: 8px;
+  --space-btn-y: 12px;
+  --space-btn-compact-x: 15px;
+  --space-btn-x: 16px;
+  --space-card-gap: 20px;
+  --space-gutter: 32px;
+  --space-column-gap: 40px;
+  --space-header: 92px;
+  --radius-none: 0;
+  --radius-media: 20px;
+  --radius-button-compact: 20px;
+  --radius-pill: 999px;
+  --shadow-hard: 3.21px 3.83px 0px 0px #000000;
+  --border-button: 2px;
+  --border-stepper: 2px;
+  --font-display: Anton, "Arial Narrow", Impact, sans-serif;
+  --font-condensed: "DIN Neuzeit Grotesk W01 Bold Condensed", "DINNeuzeitGroteskLTW01-BdCond", Anton, "Arial Narrow", sans-serif;
+  --font-body: "Avenir LT W01 35 Light", "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif;
+  --font-ui: "DIN Next W01 Light", "DIN Next LT Pro", "Helvetica Neue", Arial, sans-serif;
+  --font-product: Poppins, "Helvetica Neue", Arial, sans-serif;
+  --font-quote: "Work Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.tl-text-hero-mega {
+  font-family: var(--font-display);
+  font-size: 221.667px;
+  line-height: 1;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.tl-text-statement {
+  font-family: var(--font-display);
+  font-size: 80px;
+  line-height: 1;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.tl-text-section-title {
+  font-family: var(--font-display);
+  font-size: 44.3334px;
+  line-height: 1;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.tl-text-product-title {
+  font-family: var(--font-display);
+  font-size: 40.3539px;
+  line-height: 1;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.tl-text-button-label {
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.tl-text-subhead {
+  font-family: var(--font-display);
+  font-size: 18.62px;
+  line-height: 24.206px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.tl-text-label-strong {
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 20.8px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.tl-text-legal {
+  font-family: var(--font-display);
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.tl-text-nav {
+  font-family: var(--font-condensed);
+  font-size: 18px;
+  line-height: 22.5px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.tl-text-price {
+  font-family: var(--font-condensed);
+  font-size: 18px;
+  line-height: 28.8px;
+  font-weight: 400;
+}
+.tl-text-category {
+  font-family: var(--font-condensed);
+  font-size: 22px;
+  line-height: 35.2px;
+  font-weight: 400;
+}
+.tl-text-body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+.tl-text-ui-lg {
+  font-family: var(--font-ui);
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 400;
+}
+.tl-text-ui {
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+.tl-text-ui-sm {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: 400;
+}
+.tl-text-card-title {
+  font-family: var(--font-product);
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+}
+.tl-text-quote-title {
+  font-family: var(--font-quote);
+  font-size: 50px;
+  line-height: 50px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.tl-text-quote-name {
+  font-family: var(--font-quote);
+  font-size: 14px;
+  line-height: 18.2px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); }

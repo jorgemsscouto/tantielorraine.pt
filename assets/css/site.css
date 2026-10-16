@@ -1,0 +1,212 @@
+/* tantielorraine.pt: composição das páginas sobre o design system (tokens.css + components.css).
+   Regras do sistema: só variáveis para cor, espaçamento e raios; tipografia pelas classes .tl-text-*.
+   Única adaptação: os títulos grandes reduzem em ecrãs estreitos, com o valor do token como máximo. */
+
+:root {
+  --largura-max: 1200px;
+  --seccao-y: calc(var(--space-column-gap) * 2);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main { flex: 1; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--ink); }
+
+h1, h2, h3, p { margin: 0; }
+
+.contentor {
+  width: 100%;
+  max-width: var(--largura-max);
+  margin: 0 auto;
+  padding: 0 var(--space-gutter);
+  box-sizing: border-box;
+}
+
+/* Acessibilidade: saltar para o conteúdo */
+.saltar {
+  position: absolute;
+  left: -999px;
+  top: var(--space-btn-y);
+  z-index: 100;
+  background: var(--ink);
+  color: var(--paper);
+  padding: var(--space-btn-compact-y) var(--space-btn-compact-x);
+  border-radius: var(--radius-pill);
+}
+.saltar:focus { left: var(--space-btn-y); }
+
+/* Cabeçalho fixo */
+.tl-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.tl-wordmark a { color: inherit; text-decoration: none; }
+.tl-nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 4px; }
+
+.menu-botao {
+  display: none;
+  align-items: center;
+  background: transparent;
+  color: var(--ink);
+  border: var(--border-button) solid var(--ink);
+  border-radius: var(--radius-pill);
+  padding: var(--space-btn-compact-y) var(--space-btn-compact-x);
+  cursor: pointer;
+}
+.menu-botao:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+@media (max-width: 760px) {
+  .menu-botao { display: inline-flex; }
+  .tl-nav {
+    display: none;
+    position: absolute;
+    top: var(--space-header);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-card-gap);
+    padding: var(--space-btn-y) var(--space-gutter) var(--space-gutter);
+    background: var(--chilli-red);
+  }
+  .tl-nav.aberto { display: flex; }
+}
+
+/* Títulos em Anton: entrelinha 1,2 em vez de 1, para os acentos das maiúsculas (Í, Ã, Ç) não tocarem na linha de cima */
+.tl-text-hero-mega,
+.tl-text-statement,
+.tl-text-section-title,
+.tl-text-product-title { line-height: 1.2; }
+
+/* Títulos grandes em ecrãs estreitos (máximo = valor do token) */
+.tl-text-hero-mega { font-size: clamp(56px, 15vw, 221.667px); }
+.tl-text-statement { font-size: clamp(40px, 8vw, 80px); }
+.tl-text-section-title { font-size: clamp(32px, 6vw, 44.3334px); }
+.tl-text-quote-title { font-size: clamp(32px, 6vw, 50px); line-height: 1.2; }
+
+/* Secções */
+.seccao { padding: var(--seccao-y) 0; }
+.seccao--mist { background: var(--mist); }
+.seccao--vermelha { background: var(--chilli-red); color: var(--ink); }
+.seccao .tl-text-section-title,
+.seccao .tl-text-statement { margin-bottom: var(--space-gutter); }
+.texto { max-width: 46rem; }
+.texto p + p { margin-top: var(--space-btn-y); }
+.texto .tl-text-subhead { margin: var(--space-gutter) 0 var(--space-btn-y); }
+
+.centrado { text-align: center; }
+.centrado .texto { margin: 0 auto; }
+
+/* Hero: fotografia desfocada a toda a largura com título em paper */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--paper);
+  text-align: center;
+  padding: calc(var(--seccao-y) * 1.5) 0;
+}
+.hero__foto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(6px);
+  transform: scale(1.05);
+}
+.hero__foto + .contentor { position: relative; }
+.hero .tl-text-subhead { margin: var(--space-card-gap) auto var(--space-gutter); max-width: 40rem; }
+
+/* Grelha de produtos */
+.grelha-produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(234px, 1fr));
+  justify-items: center;
+  gap: var(--space-column-gap) var(--space-card-gap);
+}
+.tl-card .tl-text-body { margin: 0; }
+.tl-card .tl-card__price { margin: 0; }
+.tl-btn[disabled] { cursor: default; }
+.categoria { margin: var(--seccao-y) 0 var(--space-gutter); }
+.categoria:first-of-type { margin-top: 0; }
+
+/* Faixa "Brevemente" */
+.aviso {
+  border: var(--border-button) solid var(--ink);
+  border-radius: var(--radius-media);
+  padding: var(--space-card-gap) var(--space-gutter);
+  margin-bottom: var(--seccao-y);
+}
+.aviso .tl-text-section-title { margin-bottom: var(--space-btn-y); }
+
+/* Duas colunas: texto ao lado de fotografia */
+.duas-colunas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-column-gap);
+  align-items: center;
+}
+@media (max-width: 760px) {
+  .duas-colunas { grid-template-columns: 1fr; }
+}
+
+/* Fotografia por colocar (mesmo tratamento do cartão de produto) */
+.foto-reservada {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-media);
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-card-gap);
+  box-sizing: border-box;
+}
+
+/* Receitas */
+.grelha-receitas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-column-gap) var(--space-card-gap);
+}
+.receita .foto-reservada { margin-bottom: var(--space-btn-y); }
+.receita .tl-text-subhead { margin-bottom: var(--space-btn-compact-y); }
+
+/* Contactos */
+.lista-contactos { list-style: none; margin: 0; padding: 0; }
+.lista-contactos li { padding: var(--space-btn-y) 0; border-bottom: var(--border-stepper) solid var(--mist); }
+.lista-contactos .tl-text-label-strong { display: block; }
+
+/* Texto legal */
+.texto-legal .tl-text-subhead { margin: var(--space-gutter) 0 var(--space-btn-y); }
+.texto-legal p + p { margin-top: var(--space-btn-y); }
+
+/* Conteúdo por preencher: remover o span quando o texto final estiver colocado */
+.a-preencher {
+  background: var(--paper);
+  color: var(--ink);
+  outline: 2px dashed var(--plum-grey);
+  padding: 0 0.2em;
+}
+
+/* Rodapé: linha de separação quando a última secção da página também é vermelha */
+main:has(> .seccao--vermelha:last-child) + .tl-footer { border-top: var(--border-button) solid var(--ink); }
+
+/* Rodapé */
+.tl-footer__links a[aria-current="page"] { text-decoration-thickness: 3px; }
+.tl-footer__social { display: flex; gap: var(--space-card-gap); }
+@media (max-width: 760px) {
+  .tl-footer__links { grid-template-columns: 1fr; }
+}
