@@ -37,6 +37,7 @@ Adaptações deste site ao sistema (manter):
 - Menu, por esta ordem: História, Produtos, Eventos, Contactos. Sem páginas de Mercados nem de Receitas. Rodapé: História, Produtos, Contactos, Privacidade, Livro de Reclamações.
 - Não acrescentar recursos de terceiros (fontes externas, mapas incorporados, analytics, píxeis) sem atualizar `privacidade.html` e avaliar a necessidade de aviso de cookies.
 - Logótipo e fotografias: os do site do Reino Unido, nos caminhos listados no `README.md`. Usar a função de troca já existente (`<img hidden onload=...>` seguido do espaço reservado) para imagens novas, com `alt` descritivo.
+- Domínio: endereço principal `https://www.tantielorraine.pt`; `tantielorraine.pt` e `http://` redirecionam para ele. No tema, nunca escrever o domínio: usar `home_url()`, `tl_url()` e `tl_img()`.
 - Entidade em Portugal: GADGETMÉTODO, LDA, NIPC 513978011, Rua das Cruzes, n.º 625, 4100-195 Porto. Email provisório: gadgetmetodo@gmail.com.
 
 ## Git

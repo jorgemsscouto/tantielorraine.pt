@@ -4,12 +4,12 @@
 ErrorDocument 404 /404.html
 Options -Indexes
 
-# Forçar HTTPS e domínio sem "www"
+# Forçar HTTPS e o endereço principal com "www" (tantielorraine.pt redireciona para www.tantielorraine.pt)
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteCond %{HTTPS} off [OR]
-  RewriteCond %{HTTP_HOST} ^www\. [NC]
-  RewriteRule ^ https://tantielorraine.pt%{REQUEST_URI} [L,R=301]
+  RewriteCond %{HTTP_HOST} !^www\. [NC]
+  RewriteRule ^ https://www.tantielorraine.pt%{REQUEST_URI} [L,R=301]
 
   # /index.html -> /
   RewriteCond %{THE_REQUEST} \s/index\.html[\s?] [NC]

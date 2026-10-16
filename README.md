@@ -11,6 +11,29 @@ O site existe em duas formas com o mesmo conteúdo e o mesmo design:
 - **Tema WordPress** em `wordpress/tantie-lorraine/`, para o alojamento WordPress da Amen. É a versão a publicar.
 - **Site estático** na raiz do repositório, que serviu de base e fica como referência.
 
+### Domínio
+
+Endereço principal: **https://www.tantielorraine.pt**. O endereço `tantielorraine.pt` (sem "www") e qualquer pedido em `http://` redirecionam para ele (redirecionamento permanente 301).
+
+Para isso:
+
+1. **DNS** (painel da Amen, zona do domínio): `tantielorraine.pt` e `www.tantielorraine.pt` a apontar para o alojamento.
+2. **Certificado SSL** a cobrir os dois nomes (com e sem "www"); sem isso, quem escrever o nome não coberto vê um aviso de segurança antes do redirecionamento.
+3. **WordPress**, Definições > Geral: "Endereço do WordPress" e "Endereço do site" = `https://www.tantielorraine.pt`.
+4. **.htaccess** na pasta pública, por cima do bloco `# BEGIN WordPress` (o WordPress não mexe no que fica fora desse bloco):
+
+```apache
+# Forçar HTTPS e o endereço principal com "www"
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^ https://www.tantielorraine.pt%{REQUEST_URI} [L,R=301]
+</IfModule>
+```
+
+Se o site entrar em ciclo de redirecionamentos depois desta regra, o alojamento termina o HTTPS antes do Apache: retirar a regra e usar a opção de forçar HTTPS do painel da Amen.
+
 ### Instalar no WordPress da Amen
 
 1. Criar o ficheiro do tema: `wordpress/empacotar.sh` (gera `wordpress/dist/tantie-lorraine.zip`).
