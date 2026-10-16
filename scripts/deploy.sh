@@ -124,8 +124,10 @@ case "$ACAO" in
     if [[ "$PUB_" == "" ]]; then
       DEST="/wordpress-desativado-$DATA"   # a conta FTP só vê a pasta pública: o destino fica dentro dela, bloqueado
       BLOQUEAR=1
+    elif [[ "$PUB" == /* ]]; then
+      DEST="/wordpress-desativado-$DATA"; BLOQUEAR=0   # pasta pública absoluta: destino na raiz da conta
     else
-      DEST="/wordpress-desativado-$DATA"; BLOQUEAR=0
+      DEST="wordpress-desativado-$DATA"; BLOQUEAR=0    # pasta pública relativa (ex.: www): destino ao lado dela
     fi
     echo "== Ficheiros do WordPress em $PUB que serão movidos para $DEST:"
     sed 's/^/   /' <<<"$ITENS"
