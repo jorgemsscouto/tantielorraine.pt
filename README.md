@@ -15,16 +15,16 @@ O site é só de apresentação: não há venda nem preços. A loja mostra a gam
 
 ## Imagens
 
-Logótipo e fotografias são os do site do Reino Unido. Basta colocar cada ficheiro no caminho indicado: a imagem substitui automaticamente o espaço reservado (enquanto o ficheiro não existir, aparece o espaço reservado, sem ícone de imagem partida).
+Logótipo e fotografias são os do site do Reino Unido (inventário de 16 de outubro de 2026), recortados e convertidos para WebP. Cada imagem substitui automaticamente o espaço reservado; se um ficheiro faltar, aparece o espaço reservado, sem ícone de imagem partida. O favicon é o sol do logótipo oficial.
 
 | Ficheiro | Onde aparece |
 |---|---|
 | `assets/img/logo.png` | Cabeçalho e rodapé (enquanto não existir, aparece o nome em texto) |
-| `assets/img/hero.webp` | Fundo desfocado do topo da página inicial |
+| `assets/img/hero.webp` | Fundo desfocado do topo da página inicial (só as filas de cima da pirâmide de frascos: RPCL, ACJ, TCJ) |
 | `assets/img/produtos/<ref>.webp` | Cartões de produto (ver tabela acima) |
 | `assets/img/inicio-tantie.webp` | Página inicial, bloco "Quem é a Tantie?" |
-| `assets/img/sobre.webp` | Página Sobre |
-| `assets/img/eventos.webp` | Página Eventos |
+| `assets/img/sobre.webp` | Página Sobre (retrato 4:5) |
+| `assets/img/eventos.webp` | Página Eventos (pelau de uma sessão Limin with Tantie) |
 | `assets/img/receitas/salsichas-glaceadas.webp`, `tarte-queijo-cabra.webp` | Página Receitas |
 
 Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
@@ -51,7 +51,7 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 ## Por fazer antes de publicar
 
 - Textos marcados com `[A PREENCHER: ...]` (contorno tracejado no navegador): `grep -rn "A PREENCHER" --include=*.html .`
-- Logótipo e fotografias (ver "Imagens").
+- Autorização escrita da Lorraine para usar a marca, o logótipo, as fotografias e os textos, incluindo o direito de imagem do retrato dela.
 
 ## Ver localmente
 

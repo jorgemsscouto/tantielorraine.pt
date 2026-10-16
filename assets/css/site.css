@@ -181,6 +181,7 @@ h1, h2, h3, p { margin: 0; }
   overflow: hidden;
 }
 .foto-reservada img { width: 100%; height: 100%; object-fit: cover; }
+.foto-reservada--retrato { aspect-ratio: 4 / 5; }
 .foto-reservada span { padding: var(--space-card-gap); }
 
 /* Receitas */
