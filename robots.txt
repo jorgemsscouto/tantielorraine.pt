@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.tantielorraine.pt/sitemap.xml
+Sitemap: https://tantielorraine.pt/sitemap.xml

@@ -36,7 +36,6 @@ set ssl:verify-certificate yes
 mirror --reverse --verbose $OPCOES \
   --exclude-glob .git/ \
   --exclude-glob .claude/ \
-  --exclude-glob wordpress/ \
   --exclude-glob .git* \
   --exclude-glob .deploy.env* \
   --exclude-glob .DS_Store \

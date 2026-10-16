@@ -1,14 +1,6 @@
 # tantielorraine.pt
 
-Versão portuguesa do site da Tantie Lorraine's (tantielorraine.co.uk), em duas formas com o mesmo conteúdo: tema WordPress (`wordpress/tantie-lorraine/`, a publicar) e site estático em HTML e CSS na raiz (referência). Ver `README.md` para estrutura, pendentes e publicação.
-
-## Versão a publicar: tema WordPress
-
-- O site é publicado como tema WordPress (`wordpress/tantie-lorraine/`) no alojamento WordPress da Amen. Alterações de conteúdo ou design fazem-se no tema; o site estático na raiz é só referência.
-- Conteúdo das páginas em `patterns/*.php`, só com blocos nativos do WordPress (sem bloco HTML personalizado), para continuar editável no editor. Imagens e ligações internas com `tl_img()` e `tl_url()`.
-- Depois de alterar padrões, validar a marcação dos blocos com `@wordpress/blocks` e `@wordpress/block-library` (sem blocos inválidos nem avisos) e testar o tema num WordPress local.
-- Não acrescentar plugins nem recursos que façam pedidos a servidores externos (ver regra de terceiros abaixo).
-- Gerar o zip com `wordpress/empacotar.sh` (a pasta `wordpress/dist/` não é versionada).
+Versão portuguesa do site da Tantie Lorraine's (tantielorraine.co.uk). Site estático em HTML, CSS e JavaScript simples, sem frameworks nem passo de compilação. Ver `README.md` para estrutura, pendentes e publicação.
 
 ## Design system
 
@@ -37,7 +29,6 @@ Adaptações deste site ao sistema (manter):
 - Menu, por esta ordem: História, Produtos, Eventos, Contactos. Sem páginas de Mercados nem de Receitas. Rodapé: História, Produtos, Contactos, Privacidade, Livro de Reclamações.
 - Não acrescentar recursos de terceiros (fontes externas, mapas incorporados, analytics, píxeis) sem atualizar `privacidade.html` e avaliar a necessidade de aviso de cookies.
 - Logótipo e fotografias: os do site do Reino Unido, nos caminhos listados no `README.md`. Usar a função de troca já existente (`<img hidden onload=...>` seguido do espaço reservado) para imagens novas, com `alt` descritivo.
-- Domínio: endereço principal `https://www.tantielorraine.pt`; `tantielorraine.pt` e `http://` redirecionam para ele. No tema, nunca escrever o domínio: usar `home_url()`, `tl_url()` e `tl_img()`.
 - Entidade em Portugal: GADGETMÉTODO, LDA, NIPC 513978011, Rua das Cruzes, n.º 625, 4100-195 Porto. Email provisório: gadgetmetodo@gmail.com.
 
 ## Git
