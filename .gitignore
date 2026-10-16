@@ -1,4 +1,7 @@
-# Credenciais de publicação (FTP): nunca versionar
+# Credenciais de publicação (FTP e base de dados): nunca versionar
+.env
+.env.*
+!.env.example
 .deploy.env
 
 # Sistema e editores

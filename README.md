@@ -18,6 +18,14 @@ O site existe em duas formas com o mesmo conteúdo e o mesmo design:
 3. Na ativação, o tema cria as páginas Início, História, Produtos, Eventos, Contactos e Privacidade, define a página inicial e os endereços (`/historia/`, `/produtos/`, ...), e fecha os comentários. Não apaga nada; os conteúdos de exemplo do WordPress ("Sample Page", "Hello world") podem ser apagados à mão.
 4. Em Definições > Geral: idioma Português e endereços com `https://`.
 
+Em alternativa ao passo 2, o tema pode ser enviado por FTP a partir do computador, com `scripts/publicar-wordpress.sh` (requer `lftp` e um `.env` na raiz, ignorado pelo Git, com `FTP_HOST`, `FTP_USER`, `FTP_PASS`, `FTP_PORT` e, opcionalmente, `FTP_DIR`):
+
+- `scripts/publicar-wordpress.sh testar`: só leitura; testa a ligação e mostra a pasta pública e os temas instalados.
+- `scripts/publicar-wordpress.sh simular`: só leitura; mostra o que seria enviado.
+- `scripts/publicar-wordpress.sh enviar`: envia o tema para `wp-content/themes/tantie-lorraine`, depois de escrever ENVIAR; nunca apaga ficheiros no servidor. A seguir, ativar em Aparência > Temas.
+
+Não é preciso exportar nem importar a base de dados, nem substituir o `wp-config.php`: o WordPress pré-instalado da Amen já tem a sua base de dados, e o conteúdo é criado pelo tema na ativação.
+
 ### Como funciona
 
 - `theme.json`: cores, tipos de letra (alojados no tema) e tamanhos do design system, disponíveis no editor.
