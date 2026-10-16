@@ -1,0 +1,11 @@
+# Credenciais de publicação (FTP): nunca versionar
+.deploy.env
+
+# Sistema e editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Originais de imagem pesados: guardar fora do repositório, versionar só as versões otimizadas
+originais/
