@@ -64,19 +64,19 @@ Abrir http://localhost:8000. O `.htaccess` só tem efeito no servidor Apache.
 
 ## Publicar (alojamento da Amen)
 
-Requer `lftp` (macOS: `brew install lftp`) e um `.env` na raiz com os dados FTP (modelo em `.env.example`; o `.env` está no `.gitignore` e nunca é mostrado pelo script).
+Usa o `curl` que já vem com o macOS (não é preciso instalar nada) e um `.env` na raiz com os dados FTP (modelo em `.env.example`; o `.env` está no `.gitignore` e o script nunca mostra nem grava as credenciais). Funciona por FTP, com TLS quando o servidor o aceita.
 
 ### Primeira vez: trocar o WordPress pelo site estático
 
 1. `scripts/deploy.sh testar`: só leitura; confirma a ligação e mostra a pasta pública.
 2. `scripts/deploy.sh backup`: só leitura; descarrega a pasta pública para `backups/amen-<data>/` (fora do Git). Exportar também a base de dados no phpMyAdmin (Exportar > Rápido > SQL) e guardar junto.
-3. `scripts/deploy.sh enviar --simular` e depois `scripts/deploy.sh enviar`: põe o site estático no ar. Não apaga nada; o `.htaccess` do site substitui o do WordPress e o `DirectoryIndex index.html` dá prioridade ao site estático.
+3. `scripts/deploy.sh enviar --simular` e depois `scripts/deploy.sh enviar`: põe o site estático no ar (envia todos os ficheiros do site). Não apaga nada; o `.htaccess` do site substitui o do WordPress e o `DirectoryIndex index.html` dá prioridade ao site estático.
 4. Abrir o site e confirmar que está tudo bem.
 5. `scripts/deploy.sh retirar-wordpress --simular` e depois `scripts/deploy.sh retirar-wordpress`: move os ficheiros do WordPress para `wordpress-desativado-<data>/`, fora da pasta pública (pede para escrever RETIRAR). Nada é apagado: para repor, mover os ficheiros de volta. A base de dados do WordPress fica intacta.
 
 ### Atualizações seguintes
 
-`scripts/deploy.sh enviar --simular` e `scripts/deploy.sh enviar`. Para apagar no servidor ficheiros do site que deixaram de existir: `enviar --apagar --simular` e depois `enviar --apagar` (nunca toca no WordPress desativado, em `.well-known` nem em `cgi-bin`).
+`scripts/deploy.sh enviar --simular` e `scripts/deploy.sh enviar`. Ficheiros que deixem de existir no projeto não são apagados no servidor; apagar à mão, se necessário.
 
 ### Se algo correr mal
 
