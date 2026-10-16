@@ -25,7 +25,7 @@ Logótipo e fotografias são os do site do Reino Unido (inventário de 16 de out
 | `assets/img/inicio-tantie.webp` | Página inicial, bloco "Quem é a Tantie?" |
 | `assets/img/sobre.webp` | Página Sobre (retrato 4:5) |
 | `assets/img/eventos.webp` | Página Eventos (pelau de uma sessão Limin with Tantie) |
-| `assets/img/receitas/salsichas-glaceadas.webp`, `tarte-queijo-cabra.webp` | Página Receitas |
+| `assets/img/receitas/wrap-halloumi.webp`, `salsichas-glaceadas.webp`, `tarte-queijo-cabra.webp` | Página Receitas |
 
 Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 
@@ -36,7 +36,7 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 | `index.html` | Início: hero, mensagem principal, produtos em destaque, apresentação, testemunhos |
 | `loja.html` | As quatro referências, com botão "Brevemente" |
 | `mercados.html` | Mercados em Portugal (brevemente) e ligação aos do Reino Unido |
-| `receitas.html` | Receitas com compota de malagueta (métodos por traduzir) |
+| `receitas.html` | Receitas com as compotas da gama (métodos por traduzir) |
 | `eventos.html` | Aulas de cozinha |
 | `sobre.html` | História da marca e da fundadora |
 | `contactos.html`, `privacidade.html`, `404.html` | Contactos, informação legal, erro |
