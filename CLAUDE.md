@@ -1,6 +1,14 @@
 # tantielorraine.pt
 
-Versão portuguesa do site da Tantie Lorraine's (tantielorraine.co.uk). Site estático em HTML, CSS e JavaScript simples, sem frameworks nem passo de compilação. Ver `README.md` para estrutura, pendentes e publicação.
+Versão portuguesa do site da Tantie Lorraine's (tantielorraine.co.uk), em duas formas com o mesmo conteúdo: tema WordPress (`wordpress/tantie-lorraine/`, a publicar) e site estático em HTML e CSS na raiz (referência). Ver `README.md` para estrutura, pendentes e publicação.
+
+## Versão a publicar: tema WordPress
+
+- O site é publicado como tema WordPress (`wordpress/tantie-lorraine/`) no alojamento WordPress da Amen. Alterações de conteúdo ou design fazem-se no tema; o site estático na raiz é só referência.
+- Conteúdo das páginas em `patterns/*.php`, só com blocos nativos do WordPress (sem bloco HTML personalizado), para continuar editável no editor. Imagens e ligações internas com `tl_img()` e `tl_url()`.
+- Depois de alterar padrões, validar a marcação dos blocos com `@wordpress/blocks` e `@wordpress/block-library` (sem blocos inválidos nem avisos) e testar o tema num WordPress local.
+- Não acrescentar plugins nem recursos que façam pedidos a servidores externos (ver regra de terceiros abaixo).
+- Gerar o zip com `wordpress/empacotar.sh` (a pasta `wordpress/dist/` não é versionada).
 
 ## Design system
 

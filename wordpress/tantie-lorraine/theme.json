@@ -1,0 +1,126 @@
+{
+	"$schema": "https://schemas.wp.org/wp/6.5/theme.json",
+	"version": 2,
+	"settings": {
+		"appearanceTools": true,
+		"layout": {
+			"contentSize": "736px",
+			"wideSize": "1200px"
+		},
+		"color": {
+			"custom": false,
+			"customGradient": false,
+			"defaultPalette": false,
+			"defaultGradients": false,
+			"defaultDuotone": false,
+			"palette": [
+				{ "slug": "chilli-red", "name": "Chilli red", "color": "#ff2524" },
+				{ "slug": "ink", "name": "Ink", "color": "#000000" },
+				{ "slug": "paper", "name": "Paper", "color": "#ffffff" },
+				{ "slug": "mist", "name": "Mist", "color": "#f0f0f0" },
+				{ "slug": "plum-grey", "name": "Plum grey", "color": "#5e5362" },
+				{ "slug": "muted", "name": "Muted", "color": "#adadad" }
+			]
+		},
+		"typography": {
+			"customFontSize": false,
+			"defaultFontSizes": false,
+			"fluid": false,
+			"fontFamilies": [
+				{
+					"slug": "display",
+					"name": "Anton",
+					"fontFamily": "Anton, \"Arial Narrow\", Impact, sans-serif",
+					"fontFace": [
+						{ "fontFamily": "Anton", "fontWeight": "400", "fontStyle": "normal", "fontDisplay": "swap", "src": [ "file:./assets/fonts/anton-latin-400-normal.woff2" ] }
+					]
+				},
+				{
+					"slug": "condensed",
+					"name": "Condensada",
+					"fontFamily": "\"DIN Neuzeit Grotesk W01 Bold Condensed\", \"DINNeuzeitGroteskLTW01-BdCond\", Anton, \"Arial Narrow\", sans-serif"
+				},
+				{
+					"slug": "body",
+					"name": "Texto",
+					"fontFamily": "\"Avenir LT W01 35 Light\", \"Avenir Next\", Avenir, \"Helvetica Neue\", Arial, sans-serif"
+				},
+				{
+					"slug": "ui",
+					"name": "Interface",
+					"fontFamily": "\"DIN Next W01 Light\", \"DIN Next LT Pro\", \"Helvetica Neue\", Arial, sans-serif"
+				},
+				{
+					"slug": "product",
+					"name": "Poppins",
+					"fontFamily": "Poppins, \"Helvetica Neue\", Arial, sans-serif",
+					"fontFace": [
+						{ "fontFamily": "Poppins", "fontWeight": "600", "fontStyle": "normal", "fontDisplay": "swap", "src": [ "file:./assets/fonts/poppins-latin-600-normal.woff2" ] }
+					]
+				},
+				{
+					"slug": "quote",
+					"name": "Work Sans",
+					"fontFamily": "\"Work Sans\", \"Helvetica Neue\", Arial, sans-serif",
+					"fontFace": [
+						{ "fontFamily": "Work Sans", "fontWeight": "600", "fontStyle": "normal", "fontDisplay": "swap", "src": [ "file:./assets/fonts/work-sans-latin-600-normal.woff2" ] }
+					]
+				}
+			],
+			"fontSizes": [
+				{ "slug": "hero-mega", "name": "Hero", "size": "clamp(56px, 15vw, 221.667px)" },
+				{ "slug": "statement", "name": "Mensagem", "size": "clamp(40px, 8vw, 80px)" },
+				{ "slug": "section-title", "name": "Título de secção", "size": "clamp(32px, 6vw, 44.3334px)" },
+				{ "slug": "product-title", "name": "Título de produto", "size": "clamp(28px, 5vw, 40.3539px)" },
+				{ "slug": "subhead", "name": "Subtítulo", "size": "18.62px" },
+				{ "slug": "ui-lg", "name": "Interface grande", "size": "20px" },
+				{ "slug": "body", "name": "Texto", "size": "16px" },
+				{ "slug": "ui-sm", "name": "Interface pequena", "size": "14px" }
+			]
+		},
+		"spacing": {
+			"units": [ "px", "rem", "%", "vw" ],
+			"spacingSizes": [
+				{ "slug": "btn-y", "name": "12", "size": "12px" },
+				{ "slug": "card-gap", "name": "20", "size": "20px" },
+				{ "slug": "gutter", "name": "32", "size": "32px" },
+				{ "slug": "column-gap", "name": "40", "size": "40px" },
+				{ "slug": "seccao", "name": "80", "size": "80px" }
+			]
+		}
+	},
+	"styles": {
+		"color": {
+			"background": "var(--wp--preset--color--paper)",
+			"text": "var(--wp--preset--color--ink)"
+		},
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--body)",
+			"fontSize": "var(--wp--preset--font-size--body)",
+			"lineHeight": "1.5"
+		},
+		"spacing": {
+			"blockGap": "0px"
+		},
+		"elements": {
+			"link": {
+				"color": { "text": "var(--wp--preset--color--ink)" }
+			},
+			"heading": {
+				"typography": {
+					"fontFamily": "var(--wp--preset--font-family--display)",
+					"fontWeight": "400",
+					"textTransform": "uppercase",
+					"lineHeight": "1.2"
+				}
+			},
+			"h1": { "typography": { "fontSize": "var(--wp--preset--font-size--section-title)" } },
+			"h2": { "typography": { "fontSize": "var(--wp--preset--font-size--section-title)" } },
+			"h3": { "typography": { "fontSize": "var(--wp--preset--font-size--subhead)" } }
+		}
+	},
+	"templateParts": [
+		{ "name": "header", "title": "Cabeçalho", "area": "header" },
+		{ "name": "footer", "title": "Rodapé", "area": "footer" }
+	]
+}

@@ -4,6 +4,30 @@ Versão portuguesa do site da Tantie Lorraine's (marca de molhos picantes e comp
 
 O site é só de apresentação: não há venda nem preços. A página Produtos mostra a gama com o botão "Brevemente". Entidade responsável em Portugal: GADGETMÉTODO, LDA (NIPC 513978011), Rua das Cruzes, n.º 625, 4100-195 Porto.
 
+## Versão WordPress (a publicar)
+
+O site existe em duas formas com o mesmo conteúdo e o mesmo design:
+
+- **Tema WordPress** em `wordpress/tantie-lorraine/`, para o alojamento WordPress da Amen. É a versão a publicar.
+- **Site estático** na raiz do repositório, que serviu de base e fica como referência.
+
+### Instalar no WordPress da Amen
+
+1. Criar o ficheiro do tema: `wordpress/empacotar.sh` (gera `wordpress/dist/tantie-lorraine.zip`).
+2. No painel do WordPress: Aparência > Temas > Adicionar novo tema > Carregar tema > escolher o zip > Instalar > Ativar.
+3. Na ativação, o tema cria as páginas Início, História, Produtos, Eventos, Contactos e Privacidade, define a página inicial e os endereços (`/historia/`, `/produtos/`, ...), e fecha os comentários. Não apaga nada; os conteúdos de exemplo do WordPress ("Sample Page", "Hello world") podem ser apagados à mão.
+4. Em Definições > Geral: idioma Português e endereços com `https://`.
+
+### Como funciona
+
+- `theme.json`: cores, tipos de letra (alojados no tema) e tamanhos do design system, disponíveis no editor.
+- `patterns/`: conteúdo de cada página e do cabeçalho e rodapé, em blocos normais do WordPress. Cada página guarda apenas uma referência ao seu padrão; ao abrir a página no editor, o padrão passa a blocos editáveis e, depois de guardada, a página deixa de acompanhar as alterações ao tema.
+- `assets/css/`: `tokens.css`, `components.css` e `site.css` (os mesmos do site estático) e `wordpress.css` (adaptação aos blocos do WordPress).
+- `functions.php`: carregamento dos estilos, configuração inicial, língua `pt-PT`, descrição para motores de pesquisa a partir do resumo da página, ícone do site, sem emojis do WordPress (que carregam ficheiros de s.w.org) e sem comentários.
+- Estilos de botão no editor: Compacto, Hero e Brevemente (inativo).
+
+Testado em WordPress 6.5 (servido localmente com SQLite); a marcação dos blocos foi validada com a biblioteca de blocos atual do WordPress, sem avisos.
+
 ## Gama em Portugal
 
 | Ref. | Produto | Fotografia |

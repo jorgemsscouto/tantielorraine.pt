@@ -1,0 +1,247 @@
+/* tantielorraine.pt: composição das páginas sobre o design system (tokens.css + components.css).
+   Regras do sistema: só variáveis para cor, espaçamento e raios; tipografia pelas classes .tl-text-*.
+   Única adaptação: os títulos grandes reduzem em ecrãs estreitos, com o valor do token como máximo. */
+
+:root {
+  --largura-max: 1200px;
+  --seccao-y: calc(var(--space-column-gap) * 2);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main { flex: 1; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* O atributo hidden tem de prevalecer sobre display: block (imagens à espera de ficheiro) */
+[hidden] { display: none !important; }
+
+a { color: var(--ink); }
+
+h1, h2, h3, p { margin: 0; }
+
+.contentor {
+  width: 100%;
+  max-width: var(--largura-max);
+  margin: 0 auto;
+  padding: 0 var(--space-gutter);
+  box-sizing: border-box;
+}
+
+/* Acessibilidade: saltar para o conteúdo */
+.saltar {
+  position: absolute;
+  left: -999px;
+  top: var(--space-btn-y);
+  z-index: 100;
+  background: var(--ink);
+  color: var(--paper);
+  padding: var(--space-btn-compact-y) var(--space-btn-compact-x);
+  border-radius: var(--radius-pill);
+}
+.saltar:focus { left: var(--space-btn-y); }
+
+/* Cabeçalho fixo */
+.tl-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.marca { display: flex; align-items: center; color: inherit; text-decoration: none; }
+.marca .logo { height: calc(var(--space-header) - var(--space-gutter)); width: auto; }
+.tl-footer .marca .logo { height: var(--space-header); }
+.tl-nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 4px; }
+
+.menu-botao {
+  display: none;
+  align-items: center;
+  background: transparent;
+  color: var(--ink);
+  border: var(--border-button) solid var(--ink);
+  border-radius: var(--radius-pill);
+  padding: var(--space-btn-compact-y) var(--space-btn-compact-x);
+  cursor: pointer;
+}
+.menu-botao:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+@media (max-width: 760px) {
+  .menu-botao { display: inline-flex; }
+  .tl-nav {
+    display: none;
+    position: absolute;
+    top: var(--space-header);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-card-gap);
+    padding: var(--space-btn-y) var(--space-gutter) var(--space-gutter);
+    background: var(--chilli-red);
+  }
+  .tl-nav.aberto { display: flex; }
+}
+
+/* Títulos em Anton: entrelinha 1,2 em vez de 1, para os acentos das maiúsculas (Í, Ã, Ç) não tocarem na linha de cima */
+.tl-text-hero-mega,
+.tl-text-statement,
+.tl-text-section-title,
+.tl-text-product-title { line-height: 1.2; }
+
+/* Títulos grandes em ecrãs estreitos (máximo = valor do token) */
+.tl-text-hero-mega { font-size: clamp(56px, 15vw, 221.667px); }
+.tl-text-statement { font-size: clamp(40px, 8vw, 80px); }
+.tl-text-section-title { font-size: clamp(32px, 6vw, 44.3334px); }
+.tl-text-quote-title { font-size: clamp(32px, 6vw, 50px); line-height: 1.2; }
+
+/* Secções */
+.seccao { padding: var(--seccao-y) 0; }
+.seccao--mist { background: var(--mist); }
+.seccao--vermelha { background: var(--chilli-red); color: var(--ink); }
+.seccao .tl-text-section-title,
+.seccao .tl-text-statement { margin-bottom: var(--space-gutter); }
+.texto { max-width: 46rem; }
+.texto p + p { margin-top: var(--space-btn-y); }
+.texto .tl-text-subhead { margin: var(--space-gutter) 0 var(--space-btn-y); }
+
+.centrado { text-align: center; }
+.centrado .texto { margin: 0 auto; }
+
+/* Hero: fotografia desfocada a toda a largura com título em paper */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--paper);
+  text-align: center;
+  padding: calc(var(--seccao-y) * 1.5) 0;
+}
+.hero__foto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(6px);
+  transform: scale(1.05);
+  opacity: 0.6;
+}
+.hero__foto + .contentor { position: relative; }
+.hero .tl-text-subhead { margin: var(--space-card-gap) auto var(--space-gutter); max-width: 40rem; }
+
+/* Grelha de produtos */
+/* Cartões com a largura fixa do componente (234px), centrados; linhas incompletas ficam ao centro */
+.grelha-produtos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-column-gap) var(--space-gutter);
+}
+.tl-card .tl-text-body { margin: 0; }
+.tl-card .ref { color: var(--plum-grey); margin: 0; }
+.tl-btn[disabled] { cursor: default; }
+
+/* Página Produtos: uma secção por produto, fotografia ao lado da informação */
+.seccao--produto { border-top: var(--border-stepper) solid var(--mist); scroll-margin-top: var(--space-header); }
+.produto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-column-gap);
+  align-items: start;
+}
+.produto__media {
+  aspect-ratio: 1;
+  border-radius: var(--radius-media);
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.produto__media img { width: 100%; height: 100%; object-fit: cover; }
+.produto__titulo { color: var(--chilli-red); margin-bottom: var(--space-btn-compact-y); }
+.produto .ref { color: var(--plum-grey); margin-bottom: var(--space-card-gap); }
+.produto__info .tl-text-body + .tl-text-body { margin-top: var(--space-btn-y); }
+.produto__info .tl-btn { margin: var(--space-card-gap) 0 var(--space-gutter); }
+.produto__info h3 { margin-bottom: var(--space-btn-compact-y); }
+.nutricao { margin-top: var(--space-gutter); border-top: var(--border-stepper) solid var(--ink); padding-top: var(--space-btn-y); }
+.nutricao summary { cursor: pointer; }
+.nutricao table { width: 100%; border-collapse: collapse; margin-top: var(--space-btn-y); }
+.nutricao th, .nutricao td { padding: var(--space-btn-compact-y) 0; border-bottom: var(--border-stepper) solid var(--mist); font-weight: 400; }
+.nutricao th { text-align: left; white-space: nowrap; padding-right: var(--space-card-gap); }
+.nutricao td { text-align: right; }
+.nutricao .sub th { padding-left: var(--space-card-gap); }
+.tl-card__title a { color: inherit; text-decoration: none; }
+.tl-card__title a:hover { text-decoration: underline; }
+@media (max-width: 760px) {
+  .produto { grid-template-columns: 1fr; }
+}
+
+/* Faixa "Brevemente" */
+.aviso {
+  border: var(--border-button) solid var(--ink);
+  border-radius: var(--radius-media);
+  padding: var(--space-card-gap) var(--space-gutter);
+  margin-bottom: var(--seccao-y);
+}
+.aviso .tl-text-section-title { margin-bottom: var(--space-btn-y); }
+
+/* Duas colunas: texto ao lado de fotografia */
+.duas-colunas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-column-gap);
+  align-items: center;
+}
+@media (max-width: 760px) {
+  .duas-colunas { grid-template-columns: 1fr; }
+}
+
+/* Fotografia por colocar (mesmo tratamento do cartão de produto) */
+.foto-reservada {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-media);
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+.foto-reservada img { width: 100%; height: 100%; object-fit: cover; }
+.foto-reservada--retrato { aspect-ratio: 4 / 5; }
+.foto-reservada span { padding: var(--space-card-gap); }
+
+/* Contactos */
+.lista-contactos { list-style: none; margin: 0; padding: 0; }
+.lista-contactos li { padding: var(--space-btn-y) 0; border-bottom: var(--border-stepper) solid var(--mist); }
+.lista-contactos .tl-text-label-strong { display: block; }
+
+/* Texto legal */
+.texto-legal .tl-text-subhead { margin: var(--space-gutter) 0 var(--space-btn-y); }
+.texto-legal p + p { margin-top: var(--space-btn-y); }
+
+/* Conteúdo por preencher: remover o span quando o texto final estiver colocado */
+.a-preencher {
+  background: var(--paper);
+  color: var(--ink);
+  outline: 2px dashed var(--plum-grey);
+  padding: 0 0.2em;
+}
+
+/* Rodapé: linha de separação quando a última secção da página também é vermelha */
+main:has(> .seccao--vermelha:last-child) + .tl-footer { border-top: var(--border-button) solid var(--ink); }
+
+/* Rodapé */
+.tl-footer__links a[aria-current="page"] { text-decoration-thickness: 3px; }
+.tl-footer__social { display: flex; gap: var(--space-card-gap); }
+@media (max-width: 760px) {
+  .tl-footer__links { grid-template-columns: 1fr; }
+}

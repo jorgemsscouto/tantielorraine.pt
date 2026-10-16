@@ -1,0 +1,12 @@
+/*
+Theme Name: Tantie Lorraine's
+Description: Tema do site português da Tantie Lorraine's (compotas de malagueta de Trindade e Tobago), construído sobre o design system da marca. Ao ativar, cria as páginas, o menu e a página inicial.
+Author: Gadgetmétodo, Lda.
+Version: 1.0.0
+Requires at least: 6.5
+Requires PHP: 7.4
+Text Domain: tantie-lorraine
+License: Proprietário (fontes Anton, Poppins e Work Sans sob SIL Open Font License 1.1)
+*/
+
+/* Os estilos estão em assets/css/ (carregados por functions.php) e as definições em theme.json. */

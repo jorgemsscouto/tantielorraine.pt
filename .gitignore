@@ -9,3 +9,6 @@ Thumbs.db
 
 # Originais de imagem pesados: guardar fora do repositório, versionar só as versões otimizadas
 originais/
+
+# Tema WordPress empacotado (gerado por wordpress/empacotar.sh)
+wordpress/dist/
