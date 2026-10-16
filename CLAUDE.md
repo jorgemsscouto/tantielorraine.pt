@@ -35,4 +35,4 @@ Adaptações deste site ao sistema (manter):
 
 - Repositório privado `jorgemsscouto/tantielorraine.pt`, ramo `main`.
 - Depois de cada alteração concluída: commit (mensagem curta em pt-PT) e `git push`.
-- Nunca versionar credenciais (`.deploy.env`). Ficheiro sensível novo: acrescentar ao `.gitignore` antes do commit.
+- Nunca versionar credenciais (`.env`, com os dados FTP; modelo em `.env.example`) nem as cópias em `backups/`. Ficheiro sensível novo: acrescentar ao `.gitignore` antes do commit.

@@ -47,7 +47,7 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 | `assets/js/main.js` | Menu em ecrãs pequenos e ano no rodapé |
 | `.claude/skills/tantie-lorraine-design-system/` | Design system original (regras, tokens, exemplos) |
 | `.htaccess` | HTTPS obrigatório, domínio sem "www", página 404, cache e cabeçalhos de segurança (Apache) |
-| `scripts/deploy.sh` | Publicação por FTPS no alojamento |
+| `scripts/deploy.sh` | Publicação por FTP/FTPS/SFTP: testar, backup, enviar, retirar o WordPress |
 
 ## Por fazer antes de publicar
 
@@ -62,13 +62,27 @@ python3 -m http.server 8000
 
 Abrir http://localhost:8000. O `.htaccess` só tem efeito no servidor Apache.
 
-## Publicar
+## Publicar (alojamento da Amen)
 
-1. Copiar `.deploy.env.example` para `.deploy.env` e preencher com os dados FTP do alojamento (o ficheiro está no `.gitignore`).
-2. Confirmar o que vai ser enviado: `scripts/deploy.sh --simular`
-3. Publicar: `scripts/deploy.sh`
+Requer `lftp` (macOS: `brew install lftp`) e um `.env` na raiz com os dados FTP (modelo em `.env.example`; o `.env` está no `.gitignore` e nunca é mostrado pelo script).
 
-Requer `lftp` (`sudo apt install lftp` ou `brew install lftp`).
+### Primeira vez: trocar o WordPress pelo site estático
+
+1. `scripts/deploy.sh testar`: só leitura; confirma a ligação e mostra a pasta pública.
+2. `scripts/deploy.sh backup`: só leitura; descarrega a pasta pública para `backups/amen-<data>/` (fora do Git). Exportar também a base de dados no phpMyAdmin (Exportar > Rápido > SQL) e guardar junto.
+3. `scripts/deploy.sh enviar --simular` e depois `scripts/deploy.sh enviar`: põe o site estático no ar. Não apaga nada; o `.htaccess` do site substitui o do WordPress e o `DirectoryIndex index.html` dá prioridade ao site estático.
+4. Abrir o site e confirmar que está tudo bem.
+5. `scripts/deploy.sh retirar-wordpress --simular` e depois `scripts/deploy.sh retirar-wordpress`: move os ficheiros do WordPress para `wordpress-desativado-<data>/`, fora da pasta pública (pede para escrever RETIRAR). Nada é apagado: para repor, mover os ficheiros de volta. A base de dados do WordPress fica intacta.
+
+### Atualizações seguintes
+
+`scripts/deploy.sh enviar --simular` e `scripts/deploy.sh enviar`. Para apagar no servidor ficheiros do site que deixaram de existir: `enviar --apagar --simular` e depois `enviar --apagar` (nunca toca no WordPress desativado, em `.well-known` nem em `cgi-bin`).
+
+### Se algo correr mal
+
+- Erro de certificado na ligação FTP: acrescentar `FTP_VERIFICAR_CERTIFICADO=nao` ao `.env`.
+- Erro 500 depois do envio: o alojamento pode não aceitar `Options -Indexes` no `.htaccess`; retirar essa linha e voltar a enviar.
+- Repor o WordPress: mover o conteúdo de `wordpress-desativado-<data>/` de volta para a pasta pública (a cópia de `backups/` tem o `.htaccess` original).
 
 ## Opções técnicas
 

@@ -12,3 +12,6 @@ Thumbs.db
 
 # Originais de imagem pesados: guardar fora do repositório, versionar só as versões otimizadas
 originais/
+
+# Cópias de segurança descarregadas do servidor (scripts/deploy.sh backup)
+backups/

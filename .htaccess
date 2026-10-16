@@ -1,6 +1,8 @@
 # tantielorraine.pt: configuração Apache para o alojamento partilhado.
 # Cada bloco está protegido por <IfModule>, para não dar erro 500 se o módulo não existir.
 
+# O site estático tem prioridade sobre um index.php que ainda exista na pasta (por exemplo, do WordPress)
+DirectoryIndex index.html
 ErrorDocument 404 /404.html
 Options -Indexes
 
@@ -16,7 +18,7 @@ Options -Indexes
   RewriteRule ^index\.html$ / [L,R=301]
 
   # Bloquear ficheiros internos do projeto, caso sejam enviados por engano
-  RewriteRule (^|/)(\.git|\.claude|\.deploy\.env|README\.md|CLAUDE\.md|scripts/) - [F,L]
+  RewriteRule (^|/)(\.git|\.claude|\.env|\.deploy\.env|README\.md|CLAUDE\.md|scripts/|backups/) - [F,L]
 </IfModule>
 
 <IfModule mod_headers.c>
