@@ -24,6 +24,7 @@ Adaptações deste site ao sistema (manter):
 - Site só de apresentação: sem preços, sem carrinho e sem página de entregas. Produtos com botão "Brevemente" desativado.
 - Cabeçalho e rodapé repetidos em todas as páginas `.html`: qualquer alteração aplica-se a todas. Página nova: acrescentar ao menu, ao rodapé se aplicável e ao `sitemap.xml`.
 - Ligações internas com caminho absoluto (`/produtos.html`, `/assets/...`).
+- Sem ligações para o site do Reino Unido (tantielorraine.co.uk) nem indicação de versão inglesa (hreflang).
 - Menu, por esta ordem: História, Produtos, Mercados, Receitas, Eventos, Contactos. Rodapé: História, Produtos, Contactos, Privacidade, Livro de Reclamações.
 - Não acrescentar recursos de terceiros (fontes externas, mapas incorporados, analytics, píxeis) sem atualizar `privacidade.html` e avaliar a necessidade de aviso de cookies.
 - Logótipo e fotografias: os do site do Reino Unido, nos caminhos listados no `README.md`. Usar a função de troca já existente (`<img hidden onload=...>` seguido do espaço reservado) para imagens novas, com `alt` descritivo.
