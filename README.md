@@ -47,7 +47,7 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 | `assets/js/main.js` | Menu em ecrãs pequenos e ano no rodapé |
 | `.claude/skills/tantie-lorraine-design-system/` | Design system original (regras, tokens, exemplos) |
 | `.htaccess` | HTTPS obrigatório, domínio sem "www", página 404, cache e cabeçalhos de segurança (Apache) |
-| `scripts/deploy.sh` | Publicação por FTP/FTPS/SFTP: testar, backup, enviar, retirar o WordPress |
+| `scripts/deploy.sh` | Publicação por FTP/FTPS com o curl: testar, backup, enviar, retirar o WordPress |
 
 ## Por fazer antes de publicar
 
