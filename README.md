@@ -2,31 +2,44 @@
 
 Versão portuguesa do site da Tantie Lorraine's (marca de molhos picantes e compotas de malagueta de Trindade e Tobago, feitos à mão em Surrey), baseada no site do Reino Unido, [tantielorraine.co.uk](https://www.tantielorraine.co.uk). Site estático em HTML e CSS, sem dependências nem passo de compilação, construído sobre o design system da marca.
 
-A loja está em modo "Brevemente": os produtos aparecem com preços indicativos em euros e o botão de compra está desativado.
+O site é só de apresentação: não há venda nem preços. A loja mostra a gama com o botão "Brevemente". Entidade responsável em Portugal: GADGETMÉTODO, LDA (NIPC 513978011), Rua das Cruzes, n.º 625, 4100-195 Porto.
 
 ## Gama em Portugal
 
-| Ref. | Produto | Preço indicativo |
+| Ref. | Produto | Fotografia |
 |---|---|---|
-| SBJ | Scotch Bonnet Jam (com selo Great Taste na tampa) | 7,00 € |
-| ACJ | Apple Chilli Jam | 7,00 € |
-| RPCL | Red Pepper Chilli Lime Jam | 7,00 € |
-| TCJ | Tomato Chilli Jam | 7,00 € |
-| SCO | Scorpion Jelly | 7,00 € |
+| SBJ | Scotch Bonnet Jam (com selo Great Taste na tampa) | `assets/img/produtos/sbj.webp` |
+| ACJ | Apple Chilli Jam | `assets/img/produtos/acj.webp` |
+| RPCL | Red Pepper Chilli Lime Jam | `assets/img/produtos/rpcl.webp` |
+| TCJ | Tomato Chilli Jam | `assets/img/produtos/tcj.webp` |
 
-Preços: conversão de £6.00 (preço no Reino Unido) a 1,17 EUR/GBP, arredondada a 0,50 €. Por validar.
+## Imagens
+
+Logótipo e fotografias são os do site do Reino Unido. Basta colocar cada ficheiro no caminho indicado: a imagem substitui automaticamente o espaço reservado (enquanto o ficheiro não existir, aparece o espaço reservado, sem ícone de imagem partida).
+
+| Ficheiro | Onde aparece |
+|---|---|
+| `assets/img/logo.png` | Cabeçalho e rodapé (enquanto não existir, aparece o nome em texto) |
+| `assets/img/hero.webp` | Fundo desfocado do topo da página inicial |
+| `assets/img/produtos/<ref>.webp` | Cartões de produto (ver tabela acima) |
+| `assets/img/inicio-tantie.webp` | Página inicial, bloco "Quem é a Tantie?" |
+| `assets/img/sobre.webp` | Página Sobre |
+| `assets/img/eventos.webp` | Página Eventos |
+| `assets/img/receitas/salsichas-glaceadas.webp`, `tarte-queijo-cabra.webp` | Página Receitas |
+
+Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 
 ## Estrutura
 
 | Caminho | Conteúdo |
 |---|---|
 | `index.html` | Início: hero, mensagem principal, produtos em destaque, apresentação, testemunhos |
-| `loja.html` | As cinco referências, com preços indicativos e botão "Brevemente" |
+| `loja.html` | As quatro referências, com botão "Brevemente" |
 | `mercados.html` | Mercados em Portugal (brevemente) e ligação aos do Reino Unido |
 | `receitas.html` | Receitas com compota de malagueta (métodos por traduzir) |
 | `eventos.html` | Aulas de cozinha |
 | `sobre.html` | História da marca e da fundadora |
-| `contactos.html`, `entregas.html`, `privacidade.html`, `404.html` | Contactos, entregas e devoluções, informação legal, erro |
+| `contactos.html`, `privacidade.html`, `404.html` | Contactos, informação legal, erro |
 | `assets/css/tokens.css`, `components.css` | Design system da marca (cores, tipografia, componentes `.tl-*`) |
 | `assets/css/fonts.css`, `assets/fonts/` | Anton, Poppins e Work Sans alojadas no próprio site (licença OFL) |
 | `assets/css/site.css` | Composição das páginas, só com variáveis do design system |
@@ -38,9 +51,7 @@ Preços: conversão de £6.00 (preço no Reino Unido) a 1,17 EUR/GBP, arredondad
 ## Por fazer antes de publicar
 
 - Textos marcados com `[A PREENCHER: ...]` (contorno tracejado no navegador): `grep -rn "A PREENCHER" --include=*.html .`
-- Fotografias: produtos, hero e páginas interiores (procurar `TODO` nos `.html`).
-- Logótipo oficial (procurar `TODO: logótipo oficial`).
-- Validar os preços em euros (ver `loja.html` e `index.html`).
+- Logótipo e fotografias (ver "Imagens").
 
 ## Ver localmente
 

@@ -19,6 +19,9 @@ main { flex: 1; }
 
 img { max-width: 100%; height: auto; display: block; }
 
+/* O atributo hidden tem de prevalecer sobre display: block (imagens à espera de ficheiro) */
+[hidden] { display: none !important; }
+
 a { color: var(--ink); }
 
 h1, h2, h3, p { margin: 0; }
@@ -50,7 +53,9 @@ h1, h2, h3, p { margin: 0; }
   top: 0;
   z-index: 50;
 }
-.tl-wordmark a { color: inherit; text-decoration: none; }
+.marca { display: flex; align-items: center; color: inherit; text-decoration: none; }
+.marca .logo { height: calc(var(--space-header) - var(--space-gutter)); width: auto; }
+.tl-footer .marca .logo { height: var(--space-header); }
 .tl-nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 4px; }
 
 .menu-botao {
@@ -124,6 +129,7 @@ h1, h2, h3, p { margin: 0; }
   object-fit: cover;
   filter: blur(6px);
   transform: scale(1.05);
+  opacity: 0.6;
 }
 .hero__foto + .contentor { position: relative; }
 .hero .tl-text-subhead { margin: var(--space-card-gap) auto var(--space-gutter); max-width: 40rem; }
@@ -136,12 +142,7 @@ h1, h2, h3, p { margin: 0; }
   justify-content: center;
   gap: var(--space-column-gap) var(--space-gutter);
 }
-.grelha-produtos--tres {
-  max-width: calc(234px * 3 + var(--space-gutter) * 2);
-  margin: 0 auto;
-}
 .tl-card .tl-text-body { margin: 0; }
-.tl-card .tl-card__price { margin: 0; }
 .tl-card .ref { color: var(--plum-grey); margin: 0; }
 .tl-btn[disabled] { cursor: default; }
 .categoria { margin: var(--seccao-y) 0 var(--space-gutter); }
@@ -177,9 +178,10 @@ h1, h2, h3, p { margin: 0; }
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: var(--space-card-gap);
-  box-sizing: border-box;
+  overflow: hidden;
 }
+.foto-reservada img { width: 100%; height: 100%; object-fit: cover; }
+.foto-reservada span { padding: var(--space-card-gap); }
 
 /* Receitas */
 .grelha-receitas {
