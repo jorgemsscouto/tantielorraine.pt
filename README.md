@@ -4,14 +4,26 @@ Versão portuguesa do site da Tantie Lorraine's (marca de molhos picantes e comp
 
 A loja está em modo "Brevemente": os produtos aparecem com preços indicativos em euros e o botão de compra está desativado.
 
+## Gama em Portugal
+
+| Ref. | Produto | Preço indicativo |
+|---|---|---|
+| SBJ | Scotch Bonnet Jam (com selo Great Taste na tampa) | 7,00 € |
+| ACJ | Apple Chilli Jam | 7,00 € |
+| RPCL | Red Pepper Chilli Lime Jam | 7,00 € |
+| TCJ | Tomato Chilli Jam | 7,00 € |
+| SCO | Scorpion Jelly | 7,00 € |
+
+Preços: conversão de £6.00 (preço no Reino Unido) a 1,17 EUR/GBP, arredondada a 0,50 €. Por validar.
+
 ## Estrutura
 
 | Caminho | Conteúdo |
 |---|---|
 | `index.html` | Início: hero, mensagem principal, produtos em destaque, apresentação, testemunhos |
-| `loja.html` | Gama por categoria, com preços indicativos e botão "Brevemente" |
+| `loja.html` | As cinco referências, com preços indicativos e botão "Brevemente" |
 | `mercados.html` | Mercados em Portugal (brevemente) e ligação aos do Reino Unido |
-| `receitas.html` | Receitas do site do Reino Unido (métodos por traduzir) |
+| `receitas.html` | Receitas com compota de malagueta (métodos por traduzir) |
 | `eventos.html` | Aulas de cozinha |
 | `sobre.html` | História da marca e da fundadora |
 | `contactos.html`, `entregas.html`, `privacidade.html`, `404.html` | Contactos, entregas e devoluções, informação legal, erro |

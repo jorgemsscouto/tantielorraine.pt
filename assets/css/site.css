@@ -129,14 +129,20 @@ h1, h2, h3, p { margin: 0; }
 .hero .tl-text-subhead { margin: var(--space-card-gap) auto var(--space-gutter); max-width: 40rem; }
 
 /* Grelha de produtos */
+/* Cartões com a largura fixa do componente (234px), centrados; linhas incompletas ficam ao centro */
 .grelha-produtos {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(234px, 1fr));
-  justify-items: center;
-  gap: var(--space-column-gap) var(--space-card-gap);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-column-gap) var(--space-gutter);
+}
+.grelha-produtos--tres {
+  max-width: calc(234px * 3 + var(--space-gutter) * 2);
+  margin: 0 auto;
 }
 .tl-card .tl-text-body { margin: 0; }
 .tl-card .tl-card__price { margin: 0; }
+.tl-card .ref { color: var(--plum-grey); margin: 0; }
 .tl-btn[disabled] { cursor: default; }
 .categoria { margin: var(--seccao-y) 0 var(--space-gutter); }
 .categoria:first-of-type { margin-top: 0; }

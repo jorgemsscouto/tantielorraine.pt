@@ -16,6 +16,9 @@ Adaptações deste site ao sistema (manter):
 ## Regras
 
 - Português de Portugal em todo o conteúdo e nas mensagens de commit. Sem travessão longo.
+- Gama em Portugal: só cinco referências, SBJ (Scotch Bonnet Jam), ACJ (Apple Chilli Jam), RPCL (Red Pepper Chilli Lime Jam), TCJ (Tomato Chilli Jam) e SCO (Scorpion Jelly). Não mencionar outros produtos da marca (molhos, relishes, temperos, pastelaria, bebidas, conjuntos) em nenhuma página.
+- A referência aparece no cartão (`Ref. SBJ`, em `plum-grey`) e no atributo `data-ref` do `<article>`.
+- A SBJ tem o selo Great Taste na tampa; no site, o prémio é referido só em texto. O selo gráfico só com autorização e ficheiro original (regra do design system).
 - Nomes de produto em inglês, como no Reino Unido (nomes de marca); descrições em português.
 - Não inventar testemunhos, prémios, características de produto ou receitas: usar só o que está confirmado no site do Reino Unido ou foi fornecido pela marca, e marcar o resto com `<span class="a-preencher">[A PREENCHER: ...]</span>`.
 - Os preços são indicativos (conversão de GBP) até a marca os validar; manter o aviso na loja enquanto assim for.
