@@ -33,7 +33,10 @@ DATA="$(date +%Y%m%d-%H%M)"
 # Credenciais: .env (ou .deploy.env, nome antigo), sempre ignorado pelo Git
 ENVF=".env"; [[ -f "$ENVF" ]] || ENVF=".deploy.env"
 [[ -f "$ENVF" ]] || { echo "Falta o ficheiro .env na raiz (ver .env.example)." >&2; exit 1; }
-git check-ignore -q "$ENVF" 2>/dev/null || { echo "O $ENVF não está no .gitignore. Parado por segurança." >&2; exit 1; }
+# Num repositório Git, o .env tem de estar ignorado (numa cópia descarregada em ZIP não há Git, logo não há risco)
+if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  git check-ignore -q "$ENVF" || { echo "O $ENVF não está no .gitignore. Parado por segurança." >&2; exit 1; }
+fi
 command -v lftp >/dev/null || { echo "Falta o lftp (macOS: brew install lftp)." >&2; exit 1; }
 
 ler() { { grep -E "^$1=" "$ENVF" || true; } | tail -n 1 | cut -d= -f2- | sed -e 's/^["'\'']//' -e 's/["'\'']$//'; }
