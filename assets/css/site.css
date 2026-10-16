@@ -145,8 +145,43 @@ h1, h2, h3, p { margin: 0; }
 .tl-card .tl-text-body { margin: 0; }
 .tl-card .ref { color: var(--plum-grey); margin: 0; }
 .tl-btn[disabled] { cursor: default; }
-.categoria { margin: var(--seccao-y) 0 var(--space-gutter); }
-.categoria:first-of-type { margin-top: 0; }
+
+/* Página Produtos: uma secção por produto, fotografia ao lado da informação */
+.seccao--produto { border-top: var(--border-stepper) solid var(--mist); scroll-margin-top: var(--space-header); }
+.produto {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-column-gap);
+  align-items: start;
+}
+.produto__media {
+  aspect-ratio: 1;
+  border-radius: var(--radius-media);
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.produto__media img { width: 100%; height: 100%; object-fit: cover; }
+.produto__titulo { color: var(--chilli-red); margin-bottom: var(--space-btn-compact-y); }
+.produto .ref { color: var(--plum-grey); margin-bottom: var(--space-card-gap); }
+.produto__info .tl-text-body + .tl-text-body { margin-top: var(--space-btn-y); }
+.produto__info .tl-btn { margin: var(--space-card-gap) 0 var(--space-gutter); }
+.produto__info h3 { margin-bottom: var(--space-btn-compact-y); }
+.nutricao { margin-top: var(--space-gutter); border-top: var(--border-stepper) solid var(--ink); padding-top: var(--space-btn-y); }
+.nutricao summary { cursor: pointer; }
+.nutricao table { width: 100%; border-collapse: collapse; margin-top: var(--space-btn-y); }
+.nutricao th, .nutricao td { padding: var(--space-btn-compact-y) 0; border-bottom: var(--border-stepper) solid var(--mist); font-weight: 400; }
+.nutricao th { text-align: left; white-space: nowrap; padding-right: var(--space-card-gap); }
+.nutricao td { text-align: right; }
+.nutricao .sub th { padding-left: var(--space-card-gap); }
+.tl-card__title a { color: inherit; text-decoration: none; }
+.tl-card__title a:hover { text-decoration: underline; }
+@media (max-width: 760px) {
+  .produto { grid-template-columns: 1fr; }
+}
 
 /* Faixa "Brevemente" */
 .aviso {
@@ -183,15 +218,6 @@ h1, h2, h3, p { margin: 0; }
 .foto-reservada img { width: 100%; height: 100%; object-fit: cover; }
 .foto-reservada--retrato { aspect-ratio: 4 / 5; }
 .foto-reservada span { padding: var(--space-card-gap); }
-
-/* Receitas */
-.grelha-receitas {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: var(--space-column-gap) var(--space-card-gap);
-}
-.receita .foto-reservada { margin-bottom: var(--space-btn-y); }
-.receita .tl-text-subhead { margin-bottom: var(--space-btn-compact-y); }
 
 /* Contactos */
 .lista-contactos { list-style: none; margin: 0; padding: 0; }

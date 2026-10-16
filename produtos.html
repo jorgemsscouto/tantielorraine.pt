@@ -27,7 +27,7 @@
   <header class="tl-header">
     <a class="marca" href="/" aria-label="Tantie Lorraine's, início"><img class="logo" src="/assets/img/logo.png" alt="Tantie Lorraine's" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><span class="tl-wordmark">Tantie<br>Lorraine's</span></a>
     <button class="menu-botao tl-text-nav" type="button" aria-expanded="false" aria-controls="nav-principal">Menu</button>
-    <nav class="tl-nav" id="nav-principal" aria-label="Principal"><a href="/historia.html">História</a><a href="/produtos.html" aria-current="page">Produtos</a><a href="/mercados.html">Mercados</a><a href="/receitas.html">Receitas</a><a href="/eventos.html">Eventos</a><a href="/contactos.html">Contactos</a></nav>
+    <nav class="tl-nav" id="nav-principal" aria-label="Principal"><a href="/historia.html">História</a><a href="/produtos.html" aria-current="page">Produtos</a><a href="/eventos.html">Eventos</a><a href="/contactos.html">Contactos</a></nav>
   </header>
 
   <main id="conteudo">
@@ -39,38 +39,135 @@
           <p class="tl-text-body">A Tantie Lorraine's chega a Portugal com quatro compotas de malagueta. A venda online abre brevemente.</p>
           <p class="tl-text-body" style="margin-top:var(--space-btn-y)">Quer ser avisado quando abrir? <a href="/contactos.html">Fale connosco</a>.</p>
         </div>
-        <p class="tl-text-ui centrado" style="margin-bottom:var(--space-gutter)">Feito à mão em pequenos lotes · Sem conservantes artificiais · Surrey, Reino Unido</p>
-        <h2 class="tl-text-category categoria centrado">Compotas de malagueta</h2>
-        <div class="grelha-produtos">
-          <article class="tl-card" data-ref="SBJ">
-            <div class="tl-card__media"><img src="/assets/img/produtos/sbj.webp" alt="Frasco de Scotch Bonnet Jam" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><span>Fotografia do produto</span></div>
-            <h3 class="tl-card__title">Scotch Bonnet Jam</h3>
-            <p class="tl-text-ui-sm ref">Ref. SBJ</p>
-            <p class="tl-text-body">A compota de referência da casa, distinguida com duas estrelas nos Great Taste Awards de 2024. <span class="a-preencher">[A PREENCHER: descrição do sabor e sugestões de uso]</span></p>
+        <p class="tl-text-ui">Feito à mão em pequenos lotes · Sem conservantes artificiais · Surrey, Reino Unido</p>
+      </div>
+    </section>
+
+    <section class="seccao seccao--produto" id="sbj">
+      <div class="contentor">
+        <article class="produto" data-ref="SBJ">
+          <div class="produto__media tl-text-ui"><img src="/assets/img/produtos/sbj.webp" alt="Frasco de Scotch Bonnet Jam" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><span>Fotografia do produto</span></div>
+          <div class="produto__info">
+            <h2 class="tl-text-product-title produto__titulo">Scotch Bonnet Jam</h2>
+            <p class="tl-text-ui-sm ref">Ref. SBJ · Peso líquido 238 g</p>
+            <p class="tl-text-body">A compota de referência da casa e a mais premiada da gama: duas estrelas nos Great Taste Awards de 2024. Feita com pimento vermelho e pasta fermentada de malagueta Scotch Bonnet (100 000 a 350 000 unidades de calor Scoville, SHU).</p>
             <button class="tl-btn tl-btn--compact" type="button" disabled>Brevemente</button>
-          </article>
-          <article class="tl-card" data-ref="ACJ">
-            <div class="tl-card__media"><img src="/assets/img/produtos/acj.webp" alt="Frasco de Apple Chilli Jam" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><span>Fotografia do produto</span></div>
-            <h3 class="tl-card__title">Apple Chilli Jam</h3>
-            <p class="tl-text-ui-sm ref">Ref. ACJ</p>
+            <h3 class="tl-text-label-strong">Ingredientes</h3>
+            <p class="tl-text-body">Açúcar branco, pimento vermelho, <strong>vinagre</strong>, pasta fermentada de malagueta Scotch Bonnet (4,92 %), água destilada, <strong>pectina</strong>.</p>
+            <p class="tl-text-body"><strong>Alergénios:</strong> contém dióxido de enxofre e sulfitos.</p>
+            <details class="nutricao">
+              <summary class="tl-text-label-strong">Informação nutricional (por 100 g)</summary>
+              <table class="tl-text-ui">
+                <tbody>
+                  <tr><th scope="row">Energia</th><td>1210 kJ / 264 kcal <span class="a-preencher">[A PREENCHER: confirmar os kcal, que não correspondem a 1210 kJ]</span></td></tr>
+                  <tr><th scope="row">Lípidos</th><td>0 g</td></tr>
+                  <tr class="sub"><th scope="row">dos quais saturados</th><td>0 g</td></tr>
+                  <tr><th scope="row">Hidratos de carbono</th><td>69 g</td></tr>
+                  <tr class="sub"><th scope="row">dos quais açúcares</th><td>69 g</td></tr>
+                  <tr><th scope="row">Fibra</th><td>0,8 g</td></tr>
+                  <tr><th scope="row">Proteínas</th><td>0,5 g</td></tr>
+                  <tr><th scope="row">Sal</th><td>0,36 g</td></tr>
+                </tbody>
+              </table>
+            </details>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="seccao seccao--produto" id="acj">
+      <div class="contentor">
+        <article class="produto" data-ref="ACJ">
+          <div class="produto__media tl-text-ui"><img src="/assets/img/produtos/acj.webp" alt="Frasco de Apple Chilli Jam" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><span>Fotografia do produto</span></div>
+          <div class="produto__info">
+            <h2 class="tl-text-product-title produto__titulo">Apple Chilli Jam</h2>
+            <p class="tl-text-ui-sm ref">Ref. ACJ · Peso líquido 230 g</p>
             <p class="tl-text-body">Maçã inglesa e malagueta: doce, frutada e com um calor suave. Para quem quer o sabor da malagueta sem muito picante.</p>
             <button class="tl-btn tl-btn--compact" type="button" disabled>Brevemente</button>
-          </article>
-          <article class="tl-card" data-ref="RPCL">
-            <div class="tl-card__media"><img src="/assets/img/produtos/rpcl.webp" alt="Frasco de Red Pepper Chilli Lime Jam" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><span>Fotografia do produto</span></div>
-            <h3 class="tl-card__title">Red Pepper Chilli Lime Jam</h3>
-            <p class="tl-text-ui-sm ref">Ref. RPCL</p>
+            <h3 class="tl-text-label-strong">Ingredientes</h3>
+            <p class="tl-text-body">Açúcar branco, maçã (polpa e casca), <strong>vinagre</strong>, sumo de maçã concentrado sem açúcar, malagueta fresca, <strong>pectina</strong>, malagueta em flocos.</p>
+            <p class="tl-text-body"><strong>Alergénios:</strong> contém dióxido de enxofre e sulfitos.</p>
+            <details class="nutricao">
+              <summary class="tl-text-label-strong">Informação nutricional (por 100 g)</summary>
+              <table class="tl-text-ui">
+                <tbody>
+                  <tr><th scope="row">Energia</th><td>1077 kJ / 264 kcal</td></tr>
+                  <tr><th scope="row">Lípidos</th><td>0 g</td></tr>
+                  <tr class="sub"><th scope="row">dos quais saturados</th><td>0 g</td></tr>
+                  <tr><th scope="row">Hidratos de carbono</th><td>65 g</td></tr>
+                  <tr class="sub"><th scope="row">dos quais açúcares</th><td>65 g</td></tr>
+                  <tr><th scope="row">Fibra</th><td>0,7 g</td></tr>
+                  <tr><th scope="row">Proteínas</th><td>0 g</td></tr>
+                  <tr><th scope="row">Sal</th><td>0 g</td></tr>
+                </tbody>
+              </table>
+            </details>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="seccao seccao--produto" id="rpcl">
+      <div class="contentor">
+        <article class="produto" data-ref="RPCL">
+          <div class="produto__media tl-text-ui"><img src="/assets/img/produtos/rpcl.webp" alt="Frasco de Red Pepper Chilli Lime Jam" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><span>Fotografia do produto</span></div>
+          <div class="produto__info">
+            <h2 class="tl-text-product-title produto__titulo">Red Pepper Chilli Lime Jam</h2>
+            <p class="tl-text-ui-sm ref">Ref. RPCL · Peso líquido 238 g</p>
             <p class="tl-text-body">Pimento vermelho, malagueta e lima, de picante médio. A compota com que tudo começou.</p>
             <button class="tl-btn tl-btn--compact" type="button" disabled>Brevemente</button>
-          </article>
-          <article class="tl-card" data-ref="TCJ">
-            <div class="tl-card__media"><img src="/assets/img/produtos/tcj.webp" alt="Frasco de Tomato Chilli Jam" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><span>Fotografia do produto</span></div>
-            <h3 class="tl-card__title">Tomato Chilli Jam</h3>
-            <p class="tl-text-ui-sm ref">Ref. TCJ</p>
-            <p class="tl-text-body">Salgada e com pedaços, de picante médio: alho, gengibre e tomate equilibram a malagueta. Feita para tábuas de queijos e enchidos.</p>
+            <h3 class="tl-text-label-strong">Ingredientes</h3>
+            <p class="tl-text-body">Açúcar branco, pimento vermelho, <strong>vinagre</strong>, <strong>sumo de lima fresco</strong>, malagueta fresca, <strong>pectina</strong>, malagueta em flocos.</p>
+            <p class="tl-text-body"><strong>Alergénios:</strong> contém dióxido de enxofre e sulfitos.</p>
+            <details class="nutricao">
+              <summary class="tl-text-label-strong">Informação nutricional (por 100 g)</summary>
+              <table class="tl-text-ui">
+                <tbody>
+                  <tr><th scope="row">Energia</th><td>1279 kJ / 314 kcal</td></tr>
+                  <tr><th scope="row">Lípidos</th><td>0 g</td></tr>
+                  <tr class="sub"><th scope="row">dos quais saturados</th><td>0 g</td></tr>
+                  <tr><th scope="row">Hidratos de carbono</th><td>77 g</td></tr>
+                  <tr class="sub"><th scope="row">dos quais açúcares</th><td>77 g</td></tr>
+                  <tr><th scope="row">Fibra</th><td>1,0 g</td></tr>
+                  <tr><th scope="row">Proteínas</th><td>0,5 g</td></tr>
+                  <tr><th scope="row">Sal</th><td>0,02 g</td></tr>
+                </tbody>
+              </table>
+            </details>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="seccao seccao--produto" id="tcj">
+      <div class="contentor">
+        <article class="produto" data-ref="TCJ">
+          <div class="produto__media tl-text-ui"><img src="/assets/img/produtos/tcj.webp" alt="Frasco de Tomato Chilli Jam" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><span>Fotografia do produto</span></div>
+          <div class="produto__info">
+            <h2 class="tl-text-product-title produto__titulo">Tomato Chilli Jam</h2>
+            <p class="tl-text-ui-sm ref">Ref. TCJ · Peso líquido 238 g</p>
+            <p class="tl-text-body">Com pedaços e picante médio: o alho, o gengibre e o tomate cereja equilibram a malagueta. Feita para tábuas de queijos e enchidos.</p>
             <button class="tl-btn tl-btn--compact" type="button" disabled>Brevemente</button>
-          </article>
-        </div>
+            <h3 class="tl-text-label-strong">Ingredientes</h3>
+            <p class="tl-text-body">Açúcar branco, tomate cereja, pimento vermelho, <strong>vinagre</strong>, malagueta fresca, alho, gengibre fresco.</p>
+            <p class="tl-text-body"><strong>Alergénios:</strong> contém dióxido de enxofre e sulfitos.</p>
+            <details class="nutricao">
+              <summary class="tl-text-label-strong">Informação nutricional (por 100 g)</summary>
+              <table class="tl-text-ui">
+                <tbody>
+                  <tr><th scope="row">Energia</th><td>1053 kJ / 247 kcal</td></tr>
+                  <tr><th scope="row">Lípidos</th><td>0 g</td></tr>
+                  <tr class="sub"><th scope="row">dos quais saturados</th><td>0 g</td></tr>
+                  <tr><th scope="row">Hidratos de carbono</th><td>63 g</td></tr>
+                  <tr class="sub"><th scope="row">dos quais açúcares</th><td>62 g</td></tr>
+                  <tr><th scope="row">Fibra</th><td>1,1 g</td></tr>
+                  <tr><th scope="row">Proteínas</th><td>1,2 g</td></tr>
+                  <tr><th scope="row">Sal</th><td>0,02 g</td></tr>
+                </tbody>
+              </table>
+            </details>
+          </div>
+        </article>
       </div>
     </section>
   </main>

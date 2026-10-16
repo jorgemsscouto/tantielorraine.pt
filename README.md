@@ -13,6 +13,10 @@ O site é só de apresentação: não há venda nem preços. A página Produtos 
 | RPCL | Red Pepper Chilli Lime Jam | `assets/img/produtos/rpcl.webp` |
 | TCJ | Tomato Chilli Jam | `assets/img/produtos/tcj.webp` |
 
+## Dados dos produtos
+
+Peso, ingredientes, alergénios e informação nutricional (por 100 g) vêm das fichas técnicas de rótulo da marca (Project.Kitchen, 15 de outubro de 2026), traduzidos para português. Os ingredientes a negrito são os que a ficha assinala como fonte de sulfitos. A ficha da SBJ é a versão "copy using mash" (com pasta fermentada de Scotch Bonnet) e tem os kcal por confirmar.
+
 ## Imagens
 
 Logótipo e fotografias são os do site do Reino Unido (inventário de 16 de outubro de 2026), recortados e convertidos para WebP. Cada imagem substitui automaticamente o espaço reservado; se um ficheiro faltar, aparece o espaço reservado, sem ícone de imagem partida. O favicon é o sol do logótipo oficial.
@@ -25,7 +29,6 @@ Logótipo e fotografias são os do site do Reino Unido (inventário de 16 de out
 | `assets/img/inicio-tantie.webp` | Página inicial, bloco "Quem é a Tantie?" |
 | `assets/img/sobre.webp` | Página História (retrato 4:5) |
 | `assets/img/eventos.webp` | Página Eventos (pelau de uma sessão Limin with Tantie) |
-| `assets/img/receitas/wrap-halloumi.webp`, `salsichas-glaceadas.webp`, `tarte-queijo-cabra.webp` | Página Receitas |
 
 Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 
@@ -34,9 +37,7 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 | Caminho | Conteúdo |
 |---|---|
 | `index.html` | Início: hero, mensagem principal, produtos em destaque, apresentação, testemunhos |
-| `produtos.html` | As quatro referências, com botão "Brevemente" |
-| `mercados.html` | Mercados em Portugal (brevemente) e ligação aos do Reino Unido |
-| `receitas.html` | Receitas com as compotas da gama (métodos por traduzir) |
+| `produtos.html` | Uma secção por referência: fotografia, peso, descrição, ingredientes, alergénios e informação nutricional |
 | `eventos.html` | Aulas de cozinha |
 | `historia.html` | História da marca e da fundadora |
 | `contactos.html`, `privacidade.html`, `404.html` | Contactos, informação legal, erro |

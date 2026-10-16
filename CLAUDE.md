@@ -18,6 +18,7 @@ Adaptações deste site ao sistema (manter):
 - Português de Portugal em todo o conteúdo e nas mensagens de commit. Sem travessão longo.
 - Gama em Portugal: só quatro referências, SBJ (Scotch Bonnet Jam), ACJ (Apple Chilli Jam), RPCL (Red Pepper Chilli Lime Jam) e TCJ (Tomato Chilli Jam). Não mencionar outros produtos da marca (molhos, geleias, relishes, temperos, pastelaria, bebidas, conjuntos) em nenhuma página.
 - A referência aparece no cartão (`Ref. SBJ`, em `plum-grey`) e no atributo `data-ref` do `<article>`.
+- Dados de produto (peso, ingredientes, alergénios, nutrição) só a partir das fichas técnicas de rótulo da marca; não arredondar nem recalcular valores.
 - A SBJ tem o selo Great Taste na tampa; no site, o prémio é referido só em texto. O selo gráfico só com autorização e ficheiro original (regra do design system).
 - Nomes de produto em inglês, como no Reino Unido (nomes de marca); descrições em português.
 - Não inventar testemunhos, prémios, características de produto ou receitas: usar só o que está confirmado no site do Reino Unido ou foi fornecido pela marca, e marcar o resto com `<span class="a-preencher">[A PREENCHER: ...]</span>`.
@@ -25,7 +26,7 @@ Adaptações deste site ao sistema (manter):
 - Cabeçalho e rodapé repetidos em todas as páginas `.html`: qualquer alteração aplica-se a todas. Página nova: acrescentar ao menu, ao rodapé se aplicável e ao `sitemap.xml`.
 - Ligações internas com caminho absoluto (`/produtos.html`, `/assets/...`).
 - Sem ligações para o site do Reino Unido (tantielorraine.co.uk) nem indicação de versão inglesa (hreflang).
-- Menu, por esta ordem: História, Produtos, Mercados, Receitas, Eventos, Contactos. Rodapé: História, Produtos, Contactos, Privacidade, Livro de Reclamações.
+- Menu, por esta ordem: História, Produtos, Eventos, Contactos. Sem páginas de Mercados nem de Receitas. Rodapé: História, Produtos, Contactos, Privacidade, Livro de Reclamações.
 - Não acrescentar recursos de terceiros (fontes externas, mapas incorporados, analytics, píxeis) sem atualizar `privacidade.html` e avaliar a necessidade de aviso de cookies.
 - Logótipo e fotografias: os do site do Reino Unido, nos caminhos listados no `README.md`. Usar a função de troca já existente (`<img hidden onload=...>` seguido do espaço reservado) para imagens novas, com `alt` descritivo.
 - Entidade em Portugal: GADGETMÉTODO, LDA, NIPC 513978011, Rua das Cruzes, n.º 625, 4100-195 Porto. Email provisório: gadgetmetodo@gmail.com.
