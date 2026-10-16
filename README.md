@@ -2,7 +2,7 @@
 
 Versão portuguesa do site da Tantie Lorraine's (marca de molhos picantes e compotas de malagueta de Trindade e Tobago, feitos à mão em Surrey), baseada no site do Reino Unido, [tantielorraine.co.uk](https://www.tantielorraine.co.uk). Site estático em HTML e CSS, sem dependências nem passo de compilação, construído sobre o design system da marca.
 
-O site é só de apresentação: não há venda nem preços. A loja mostra a gama com o botão "Brevemente". Entidade responsável em Portugal: GADGETMÉTODO, LDA (NIPC 513978011), Rua das Cruzes, n.º 625, 4100-195 Porto.
+O site é só de apresentação: não há venda nem preços. A página Produtos mostra a gama com o botão "Brevemente". Entidade responsável em Portugal: GADGETMÉTODO, LDA (NIPC 513978011), Rua das Cruzes, n.º 625, 4100-195 Porto.
 
 ## Gama em Portugal
 
@@ -23,7 +23,7 @@ Logótipo e fotografias são os do site do Reino Unido (inventário de 16 de out
 | `assets/img/hero.webp` | Fundo desfocado do topo da página inicial (só as filas de cima da pirâmide de frascos: RPCL, ACJ, TCJ) |
 | `assets/img/produtos/<ref>.webp` | Cartões de produto (ver tabela acima) |
 | `assets/img/inicio-tantie.webp` | Página inicial, bloco "Quem é a Tantie?" |
-| `assets/img/sobre.webp` | Página Sobre (retrato 4:5) |
+| `assets/img/sobre.webp` | Página História (retrato 4:5) |
 | `assets/img/eventos.webp` | Página Eventos (pelau de uma sessão Limin with Tantie) |
 | `assets/img/receitas/wrap-halloumi.webp`, `salsichas-glaceadas.webp`, `tarte-queijo-cabra.webp` | Página Receitas |
 
@@ -34,11 +34,11 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 | Caminho | Conteúdo |
 |---|---|
 | `index.html` | Início: hero, mensagem principal, produtos em destaque, apresentação, testemunhos |
-| `loja.html` | As quatro referências, com botão "Brevemente" |
+| `produtos.html` | As quatro referências, com botão "Brevemente" |
 | `mercados.html` | Mercados em Portugal (brevemente) e ligação aos do Reino Unido |
 | `receitas.html` | Receitas com as compotas da gama (métodos por traduzir) |
 | `eventos.html` | Aulas de cozinha |
-| `sobre.html` | História da marca e da fundadora |
+| `historia.html` | História da marca e da fundadora |
 | `contactos.html`, `privacidade.html`, `404.html` | Contactos, informação legal, erro |
 | `assets/css/tokens.css`, `components.css` | Design system da marca (cores, tipografia, componentes `.tl-*`) |
 | `assets/css/fonts.css`, `assets/fonts/` | Anton, Poppins e Work Sans alojadas no próprio site (licença OFL) |
