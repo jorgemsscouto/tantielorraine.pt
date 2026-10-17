@@ -17,7 +17,6 @@ Factos principais:
 - [Produtos](https://tantielorraine.pt/produtos.html): as quatro compotas, com descrição, peso, ingredientes, alergénios, informação nutricional e perguntas frequentes
 - [História](https://tantielorraine.pt/historia.html): origem da marca e da fundadora
 - [Publicações](https://tantielorraine.pt/publicacoes.html): sugestões de utilização, receitas e novidades publicadas no Instagram da marca (algumas referem produtos do Reino Unido que não estão à venda em Portugal)
-- [Eventos](https://tantielorraine.pt/eventos.html): aulas de cozinha das Caraíbas; datas em Portugal brevemente
 - [Contactos](https://tantielorraine.pt/contactos.html): email e formulário de pedido de informação
 
 ## Opcional

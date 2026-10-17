@@ -28,7 +28,6 @@ Logótipo e fotografias são os do site do Reino Unido (inventário de 16 de out
 | `assets/img/produtos/<ref>.webp` | Cartões de produto (ver tabela acima) |
 | `assets/img/inicio-tantie.webp` | Página inicial, bloco "Quem é a Tantie?" |
 | `assets/img/sobre.webp` | Página História (retrato 4:5) |
-| `assets/img/eventos.webp` | Página Eventos (pelau de uma sessão Limin with Tantie) |
 | `assets/img/selos/great-taste-producer.png` | Rodapé |
 | `assets/img/selos/food-hygiene-rating-5.png`, `great-taste-2019-1-estrela.png`, `great-taste-2021-1-estrela.png`, `great-taste-2024-2-estrelas.png` | Rodapé, sob "Distinções da marca no Reino Unido" |
 | `assets/img/selos/great-taste-2026.png` | Centro do cabeçalho e rodapé (uma estrela). Recortado da imagem enviada pelo utilizador, com o fundo tornado transparente; trocar pelo ficheiro original da Guild of Fine Food quando houver |
@@ -46,7 +45,6 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 |---|---|
 | `index.html` | Início: hero, mensagem principal, produtos em destaque, apresentação, testemunhos |
 | `produtos.html` | Uma secção por referência: fotografia, peso, descrição, ingredientes, alergénios e informação nutricional |
-| `eventos.html` | Aulas de cozinha |
 | `historia.html` | História da marca e da fundadora |
 | `publicacoes.html` | Publicações do Instagram da marca, resumidas em português, com ligação para cada uma |
 | `contactos.html`, `privacidade.html`, `404.html` | Contactos (com o formulário de pedido de informação), informação legal, erro |
@@ -60,6 +58,7 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 | `.claude/skills/tantie-lorraine-design-system/` | Design system original (regras, tokens, exemplos) |
 | `.htaccess` | Regras para Apache (HTTPS, domínio sem "www", página 404, cache, cabeçalhos de segurança). Sem efeito no alojamento da Amen (ver abaixo); mantido para o caso de mudança de servidor |
 | `scripts/deploy.sh` | Publicação por FTP/FTPS com o curl: testar, backup, enviar, retirar o WordPress, configurar o email |
+| `scripts/retirados.txt` | Ficheiros retirados do site, apagados no servidor a cada publicação (por agora, a página Eventos) |
 | `scripts/obter-selos.sh` | Descarrega os selos em falta a partir dos originais do site do Reino Unido |
 | `.github/workflows/publicar.yml` | Publicação automática na Amen a cada alteração no ramo `main` |
 | `scripts/indexnow.sh`, `<chave>.txt` | Aviso aos motores de busca das páginas alteradas (IndexNow); o ficheiro `.txt` com nome hexadecimal na raiz é a chave pública de verificação |
@@ -103,7 +102,7 @@ Abrir http://localhost:8000.
 
 ### Automática, a partir do GitHub
 
-Cada alteração no ramo `main` publica o site sozinha (`.github/workflows/publicar.yml`, separador Actions do GitHub): obtém os selos que faltam (`scripts/obter-selos.sh`), envia o site e atualiza no servidor a configuração do email do formulário. Não apaga nada no servidor.
+Cada alteração no ramo `main` publica o site sozinha (`.github/workflows/publicar.yml`, separador Actions do GitHub): obtém os selos que faltam (`scripts/obter-selos.sh`), envia o site, apaga no servidor os ficheiros listados em `scripts/retirados.txt` e atualiza a configuração do email do formulário. Não apaga mais nada no servidor.
 
 Configuração, uma única vez, em Settings > Secrets and variables > Actions > New repository secret:
 
@@ -132,7 +131,7 @@ Feito em 17/10/2026.
 
 ### Atualizações seguintes
 
-`scripts/deploy.sh enviar --simular` e `scripts/deploy.sh enviar`. Ficheiros que deixem de existir no projeto não são apagados no servidor; apagar à mão, se necessário.
+`scripts/deploy.sh enviar --simular` e `scripts/deploy.sh enviar`. Ficheiros que deixem de existir no projeto só são apagados no servidor se forem acrescentados a `scripts/retirados.txt` (um caminho por linha, relativo à pasta pública).
 
 ### Se algo correr mal
 

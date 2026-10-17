@@ -152,6 +152,17 @@ case "$ACAO" in
       printf 'upload-file = "%s"\nurl = "%s"\n' "$(esc "$f")" "$(esc "$(url "$(caminho "$f")")")" >> "$LOTE"
     done <<<"$LISTA"
     ftp_lote "$LOTE" --ftp-create-dirs
+    # Ficheiros retirados do site (scripts/retirados.txt): apagados no servidor numa só ligação; os que já não
+    # existem são ignorados (o "*" antes do comando FTP diz ao curl para continuar se falhar)
+    APAGAR=()
+    while IFS= read -r f; do
+      [[ -z "$f" || "$f" == \#* ]] && continue
+      APAGAR+=( -Q "*DELE $(caminho "$f")" )
+    done < <(cat scripts/retirados.txt 2>/dev/null || true)
+    if [[ ${#APAGAR[@]} -gt 0 ]]; then
+      ftp "${APAGAR[@]}" --list-only "$(url "")" > /dev/null || true
+      echo "Ficheiros retirados do site apagados no servidor, se ainda existiam: $(( ${#APAGAR[@]} / 2 ))"
+    fi
     echo "Enviado. Se ainda houver WordPress na pasta pública, o servidor continua a mostrá-lo: correr retirar-wordpress."
     ;;
 

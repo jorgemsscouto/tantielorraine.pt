@@ -1,0 +1,4 @@
+# Ficheiros retirados do site: cada publicação apaga-os no servidor, se ainda lá estiverem (scripts/deploy.sh enviar).
+# Um caminho por linha, relativo à pasta pública.
+eventos.html
+assets/img/eventos.webp
