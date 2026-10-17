@@ -19,7 +19,7 @@ Adaptações deste site ao sistema (manter):
 - Gama em Portugal: só quatro referências, SBJ (Scotch Bonnet Jam), ACJ (Apple Chilli Jam), RPCL (Red Pepper Chilli Lime Jam) e TCJ (Tomato Chilli Jam). Não mencionar outros produtos da marca (molhos, geleias, relishes, temperos, pastelaria, bebidas, conjuntos) em nenhuma página.
 - A referência aparece no cartão (`Ref. SBJ`, em `plum-grey`) e no atributo `data-ref` do `<article>`.
 - Dados de produto (peso, ingredientes, alergénios, nutrição) só a partir das fichas técnicas de rótulo da marca; não arredondar nem recalcular valores. Exceção decidida pelo utilizador: energia da SBJ, 1210 kJ / 289 kcal (a ficha diz 264 kcal; ver README).
-- Selos (decisão do utilizador, 17/10/2026, contra a regra geral do design system): Great Taste Producer ao centro do cabeçalho; no rodapé, sob "Distinções da marca no Reino Unido", Food Hygiene Rating 5 e Great Taste Producer, 2019, 2021, 2024 e 2026 (este com ligação ao diretório da Guild of Fine Food). Só ficheiros originais em `assets/img/selos/`, sem alterações. Não acrescentar outros selos sem pedido.
+- Selos (decisão do utilizador, 17/10/2026, contra a regra geral do design system): Great Taste Producer ao centro do cabeçalho; no rodapé, sob "Distinções da marca no Reino Unido", Food Hygiene Rating 5 e Great Taste Producer, 2019, 2021, 2024 e 2026. Todos os selos Great Taste, no site e no email de confirmação, ligam a https://gff.co.uk/directory/producer/?id=25813 (o Food Hygiene Rating não tem ligação). Só ficheiros originais em `assets/img/selos/`, sem alterações. Não acrescentar outros selos sem pedido.
 - Nomes de produto em inglês, como no Reino Unido (nomes de marca); descrições em português.
 - Não inventar testemunhos, prémios, características de produto ou receitas: usar só o que está confirmado no site do Reino Unido ou foi fornecido pela marca, e marcar o resto com `<span class="a-preencher">[A PREENCHER: ...]</span>`.
 - Site só de apresentação: sem preços, sem carrinho e sem página de entregas. Produtos com botão "Brevemente" desativado.
@@ -29,7 +29,7 @@ Adaptações deste site ao sistema (manter):
 - Menu, por esta ordem: História, Produtos, Eventos, Contactos. Sem páginas de Mercados nem de Receitas. Rodapé: História, Produtos, Contactos, Privacidade, Livro de Reclamações.
 - Não acrescentar recursos de terceiros (fontes externas, mapas incorporados, analytics, píxeis) sem atualizar `privacidade.html` e avaliar a necessidade de aviso de cookies.
 - Logótipo e fotografias: os do site do Reino Unido, nos caminhos listados no `README.md`. Usar a função de troca já existente (`<img hidden onload=...>` seguido do espaço reservado) para imagens novas, com `alt` descritivo.
-- Entidade em Portugal: GADGETMÉTODO, LDA, NIPC 513978011, Rua das Cruzes, n.º 625, 4100-195 Porto. Email do site: info@tantielorraine.pt. O formulário de contactos (`contacto.php`) envia os pedidos para info@tantielorraine.pt e gadgetmetodo@gmail.com.
+- Entidade em Portugal: GADGETMÉTODO, LDA, NIPC 513978011, Rua das Cruzes, n.º 625, 4100-195 Porto. Email do site: info@tantielorraine.pt. O formulário de contactos (`contacto.php`) envia os pedidos para info@tantielorraine.pt e gadgetmetodo@gmail.com e uma confirmação de receção a quem escreveu, que não repete o conteúdo do pedido.
 
 ## Git
 

@@ -31,7 +31,9 @@ Logótipo e fotografias são os do site do Reino Unido (inventário de 16 de out
 | `assets/img/eventos.webp` | Página Eventos (pelau de uma sessão Limin with Tantie) |
 | `assets/img/selos/great-taste-producer.png` | Centro do cabeçalho e rodapé |
 | `assets/img/selos/food-hygiene-rating-5.png`, `great-taste-2019-1-estrela.png`, `great-taste-2021-1-estrela.png`, `great-taste-2024-2-estrelas.png` | Rodapé, sob "Distinções da marca no Reino Unido" |
-| `assets/img/selos/great-taste-2026.png` | Rodapé, com ligação ao diretório de produtores da Guild of Fine Food |
+| `assets/img/selos/great-taste-2026.png` | Rodapé |
+
+Todos os selos Great Taste (cabeçalho, rodapé e email de confirmação) ligam ao [diretório de produtores da Guild of Fine Food](https://gff.co.uk/directory/producer/?id=25813). O Food Hygiene Rating não, porque não é atribuído pela Guild. O email de confirmação usa o logótipo e os selos que estiverem no servidor.
 
 Os selos são ficheiros originais, usados sem alterações (a Food Standards Agency não permite alterar as imagens da classificação e só deixa mostrar a classificação em vigor). Enquanto um ficheiro faltar, o selo não aparece. Os quatro primeiros estão no site do Reino Unido:
 
@@ -58,7 +60,7 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 | `eventos.html` | Aulas de cozinha |
 | `historia.html` | História da marca e da fundadora |
 | `contactos.html`, `privacidade.html`, `404.html` | Contactos (com o formulário de pedido de informação), informação legal, erro |
-| `contacto.php` | Recebe o formulário e envia o pedido por email (SMTP da Amen) para info@tantielorraine.pt e gadgetmetodo@gmail.com |
+| `contacto.php` | Recebe o formulário e envia, por SMTP da Amen, o pedido para info@tantielorraine.pt e gadgetmetodo@gmail.com e uma confirmação de receção a quem escreveu |
 | `favicon.ico` | Favicon para os browsers que o pedem na raiz |
 | `assets/css/tokens.css`, `components.css` | Design system da marca (cores, tipografia, componentes `.tl-*`) |
 | `assets/css/fonts.css`, `assets/fonts/` | Anton, Poppins e Work Sans alojadas no próprio site (licença OFL) |
@@ -116,7 +118,7 @@ Feito em 17/10/2026.
 3. `scripts/deploy.sh configurar-email`: cria `config-email.php` no servidor, fora da pasta pública (se o alojamento não deixar o PHP ler lá, fica na pasta pública, onde o servidor não mostra o conteúdo de ficheiros `.php`), e envia uma mensagem de teste pelo formulário. A palavra-passe não passa pelo disco do computador nem vai para o Git.
 4. Ao mudar a palavra-passe do email: atualizar o `.env` e repetir o passo 3.
 
-Os pedidos chegam com o remetente info@tantielorraine.pt e "Responder para" o email de quem escreveu. Proteção contra robôs sem serviços de terceiros: um campo escondido e um tempo mínimo de preenchimento. Erros de envio ficam no registo de erros do PHP no servidor (pasta `logs`).
+Os pedidos chegam com o remetente info@tantielorraine.pt e "Responder para" o email de quem escreveu. Quem escreve recebe uma confirmação de receção (HTML com logótipo e selos, mais versão em texto); por segurança, não repete a mensagem e só usa o nome se parecer um nome. Limites: 3 pedidos por dia para o mesmo email e 100 por dia no total. Proteção contra robôs sem serviços de terceiros: um campo escondido e um tempo mínimo de preenchimento. Erros de envio ficam no registo de erros do PHP no servidor (pasta `logs`).
 
 ### Comportamento do servidor da Amen (confirmado em 17/10/2026)
 

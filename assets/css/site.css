@@ -58,15 +58,19 @@ h1, h2, h3, p { margin: 0; }
 .tl-footer .marca .logo { height: var(--space-header); }
 .tl-nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 4px; }
 
-/* Selo Great Taste Producer ao centro do cabeçalho, sobreposto ao limite inferior da barra (como no site do Reino Unido) */
+/* Selo Great Taste Producer ao centro do cabeçalho, sobreposto ao limite inferior da barra (como no site do Reino Unido),
+   com ligação para os prémios da marca no diretório da Guild of Fine Food */
 .selo-cabecalho {
+  display: block;
   position: absolute;
   left: 50%;
   top: var(--space-card-gap);
   width: calc(var(--space-header) + var(--space-btn-compact-y));
-  height: auto;
   transform: translateX(-50%);
+  border-radius: var(--radius-pill);
 }
+.selo-cabecalho img { width: 100%; height: auto; }
+.selo-cabecalho:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 @media (max-width: 760px) {
   .selo-cabecalho { top: calc(var(--space-gutter) / 2); width: calc(var(--space-header) - var(--space-gutter)); }
 }
