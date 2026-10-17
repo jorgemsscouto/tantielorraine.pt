@@ -16,6 +16,7 @@ Adaptações deste site ao sistema (manter):
 ## Regras
 
 - Português de Portugal em todo o conteúdo e nas mensagens de commit. Sem travessão longo.
+- O país escreve-se "Trinidad e Tobago" e a ilha "Trinidad", nunca "Trindade" (decisão do utilizador, 17/10/2026, embora "Trindade e Tobago" seja a forma corrente em português de Portugal).
 - Gama em Portugal: só quatro referências, SBJ (Scotch Bonnet Jam), ACJ (Apple Chilli Jam), RPCL (Red Pepper Chilli Lime Jam) e TCJ (Tomato Chilli Jam). Não mencionar outros produtos da marca (molhos, geleias, relishes, temperos, pastelaria, bebidas, conjuntos) em nenhuma página. Exceção decidida pelo utilizador (17/10/2026): `publicacoes.html` reproduz publicações do Instagram da marca e pode referi-los, com a nota de que nem todos estão à venda em Portugal.
 - A referência aparece no cartão (`Ref. SBJ`, em `plum-grey`) e no atributo `data-ref` do `<article>`.
 - Dados de produto (peso, ingredientes, alergénios, nutrição) só a partir das fichas técnicas de rótulo da marca; não arredondar nem recalcular valores. Exceção decidida pelo utilizador: energia da SBJ, 1210 kJ / 289 kcal (a ficha diz 264 kcal; ver README).
