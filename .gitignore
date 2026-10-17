@@ -3,6 +3,8 @@
 .env.*
 !.env.example
 .deploy.env
+# Configuração de envio do formulário, com a palavra-passe do email (só existe no servidor)
+config-email.php
 
 # Sistema e editores
 .DS_Store

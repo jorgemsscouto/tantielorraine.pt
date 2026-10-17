@@ -58,6 +58,22 @@ h1, h2, h3, p { margin: 0; }
 .tl-footer .marca .logo { height: var(--space-header); }
 .tl-nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 4px; }
 
+/* Selo Great Taste Producer ao centro do cabeçalho, sobreposto ao limite inferior da barra (como no site do Reino Unido) */
+.selo-cabecalho {
+  position: absolute;
+  left: 50%;
+  top: var(--space-card-gap);
+  width: calc(var(--space-header) + var(--space-btn-compact-y));
+  height: auto;
+  transform: translateX(-50%);
+}
+@media (max-width: 760px) {
+  .selo-cabecalho { top: calc(var(--space-gutter) / 2); width: calc(var(--space-header) - var(--space-gutter)); }
+}
+@media (max-width: 340px) {
+  .selo-cabecalho { display: none; }
+}
+
 .menu-botao {
   display: none;
   align-items: center;
@@ -229,6 +245,41 @@ h1, h2, h3, p { margin: 0; }
 .lista-contactos li { padding: var(--space-btn-y) 0; border-bottom: var(--border-stepper) solid var(--mist); }
 .lista-contactos .tl-text-label-strong { display: block; }
 
+/* Pedido de informação. O design system não tem campos de formulário: contorno igual ao dos botões e cantos retos */
+.formulario { display: grid; gap: var(--space-card-gap); }
+.campo { display: grid; gap: var(--space-btn-compact-y); }
+.campo input,
+.campo textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: var(--space-btn-y) var(--space-btn-x);
+  background: var(--paper);
+  color: var(--ink);
+  border: var(--border-button) solid var(--ink);
+  border-radius: var(--radius-none);
+}
+.campo textarea { resize: vertical; min-height: calc(var(--space-header) * 2); }
+.campo input:focus-visible,
+.campo textarea:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.campo label .tl-text-ui-sm { text-transform: none; }
+/* Armadilha para robôs: fora do ecrã, invisível para pessoas e leitores de ecrã */
+.campo--armadilha { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Mensagens de envio: :target serve o envio sem JavaScript (o servidor redireciona para #pedido-enviado ou #pedido-erro) */
+.estado-pedido {
+  display: none;
+  border: var(--border-button) solid var(--ink);
+  border-radius: var(--radius-media);
+  background: var(--paper);
+  padding: var(--space-btn-y) var(--space-card-gap);
+  margin-bottom: var(--space-gutter);
+  scroll-margin-top: calc(var(--space-header) + var(--space-gutter));
+}
+.estado-pedido:target,
+.estado-pedido.visivel { display: block; }
+#pedido-enviado:target ~ .formulario { display: none; }
+#pedido { scroll-margin-top: var(--space-header); }
+
 /* Texto legal */
 .texto-legal .tl-text-subhead { margin: var(--space-gutter) 0 var(--space-btn-y); }
 .texto-legal p + p { margin-top: var(--space-btn-y); }
@@ -246,6 +297,15 @@ main:has(> .seccao--vermelha:last-child) + .tl-footer { border-top: var(--border
 
 /* Rodapé */
 .tl-footer__links a[aria-current="page"] { text-decoration-thickness: 3px; }
+/* Distinções no rodapé: ficheiros originais do site do Reino Unido, sem alterações (regra da Food Standards Agency) */
+.selos { display: grid; gap: var(--space-btn-y); }
+.selos__lista { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-card-gap); }
+.selos__lista img { height: var(--space-header); width: auto; }
+.selos__lista a { display: block; }
+.selos__lista a:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+@media (max-width: 760px) {
+  .selos__lista img { height: calc(var(--space-header) - var(--space-gutter)); }
+}
 .tl-footer__social { display: flex; gap: var(--space-card-gap); }
 @media (max-width: 760px) {
   .tl-footer__links { grid-template-columns: 1fr; }

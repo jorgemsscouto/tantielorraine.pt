@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Publica o site estático no alojamento da Amen por FTP (com TLS quando o servidor o aceita), usando o curl
 # que já vem instalado no macOS. Credenciais lidas do .env na raiz (FTP_HOST, FTP_USER, FTP_PASS, FTP_PORT e,
-# opcionais, FTP_DIR e FTP_VERIFICAR_CERTIFICADO=nao); nunca são mostradas nem escritas em disco.
+# opcionais, FTP_DIR e FTP_VERIFICAR_CERTIFICADO=nao; para o formulário, SMTP_USER e SMTP_PASS); nunca são
+# mostradas nem escritas em disco no computador.
 #
 # Uso:
 #   scripts/deploy.sh testar                  só leitura: testa a ligação e mostra a pasta de entrada e a pasta pública
@@ -10,6 +11,8 @@
 #   scripts/deploy.sh retirar-wordpress [--simular]
 #                                             move os ficheiros do WordPress da pasta pública para uma pasta
 #                                             wordpress-desativado-<data> fora do site; nada é apagado
+#   scripts/deploy.sh configurar-email        põe no servidor, fora da pasta pública, a configuração de envio do
+#                                             formulário (config-email.php) e envia uma mensagem de teste
 #
 # Ordem para trocar o WordPress pelo site estático: testar, backup, enviar --simular, enviar (guarda antes o .htaccess),
 # retirar-wordpress --simular, retirar-wordpress. No alojamento da Amen (nginx, que ignora o .htaccess) o site estático
@@ -131,6 +134,7 @@ case "$ACAO" in
     exigir_publica
     LISTA="$(find . \( -name .git -o -name .claude -o -name scripts -o -name backups -o -name originais -o -name node_modules \) -prune -o \
       -type f ! -name '.git*' ! -name '.env*' ! -name '.deploy.env*' ! -name '.DS_Store' ! -name 'README.md' ! -name 'CLAUDE.md' \
+      ! -name 'config-email.php' \
       -print | sed 's#^\./##' | sort)"
     echo "== Ficheiros do site a enviar para $PUB_ROTULO: $(wc -l <<<"$LISTA" | tr -d ' ')"
     if [[ $SIMULAR -eq 1 ]]; then sed 's/^/   /' <<<"$LISTA"; echo "Simulação: nada foi enviado."; exit 0; fi
@@ -170,8 +174,55 @@ case "$ACAO" in
     echo "WordPress movido para $DEST. Para repor, mover os ficheiros de volta para $PUB_ROTULO."
     ;;
 
+  configurar-email)
+    exigir_publica
+    SMTP_HOST="$(ler SMTP_HOST)"; SMTP_PORT="$(ler SMTP_PORT)"; SMTP_USER="$(ler SMTP_USER)"; SMTP_PASS="$(ler SMTP_PASS)"
+    SMTP_HOST="${SMTP_HOST:-smtp-pt.securemail.pro}"; SMTP_PORT="${SMTP_PORT:-465}"
+    SITE="$(ler SITE_URL)"; SITE="${SITE:-https://tantielorraine.pt}"; SITE="${SITE%/}"
+    [[ -n "$SMTP_USER" && -n "$SMTP_PASS" ]] || { echo "Faltam SMTP_USER ou SMTP_PASS no $ENVF (ver .env.example)." >&2; exit 1; }
+    [[ "$SMTP_PORT" =~ ^[0-9]+$ ]] || { echo "SMTP_PORT inválida no $ENVF." >&2; exit 1; }
+    verificar() { curl --silent --max-time 20 "$SITE/contacto.php?verificar" 2>/dev/null || true; }
+    [[ "$(verificar)" == *'"configurado"'* ]] || { echo "O $SITE/contacto.php não responde: enviar primeiro o site (scripts/deploy.sh enviar)." >&2; exit 1; }
+    # Texto para uma string PHP entre plicas; o ficheiro segue para o servidor pela entrada do curl, sem passar pelo disco
+    pesc() { printf '%s' "$1" | sed -e 's/\\/\\\\/g' -e "s/'/\\\\'/g"; }
+    config() {
+      printf '%s\n' "<?php" "// Gerado por scripts/deploy.sh configurar-email em $DATA. Tem a palavra-passe do email: não copiar nem versionar." \
+        "return [" "  'host' => '$(pesc "$SMTP_HOST")'," "  'porta' => $SMTP_PORT," \
+        "  'utilizador' => '$(pesc "$SMTP_USER")'," "  'palavra_passe' => '$(pesc "$SMTP_PASS")'," "];"
+    }
+    DENTRO="$(caminho config-email.php)"
+    FORA=""
+    if [[ -n "$PUB" ]]; then PAI="${PUB%/*}"; [[ "$PAI" == "$PUB" ]] && PAI=""; FORA="${PAI:+$PAI/}config-email.php"; fi
+    ONDE=""
+    if [[ -n "$FORA" ]]; then
+      echo "== A pôr a configuração do email fora da pasta pública ($FORA)..."
+      config | ftp -T - "$(url "$FORA")"
+      if [[ "$(verificar)" == *'"configurado":true'* ]]; then ONDE="$FORA"; else
+        echo "   O alojamento não deixa o PHP ler fora da pasta pública; passa para $DENTRO (um .php não é mostrado pelo servidor)."
+        ftp -Q "DELE $FORA" --list-only "$(url "")" > /dev/null 2>&1 || true
+      fi
+    fi
+    if [[ -z "$ONDE" ]]; then
+      config | ftp -T - "$(url "$DENTRO")"
+      [[ "$(verificar)" == *'"configurado":true'* ]] || { echo "O formulário não encontra a configuração em $DENTRO." >&2; exit 1; }
+      ONDE="$DENTRO"
+    fi
+    echo "   Configuração em $ONDE."
+    echo "== A enviar uma mensagem de teste pelo formulário do site..."
+    RESP="$(curl --silent --show-error --max-time 60 -H 'Accept: application/json' \
+      --data-urlencode "nome=Teste do site" --data-urlencode "email=$SMTP_USER" \
+      --data-urlencode "mensagem=Mensagem de teste enviada por scripts/deploy.sh configurar-email em $DATA. Pode apagar." \
+      "$SITE/contacto.php" 2>&1 || true)"
+    case "$RESP" in
+      *'"ok":true'*) echo "Teste enviado. Confirmar que chegou às caixas de destino (ver também a pasta de spam)." ;;
+      *autenticacao*) echo "O servidor de email ($SMTP_HOST) recusou o utilizador ou a palavra-passe: rever SMTP_USER e SMTP_PASS no $ENVF e repetir." >&2; exit 1 ;;
+      *ligacao*) echo "O servidor do site não conseguiu ligar a $SMTP_HOST, porta $SMTP_PORT: confirmar estes dados no painel da Amen (SMTP_HOST e SMTP_PORT no $ENVF)." >&2; exit 1 ;;
+      *) echo "O envio de teste falhou: $RESP" >&2; exit 1 ;;
+    esac
+    ;;
+
   *)
-    sed -n '2,16p' "$0" | sed 's/^# \{0,1\}//'
+    sed -n '2,19p' "$0" | sed 's/^# \{0,1\}//'
     exit 1
     ;;
 esac

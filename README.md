@@ -15,11 +15,11 @@ O site é só de apresentação: não há venda nem preços. A página Produtos 
 
 ## Dados dos produtos
 
-Peso, ingredientes, alergénios e informação nutricional (por 100 g) vêm das fichas técnicas de rótulo da marca (Project.Kitchen, 15 de outubro de 2026), traduzidos para português. Os ingredientes a negrito são os que a ficha assinala como fonte de sulfitos. A ficha da SBJ é a versão "copy using mash" (com pasta fermentada de Scotch Bonnet) e tem os kcal por confirmar.
+Peso, ingredientes, alergénios e informação nutricional (por 100 g) vêm das fichas técnicas de rótulo da marca (Project.Kitchen, 15 de outubro de 2026), traduzidos para português. Os ingredientes a negrito são os que a ficha assinala como fonte de sulfitos. A ficha da SBJ é a versão "copy using mash" (com pasta fermentada de Scotch Bonnet) e indica 1210 kJ / 264 kcal, valores incoerentes entre si (1210 kJ correspondem a 289 kcal). A pedido, o site mostra 1210 kJ / 289 kcal (17/10/2026); a marca deve confirmar o valor e corrigir o rótulo, porque o frasco continua a indicar 264 kcal.
 
 ## Imagens
 
-Logótipo e fotografias são os do site do Reino Unido (inventário de 16 de outubro de 2026), recortados e convertidos para WebP. Cada imagem substitui automaticamente o espaço reservado; se um ficheiro faltar, aparece o espaço reservado, sem ícone de imagem partida. O favicon é o sol do logótipo oficial.
+Logótipo e fotografias são os do site do Reino Unido (inventário de 16 de outubro de 2026), recortados e convertidos para WebP. Cada imagem substitui automaticamente o espaço reservado; se um ficheiro faltar, aparece o espaço reservado, sem ícone de imagem partida. O favicon (`assets/img/favicon.png`, `favicon.ico` na raiz e `assets/img/apple-touch-icon.png`) é o sol do logótipo oficial em `chilli-red`, como no separador do site do Reino Unido.
 
 | Ficheiro | Onde aparece |
 |---|---|
@@ -29,6 +29,23 @@ Logótipo e fotografias são os do site do Reino Unido (inventário de 16 de out
 | `assets/img/inicio-tantie.webp` | Página inicial, bloco "Quem é a Tantie?" |
 | `assets/img/sobre.webp` | Página História (retrato 4:5) |
 | `assets/img/eventos.webp` | Página Eventos (pelau de uma sessão Limin with Tantie) |
+| `assets/img/selos/great-taste-producer.png` | Centro do cabeçalho e rodapé |
+| `assets/img/selos/food-hygiene-rating-5.png`, `great-taste-2019-1-estrela.png`, `great-taste-2021-1-estrela.png`, `great-taste-2024-2-estrelas.png` | Rodapé, sob "Distinções da marca no Reino Unido" |
+| `assets/img/selos/great-taste-2026.png` | Rodapé, com ligação ao diretório de produtores da Guild of Fine Food |
+
+Os selos são ficheiros originais, usados sem alterações (a Food Standards Agency não permite alterar as imagens da classificação e só deixa mostrar a classificação em vigor). Enquanto um ficheiro faltar, o selo não aparece. Os quatro primeiros estão no site do Reino Unido:
+
+```bash
+mkdir -p assets/img/selos && cd assets/img/selos
+curl -fsS -o great-taste-producer.png 'https://static.wixstatic.com/media/0e8816_8ed9b46635bc4fc6be9a014622398b08~mv2.png'
+curl -fsS -o great-taste-2019-1-estrela.png 'https://static.wixstatic.com/media/0e8816_31d838a940264e64a4700c7fd0a04d0d~mv2.png'
+curl -fsS -o great-taste-2021-1-estrela.png 'https://static.wixstatic.com/media/0e8816_e0d14e5540de4990a0f2005f40b02732~mv2.png'
+curl -fsS -o great-taste-2024-2-estrelas.png 'https://static.wixstatic.com/media/0e8816_94a846c201984143887fba1eddc27b0b~mv2.png'
+curl -fsS -o food-hygiene-rating-5.png 'https://static.wixstatic.com/media/0e8816_a869c19a6bcc4a19afb12e17d96ac6a1~mv2.png'
+cd ../../..
+```
+
+O de 2026 tem de vir da marca (kit de vencedor da Guild of Fine Food).
 
 Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 
@@ -40,11 +57,13 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 | `produtos.html` | Uma secção por referência: fotografia, peso, descrição, ingredientes, alergénios e informação nutricional |
 | `eventos.html` | Aulas de cozinha |
 | `historia.html` | História da marca e da fundadora |
-| `contactos.html`, `privacidade.html`, `404.html` | Contactos, informação legal, erro |
+| `contactos.html`, `privacidade.html`, `404.html` | Contactos (com o formulário de pedido de informação), informação legal, erro |
+| `contacto.php` | Recebe o formulário e envia o pedido por email (SMTP da Amen) para info@tantielorraine.pt e gadgetmetodo@gmail.com |
+| `favicon.ico` | Favicon para os browsers que o pedem na raiz |
 | `assets/css/tokens.css`, `components.css` | Design system da marca (cores, tipografia, componentes `.tl-*`) |
 | `assets/css/fonts.css`, `assets/fonts/` | Anton, Poppins e Work Sans alojadas no próprio site (licença OFL) |
 | `assets/css/site.css` | Composição das páginas, só com variáveis do design system |
-| `assets/js/main.js` | Menu em ecrãs pequenos e ano no rodapé |
+| `assets/js/main.js` | Menu em ecrãs pequenos, ano no rodapé e envio do formulário sem sair da página |
 | `.claude/skills/tantie-lorraine-design-system/` | Design system original (regras, tokens, exemplos) |
 | `.htaccess` | Regras para Apache (HTTPS, domínio sem "www", página 404, cache, cabeçalhos de segurança). Sem efeito no alojamento da Amen (ver abaixo); mantido para o caso de mudança de servidor |
 | `scripts/deploy.sh` | Publicação por FTP/FTPS com o curl: testar, backup, enviar, retirar o WordPress |
@@ -52,13 +71,17 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 ## Por fazer antes de publicar
 
 - Textos marcados com `[A PREENCHER: ...]` (contorno tracejado no navegador): `grep -rn "A PREENCHER" --include=*.html .`
-- Autorização escrita da Lorraine para usar a marca, o logótipo, as fotografias e os textos, incluindo o direito de imagem do retrato dela.
+- Autorização escrita da Lorraine para usar a marca, o logótipo, as fotografias, os textos e os selos dos prémios, incluindo o direito de imagem do retrato dela.
+- Ficheiros dos selos em `assets/img/selos/` (ver Imagens), incluindo o de 2026, a pedir à marca.
+- Confirmar com a marca os kcal da SBJ e que a classificação Food Hygiene Rating 5 continua em vigor.
 
 ## Ver localmente
 
 ```bash
 python3 -m http.server 8000
 ```
+
+Para experimentar o formulário é preciso PHP (`php -S localhost:8000`); sem `config-email.php`, o envio dá a mensagem de erro.
 
 Abrir http://localhost:8000.
 
@@ -86,6 +109,15 @@ Feito em 17/10/2026.
 - Repor o WordPress: mover o conteúdo de `wordpress-desativado-<data>/` de volta para a pasta pública e repor o `.htaccess` guardado em `backups/antes-do-envio-<data>/`.
 - "Connection time-out": o servidor está a limitar ligações; esperar 10 minutos e repetir (o script já tenta de novo sozinho algumas vezes).
 
+### Formulário de pedido de informação
+
+1. No `.env`, preencher `SMTP_USER` (info@tantielorraine.pt) e `SMTP_PASS` (palavra-passe dessa caixa de correio). Por omissão, o servidor de envio é `smtp-pt.securemail.pro`, porta 465, segundo a ajuda da Amen; se o painel indicar outros, definir `SMTP_HOST` e `SMTP_PORT`.
+2. `scripts/deploy.sh enviar` (põe o `contacto.php` no servidor).
+3. `scripts/deploy.sh configurar-email`: cria `config-email.php` no servidor, fora da pasta pública (se o alojamento não deixar o PHP ler lá, fica na pasta pública, onde o servidor não mostra o conteúdo de ficheiros `.php`), e envia uma mensagem de teste pelo formulário. A palavra-passe não passa pelo disco do computador nem vai para o Git.
+4. Ao mudar a palavra-passe do email: atualizar o `.env` e repetir o passo 3.
+
+Os pedidos chegam com o remetente info@tantielorraine.pt e "Responder para" o email de quem escreveu. Proteção contra robôs sem serviços de terceiros: um campo escondido e um tempo mínimo de preenchimento. Erros de envio ficam no registo de erros do PHP no servidor (pasta `logs`).
+
 ### Comportamento do servidor da Amen (confirmado em 17/10/2026)
 
 - Os ficheiros são servidos diretamente pelo nginx, que não lê o `.htaccess`: não se aplicam o `DirectoryIndex`, os redirecionamentos, a página de erro, a cache nem os cabeçalhos de segurança aí definidos. Alterações destas pedem-se à Amen ou fazem-se no painel.
@@ -97,4 +129,4 @@ Feito em 17/10/2026.
 
 - Fontes alojadas no site em vez do Google Fonts, sem mapas incorporados nem analytics: não há transferência de dados para terceiros e não é preciso aviso de cookies.
 - As fontes DIN Neuzeit Grotesk, Avenir e DIN Next do site do Reino Unido são licenciadas pela Wix e não estão incluídas; o site usa as alternativas definidas no design system.
-- Sem formulários: os contactos são feitos por email, telefone ou redes sociais.
+- Um único formulário (pedido de informação), tratado pelo próprio alojamento: sem reCAPTCHA nem outros serviços de terceiros, sem cookies e sem guardar dados no site.
