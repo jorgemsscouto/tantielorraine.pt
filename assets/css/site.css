@@ -185,6 +185,22 @@ h1, h2, h3, p { margin: 0; }
   justify-content: center;
 }
 .produto__media img { width: 100%; height: 100%; object-fit: cover; }
+/* Ingrediente principal num círculo, no canto superior direito da fotografia do produto, sobre o fundo e fora do rótulo */
+.produto__media,
+.tl-card__media { position: relative; }
+.produto__media img.ingrediente,
+.tl-card__media img.ingrediente {
+  position: absolute;
+  top: var(--space-card-gap);
+  right: var(--space-card-gap);
+  width: 26%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: calc(var(--border-button) * 2) solid var(--paper);
+  border-radius: var(--radius-pill);
+}
+.tl-card__media img.ingrediente { top: var(--space-btn-y); right: var(--space-btn-y); width: 30%; }
 .produto__titulo { color: var(--chilli-red); margin-bottom: var(--space-btn-compact-y); }
 .produto .ref { color: var(--plum-grey); margin-bottom: var(--space-card-gap); }
 .produto__info .tl-text-body + .tl-text-body { margin-top: var(--space-btn-y); }

@@ -1,6 +1,6 @@
 # tantielorraine.pt
 
-Versão portuguesa do site da Tantie Lorraine's (marca de molhos picantes e compotas de malagueta de Trinidad e Tobago, feitos à mão em Surrey), baseada no site do Reino Unido, [tantielorraine.co.uk](https://www.tantielorraine.co.uk). Site estático em HTML e CSS, sem dependências nem passo de compilação, construído sobre o design system da marca.
+Versão portuguesa do site da Tantie Lorraine's (marca de molhos picantes e compotas de malagueta de Trinidad e Tobago, feitos à mão em Surrey, Londres), baseada no site do Reino Unido, [tantielorraine.co.uk](https://www.tantielorraine.co.uk). Site estático em HTML e CSS, sem dependências nem passo de compilação, construído sobre o design system da marca.
 
 O site é só de apresentação: não há venda nem preços. A página Produtos mostra a gama com o botão "Brevemente". Entidade responsável em Portugal: GADGETMÉTODO, LDA (NIPC 513978011), Rua das Cruzes, n.º 625, 4100-195 Porto.
 
@@ -28,6 +28,7 @@ Logótipo e fotografias são os do site do Reino Unido (inventário de 16 de out
 | `assets/img/produtos/<ref>.webp` | Cartões de produto (ver tabela acima) |
 | `assets/img/inicio-tantie.webp` | Página inicial, bloco "Quem é a Tantie?" |
 | `assets/img/sobre.webp` | Página História (retrato 4:5) |
+| `assets/img/ingredientes/<ingrediente>.webp` | Círculo com o ingrediente principal no canto das fotografias de produto: `scotch-bonnet` (SBJ), `maca-verde` (ACJ), `lima` (RPCL), `tomate-cereja` (TCJ). Fotografias enviadas pelo utilizador a 17/10/2026; confirmar que há licença para uso comercial |
 | `assets/img/selos/great-taste-producer.png` | Rodapé |
 | `assets/img/selos/food-hygiene-rating-5.png`, `great-taste-2019-1-estrela.png`, `great-taste-2021-1-estrela.png`, `great-taste-2024-2-estrelas.png` | Rodapé, sob "Distinções da marca no Reino Unido" |
 | `assets/img/selos/great-taste-2026.png` | Centro do cabeçalho e rodapé (uma estrela). Recortado da imagem enviada pelo utilizador, com o fundo tornado transparente; trocar pelo ficheiro original da Guild of Fine Food quando houver |
