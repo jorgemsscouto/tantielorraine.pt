@@ -12,7 +12,8 @@
 #                                             wordpress-desativado-<data> fora do site; nada é apagado
 #
 # Ordem para trocar o WordPress pelo site estático: testar, backup, enviar --simular, enviar (guarda antes o .htaccess),
-# retirar-wordpress --simular, retirar-wordpress.
+# retirar-wordpress --simular, retirar-wordpress. No alojamento da Amen (nginx, que ignora o .htaccess) o site estático
+# só aparece depois de retirar o WordPress.
 set -euo pipefail
 
 RAIZ="$(cd "$(dirname "$0")/.." && pwd)"
@@ -140,7 +141,7 @@ case "$ACAO" in
       printf 'upload-file = "%s"\nurl = "%s"\n' "$(esc "$f")" "$(esc "$(url "$(caminho "$f")")")" >> "$LOTE"
     done <<<"$LISTA"
     ftp_lote "$LOTE" --ftp-create-dirs
-    echo "Enviado. Abrir o site e confirmar antes de retirar o WordPress."
+    echo "Enviado. Se ainda houver WordPress na pasta pública, o servidor continua a mostrá-lo: correr retirar-wordpress."
     ;;
 
   retirar-wordpress)
@@ -170,7 +171,7 @@ case "$ACAO" in
     ;;
 
   *)
-    sed -n '2,15p' "$0" | sed 's/^# \{0,1\}//'
+    sed -n '2,16p' "$0" | sed 's/^# \{0,1\}//'
     exit 1
     ;;
 esac

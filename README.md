@@ -46,7 +46,7 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 | `assets/css/site.css` | Composição das páginas, só com variáveis do design system |
 | `assets/js/main.js` | Menu em ecrãs pequenos e ano no rodapé |
 | `.claude/skills/tantie-lorraine-design-system/` | Design system original (regras, tokens, exemplos) |
-| `.htaccess` | HTTPS obrigatório, domínio sem "www", página 404, cache e cabeçalhos de segurança (Apache) |
+| `.htaccess` | Regras para Apache (HTTPS, domínio sem "www", página 404, cache, cabeçalhos de segurança). Sem efeito no alojamento da Amen (ver abaixo); mantido para o caso de mudança de servidor |
 | `scripts/deploy.sh` | Publicação por FTP/FTPS com o curl: testar, backup, enviar, retirar o WordPress |
 
 ## Por fazer antes de publicar
@@ -60,7 +60,7 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 python3 -m http.server 8000
 ```
 
-Abrir http://localhost:8000. O `.htaccess` só tem efeito no servidor Apache.
+Abrir http://localhost:8000.
 
 ## Publicar (alojamento da Amen)
 
@@ -70,9 +70,11 @@ Usa o `curl` que já vem com o macOS (não é preciso instalar nada) e um `.env`
 
 1. `scripts/deploy.sh testar`: só leitura; confirma a ligação e mostra a pasta pública.
 2. `scripts/deploy.sh backup`: só leitura; guarda `.htaccess`, `wp-config.php` e `index.php` em `backups/amen-<data>/` (fora do Git), numa só ligação. Para uma cópia integral do WordPress, usar as cópias de segurança do painel da Amen; exportar também a base de dados no phpMyAdmin (Exportar > Rápido > SQL). Não se descarrega o WordPress todo por FTP: o servidor recusa ligações quando se abrem centenas seguidas.
-3. `scripts/deploy.sh enviar --simular` e depois `scripts/deploy.sh enviar`: põe o site estático no ar (envia todos os ficheiros do site). Não apaga nada; antes de enviar, guarda o `.htaccess` atual em `backups/antes-do-envio-<data>/`; o `.htaccess` do site substitui o do WordPress e o `DirectoryIndex index.html` dá prioridade ao site estático.
-4. Abrir o site e confirmar que está tudo bem.
-5. `scripts/deploy.sh retirar-wordpress --simular` e depois `scripts/deploy.sh retirar-wordpress`: move os ficheiros do WordPress para `wordpress-desativado-<data>/`, fora da pasta pública (pede para escrever RETIRAR). Nada é apagado: para repor, mover os ficheiros de volta. A base de dados do WordPress fica intacta.
+3. `scripts/deploy.sh enviar --simular` e depois `scripts/deploy.sh enviar`: envia todos os ficheiros do site. Não apaga nada; antes de enviar, guarda o `.htaccess` atual em `backups/antes-do-envio-<data>/`. Enquanto o `index.php` do WordPress estiver na pasta, o servidor continua a mostrar o WordPress.
+4. `scripts/deploy.sh retirar-wordpress --simular` e depois `scripts/deploy.sh retirar-wordpress`: move os ficheiros do WordPress para `wordpress-desativado-<data>/`, fora da pasta pública (pede para escrever RETIRAR, em maiúsculas). A partir daqui o site estático fica no ar.
+5. Abrir o site (Cmd+Shift+R) e confirmar. Depois, no painel da Amen, apagar a pasta `wordpress-desativado-<data>/` (tem o `wp-config.php`, com a palavra-passe da base de dados) e a base de dados do WordPress.
+
+Feito em 17/10/2026.
 
 ### Atualizações seguintes
 
@@ -81,9 +83,15 @@ Usa o `curl` que já vem com o macOS (não é preciso instalar nada) e um `.env`
 ### Se algo correr mal
 
 - Erro de certificado na ligação FTP: acrescentar `FTP_VERIFICAR_CERTIFICADO=nao` ao `.env`.
-- Erro 500 depois do envio: o alojamento pode não aceitar `Options -Indexes` no `.htaccess`; retirar essa linha e voltar a enviar.
 - Repor o WordPress: mover o conteúdo de `wordpress-desativado-<data>/` de volta para a pasta pública e repor o `.htaccess` guardado em `backups/antes-do-envio-<data>/`.
 - "Connection time-out": o servidor está a limitar ligações; esperar 10 minutos e repetir (o script já tenta de novo sozinho algumas vezes).
+
+### Comportamento do servidor da Amen (confirmado em 17/10/2026)
+
+- Os ficheiros são servidos diretamente pelo nginx, que não lê o `.htaccess`: não se aplicam o `DirectoryIndex`, os redirecionamentos, a página de erro, a cache nem os cabeçalhos de segurança aí definidos. Alterações destas pedem-se à Amen ou fazem-se no painel.
+- `http://` redireciona para `https://` (301), por configuração do servidor.
+- `www.tantielorraine.pt` responde com o próprio site (200), sem redirecionar para `tantielorraine.pt`. Todas as páginas têm `<link rel="canonical">` para o domínio sem "www", o que evita conteúdo duplicado nos motores de busca. Pendente: pedir à Amen um redirecionamento 301 de "www" para o domínio sem "www".
+- Endereços inexistentes devolvem o código 404; falta confirmar se mostram a página `404.html` do site ou a página genérica do servidor.
 
 ## Opções técnicas
 
