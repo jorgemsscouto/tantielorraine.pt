@@ -141,7 +141,7 @@
         <h2 class="tl-text-section-title">Pedido de informação</h2>
         <p class="estado-pedido tl-text-body texto" id="pedido-enviado" role="status" tabindex="-1">Obrigado pelo seu pedido. Recebemos a mensagem e respondemos por email com a maior brevidade possível.</p>
         <p class="estado-pedido tl-text-body texto" id="pedido-erro" role="alert" tabindex="-1">Não foi possível enviar o pedido. Tente de novo dentro de alguns minutos ou escreva para <a href="mailto:info@tantielorraine.pt">info@tantielorraine.pt</a>.</p>
-        <form class="formulario texto" action="/contacto.php" method="post" data-formulario-pedido>
+        <form class="formulario texto" action="/contacto.php" method="post" data-formulario data-enviado="pedido-enviado" data-erro="pedido-erro">
           <div class="campo">
             <label class="tl-text-label-strong" for="pedido-nome">Nome</label>
             <input class="tl-text-ui" id="pedido-nome" name="nome" type="text" autocomplete="name" required minlength="2" maxlength="100">

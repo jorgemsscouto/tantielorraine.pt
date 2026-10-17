@@ -1,5 +1,6 @@
-// tantielorraine.pt: comportamento mínimo do site (menu móvel, ano no rodapé, envio do pedido de informação e
-// medição de visitas com autorização). O site funciona sem JavaScript; sem ele, também não há medição.
+// tantielorraine.pt: comportamento mínimo do site (menu móvel, ano no rodapé, envio dos formulários, perguntas da
+// degustação conforme as compotas provadas e medição de visitas com autorização). O site funciona sem JavaScript;
+// sem ele, também não há medição.
 
 (function () {
   var botao = document.querySelector(".menu-botao");
@@ -90,12 +91,13 @@
 
   if (ler() === "aceite") { medir(); } else if (ler() !== "recusado") { aviso.hidden = false; }
 
-  // Pedido de informação: envio sem sair da página (sem JavaScript, o formulário é enviado da forma normal)
-  var form = document.querySelector("[data-formulario-pedido]");
-  if (form && window.fetch && window.FormData) {
+  // Formulários (pedido de informação e opinião de degustação): envio sem sair da página. Sem JavaScript, o
+  // formulário é enviado da forma normal e o servidor redireciona para a mensagem (data-enviado ou data-erro).
+  Array.prototype.forEach.call(document.querySelectorAll("[data-formulario]"), function (form) {
+    if (!window.fetch || !window.FormData) { return; }
     var inicio = Date.now();
-    var enviado = document.getElementById("pedido-enviado");
-    var erro = document.getElementById("pedido-erro");
+    var enviado = document.getElementById(form.getAttribute("data-enviado"));
+    var erro = document.getElementById(form.getAttribute("data-erro"));
     var enviar = form.querySelector("button[type=submit]");
     var rotulo = enviar.textContent;
 
@@ -123,5 +125,52 @@
           enviar.textContent = rotulo;
         });
     });
+  });
+
+  // Degustação: só aparecem as perguntas das compotas que a pessoa marcou como provadas. As outras ficam
+  // desativadas (não são validadas nem enviadas); a escolha da preferida e a comparação final só aparecem com
+  // duas ou mais. Sem JavaScript, aparece tudo e o servidor só conta as compotas marcadas.
+  var prova = document.querySelector("[data-degustacao]");
+  if (prova) {
+    var provou = prova.querySelectorAll("[data-provou]");
+    var primeira = prova.querySelector("[data-obrigatorio]");
+    var aviso = prova.querySelector("[data-sem-escolha]");
+
+    var atualizar = function () {
+      var escolhidas = {};
+      var n = 0;
+      Array.prototype.forEach.call(provou, function (c) { if (c.checked) { escolhidas[c.value] = true; n++; } });
+
+      primeira.setCustomValidity(n ? "" : primeira.getAttribute("data-obrigatorio"));
+      if (aviso) { aviso.hidden = n > 0; }
+
+      Array.prototype.forEach.call(prova.querySelectorAll("[data-amostra]"), function (f) {
+        var ativa = !!escolhidas[f.getAttribute("data-amostra")];
+        f.hidden = !ativa;
+        f.disabled = !ativa;
+        Array.prototype.forEach.call(f.querySelectorAll("input[name$=_global]"), function (r) { r.required = ativa; });
+      });
+      Array.prototype.forEach.call(prova.querySelectorAll("[data-varias]"), function (f) {
+        f.hidden = n < 2;
+        f.disabled = n < 2;
+      });
+      Array.prototype.forEach.call(prova.querySelectorAll("[data-compota]"), function (o) {
+        var ativa = !!escolhidas[o.getAttribute("data-compota")];
+        var r = o.querySelector("input");
+        o.hidden = !ativa;
+        r.disabled = !ativa;
+        if (!ativa) { r.checked = false; }
+      });
+    };
+
+    Array.prototype.forEach.call(provou, function (c) { c.addEventListener("change", atualizar); });
+    window.addEventListener("pageshow", atualizar);
+    atualizar();
+
+    // Degustação identificada no endereço (por exemplo, /degustacao.html?evento=mercado-porto, num código QR)
+    var evento = /[?&]evento=([^&#]*)/.exec(location.search);
+    if (evento) {
+      try { prova.elements.evento.value = decodeURIComponent(evento[1].replace(/\+/g, " ")).slice(0, 80); } catch (e) {}
+    }
   }
 })();

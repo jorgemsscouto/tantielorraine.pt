@@ -179,6 +179,7 @@ h1, h2, h3, p { margin: 0; }
 
 /* Página Produtos: uma secção por produto, fotografia ao lado da informação */
 .seccao--produto { border-top: var(--border-stepper) solid var(--mist); scroll-margin-top: var(--space-header); }
+.seccao--degustacao { border-top: var(--border-stepper) solid var(--mist); }
 .produto {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -308,8 +309,71 @@ h1, h2, h3, p { margin: 0; }
 }
 .estado-pedido:target,
 .estado-pedido.visivel { display: block; }
-#pedido-enviado:target ~ .formulario { display: none; }
+#pedido-enviado:target ~ .formulario,
+#opiniao-enviada:target ~ .formulario { display: none; }
 #pedido { scroll-margin-top: var(--space-header); }
+#opiniao { scroll-margin-top: var(--space-header); }
+.seccao--abertura + #opiniao { padding-top: 0; }
+
+/* Degustação: notas de 1 a 5 em círculos de 40px (como o QuantityStepper) e escolhas em pílula. O botão de opção
+   fica invisível mas utilizável pelo teclado; a escolha vê-se pelo fundo ink. */
+.degustacao fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.degustacao legend { padding: 0; }
+.degustacao .grupo { display: grid; gap: var(--space-btn-y); }
+.degustacao h2 { margin: 0; }
+.opcoes { display: flex; flex-wrap: wrap; gap: var(--space-btn-compact-y); }
+.opcao,
+.escala label { position: relative; cursor: pointer; }
+.opcao input,
+.escala input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.opcao__texto {
+  display: inline-block;
+  padding: var(--space-btn-compact-y) var(--space-btn-compact-x);
+  border: var(--border-stepper) solid var(--mist);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-ui);
+}
+.escala { display: flex; gap: var(--space-btn-compact-y); }
+.escala span {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: var(--border-stepper) solid var(--mist);
+  border-radius: 50%;
+  font-family: var(--font-ui);
+}
+.opcao:hover .opcao__texto,
+.escala label:hover span { border-color: var(--ink); }
+.opcao input:checked + .opcao__texto,
+.escala input:checked + span { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.opcao input:focus-visible + .opcao__texto,
+.escala input:focus-visible + span { outline: 3px solid var(--ink); outline-offset: 2px; }
+.degustacao .amostra { display: grid; gap: var(--space-btn-y); padding-top: var(--space-card-gap); border-top: var(--border-button) solid var(--ink); }
+.amostra__titulo { float: left; width: 100%; margin-bottom: var(--space-btn-compact-y); }
+.nota {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-btn-compact-y) var(--space-card-gap);
+  padding-bottom: var(--space-btn-compact-y);
+  border-bottom: var(--border-stepper) solid var(--mist);
+}
+.comparacao .nota { grid-template-columns: minmax(0, 1fr); }
+.campo-outro { display: inline-flex; align-items: center; gap: var(--space-btn-compact-y); }
+.campo-outro input {
+  width: 12em;
+  padding: var(--space-btn-compact-y) var(--space-btn-compact-x);
+  background: var(--paper);
+  color: var(--ink);
+  border: var(--border-stepper) solid var(--mist);
+  border-radius: var(--radius-pill);
+}
+.campo-outro input:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.aviso-escolha { color: var(--plum-grey); }
+@media (max-width: 600px) {
+  .nota { grid-template-columns: minmax(0, 1fr); }
+}
 
 /* Publicações: grelha de textos curtos, cada um com ligação para o Instagram */
 .nota-publicacoes { margin-top: var(--space-btn-y); }

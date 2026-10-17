@@ -52,12 +52,15 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 | `publicacoes.html` | Publicações do Instagram da marca, resumidas em português, com ligação para cada uma |
 | `contactos.html`, `privacidade.html`, `404.html` | Contactos (com o formulário de pedido de informação), informação legal, erro |
 | `robots.txt`, `sitemap.xml`, `llms.txt` | Indicações para motores de busca e assistentes de IA (ver abaixo) |
-| `contacto.php` | Recebe o formulário e envia, por SMTP da Amen, o pedido para info@tantielorraine.pt e gadgetmetodo@gmail.com e uma confirmação de receção a quem escreveu |
+| `degustacao.html` | Formulário de opinião das degustações (fora do menu, do sitemap e do `llms.txt`, com `noindex`; ligação no fim de Produtos) |
+| `contacto.php` | Recebe o pedido de informação e envia-o, por SMTP da Amen, para info@tantielorraine.pt, mais uma confirmação de receção a quem escreveu |
+| `degustacao.php` | Recebe a opinião de degustação e envia-a para info@tantielorraine.pt |
+| `email-comum.php` | Código comum aos dois formulários: destinatários, configuração, envio por SMTP e limites de envios |
 | `favicon.ico` | Favicon para os browsers que o pedem na raiz |
 | `assets/css/tokens.css`, `components.css` | Design system da marca (cores, tipografia, componentes `.tl-*`) |
 | `assets/css/fonts.css`, `assets/fonts/` | Anton, Poppins e Work Sans alojadas no próprio site (licença OFL) |
 | `assets/css/site.css` | Composição das páginas, só com variáveis do design system |
-| `assets/js/main.js` | Menu em ecrãs pequenos, ano no rodapé, envio do formulário sem sair da página, aviso de cookies e Google Analytics com consentimento |
+| `assets/js/main.js` | Menu em ecrãs pequenos, ano no rodapé, envio dos formulários sem sair da página, perguntas da degustação conforme as compotas provadas, aviso de cookies e Google Analytics com consentimento |
 | `.claude/skills/tantie-lorraine-design-system/` | Design system original (regras, tokens, exemplos) |
 | `.htaccess` | Regras para Apache (HTTPS, domínio sem "www", página 404, cache, cabeçalhos de segurança). Sem efeito no alojamento da Amen (ver abaixo); mantido para o caso de mudança de servidor |
 | `scripts/deploy.sh` | Publicação por FTP/FTPS com o curl: testar, backup, enviar, retirar o WordPress, configurar o email |
@@ -91,8 +94,9 @@ O script traduz cada página portuguesa com a tabela de traduções que tem dent
 | `/publicacoes.html` | `/en/posts.html` | `/es/publicaciones.html` |
 | `/contactos.html` | `/en/contact.html` | `/es/contacto.html` |
 | `/privacidade.html` | `/en/privacy.html` | `/es/privacidad.html` |
+| `/degustacao.html` | `/en/tasting.html` | `/es/degustacion.html` |
 
-O formulário envia a língua da página (`idioma`): a confirmação por email segue nessa língua e o aviso à equipa indica-a. O aviso de cookies também acompanha a língua. Os ingredientes em inglês seguem o texto das fichas técnicas originais; a tradução espanhola usa "chile" para malagueta e "mermelada de chile" para "chilli jam".
+Os formulários enviam a língua da página (`idioma`): a confirmação do pedido de informação segue nessa língua e os emails para a equipa indicam-na. O aviso de cookies também acompanha a língua. Os ingredientes em inglês seguem o texto das fichas técnicas originais; a tradução espanhola usa "chile" para malagueta e "mermelada de chile" para "chilli jam".
 
 ## Motores de busca e assistentes de IA
 
@@ -172,6 +176,17 @@ Feito em 17/10/2026.
 
 Os pedidos chegam com o remetente info@tantielorraine.pt e "Responder para" o email de quem escreveu. Quem escreve recebe uma confirmação de receção (HTML com logótipo e selos, mais versão em texto); por segurança, não repete a mensagem e só usa o nome se parecer um nome. Limites: 3 pedidos por dia para o mesmo email e 100 por dia no total. Proteção contra robôs sem serviços de terceiros: um campo escondido e um tempo mínimo de preenchimento. Erros de envio ficam no registo de erros do PHP no servidor (pasta `logs`).
 
+### Formulário de degustação
+
+Página `/degustacao.html` (e `/en/tasting.html`, `/es/degustacion.html`), com as perguntas da ficha em papel "Degustação de Chilli Jams". Pensada para ser aberta no telemóvel durante a degustação, por ligação ou código QR; está fora do menu, do sitemap e do `llms.txt` e tem `noindex`, para não aparecer nos motores de busca.
+
+- A pessoa marca primeiro as compotas que provou; só aparecem as perguntas dessas. A escolha da preferida e a comparação final só aparecem com duas ou mais. A nota global de cada compota provada é obrigatória; o resto é opcional. Sem JavaScript aparece tudo e o servidor só conta as compotas marcadas.
+- Não pede nome nem contacto e não envia confirmação.
+- O email chega a info@tantielorraine.pt, sempre em português, com o assunto "Opinião de degustação: ..." e, no fim, duas linhas separadas por ponto e vírgula (cabeçalhos e respostas) para colar numa folha de cálculo; as colunas são sempre as mesmas, por isso as opiniões podem ser juntadas numa só folha (no Excel, Dados > Texto para Colunas, separador ponto e vírgula).
+- Para saber de que degustação vem cada opinião, usar no código QR o endereço com `?evento=`, por exemplo `https://tantielorraine.pt/degustacao.html?evento=Mercado do Bolhão` (até 80 caracteres: letras, algarismos, espaços, pontos, hífenes e barras). O email indica-o na linha "Degustação".
+- Limite de 300 opiniões por dia no total; a mesma proteção contra robôs do pedido de informação.
+- As chaves das perguntas têm de coincidir entre `degustacao.html` e `degustacao.php`; ao mudar uma pergunta, mudar as duas e a tabela de traduções em `scripts/idiomas.py`.
+
 ### Comportamento do servidor da Amen (confirmado em 17/10/2026)
 
 - Os ficheiros são servidos diretamente pelo nginx, que não lê o `.htaccess`: não se aplicam o `DirectoryIndex`, os redirecionamentos, a página de erro, a cache nem os cabeçalhos de segurança aí definidos. Alterações destas pedem-se à Amen ou fazem-se no painel.
@@ -183,4 +198,4 @@ Os pedidos chegam com o remetente info@tantielorraine.pt e "Responder para" o em
 
 - Fontes alojadas no site em vez do Google Fonts e sem mapas incorporados. O único recurso de terceiros é o Google Analytics 4 (G-PMGEGTHM1W), carregado por `assets/js/main.js` só depois de aceite no aviso de cookies; recusar ou retirar o consentimento (botão "Cookies" no rodapé) não carrega nada da Google e apaga os cookies `_ga`. Política de privacidade, ponto 6.
 - As fontes DIN Neuzeit Grotesk, Avenir e DIN Next do site do Reino Unido são licenciadas pela Wix e não estão incluídas; o site usa as alternativas definidas no design system.
-- Um único formulário (pedido de informação), tratado pelo próprio alojamento: sem reCAPTCHA nem outros serviços de terceiros, sem cookies e sem guardar dados no site.
+- Dois formulários (pedido de informação e opinião de degustação), tratados pelo próprio alojamento: sem reCAPTCHA nem outros serviços de terceiros, sem cookies e sem guardar dados no site.
