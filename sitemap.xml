@@ -1,9 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://tantielorraine.pt/</loc><lastmod>2026-10-17</lastmod></url>
-  <url><loc>https://tantielorraine.pt/produtos.html</loc><lastmod>2026-10-17</lastmod></url>
-  <url><loc>https://tantielorraine.pt/publicacoes.html</loc><lastmod>2026-10-17</lastmod></url>
-  <url><loc>https://tantielorraine.pt/historia.html</loc><lastmod>2026-10-17</lastmod></url>
-  <url><loc>https://tantielorraine.pt/contactos.html</loc><lastmod>2026-10-17</lastmod></url>
-  <url><loc>https://tantielorraine.pt/privacidade.html</loc><lastmod>2026-10-17</lastmod></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://tantielorraine.pt/</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://tantielorraine.pt/en/"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://tantielorraine.pt/es/"/>
+  </url>
+  <url>
+    <loc>https://tantielorraine.pt/en/</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://tantielorraine.pt/en/"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://tantielorraine.pt/es/"/>
+  </url>
+  <url>
+    <loc>https://tantielorraine.pt/es/</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://tantielorraine.pt/en/"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://tantielorraine.pt/es/"/>
+  </url>
+  <url>
+    <loc>https://tantielorraine.pt/historia.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/historia.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://tantielorraine.pt/en/story.html"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://tantielorraine.pt/es/historia.html"/>
+  </url>
+  <url>
+    <loc>https://tantielorraine.pt/en/story.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/historia.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://tantielorraine.pt/en/story.html"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://tantielorraine.pt/es/historia.html"/>
+  </url>
+  <url>
+    <loc>https://tantielorraine.pt/es/historia.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/historia.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://tantielorraine.pt/en/story.html"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://tantielorraine.pt/es/historia.html"/>
+  </url>
+  <url>
+    <loc>https://tantielorraine.pt/produtos.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/produtos.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://tantielorraine.pt/en/products.html"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://tantielorraine.pt/es/productos.html"/>
+  </url>
+  <url>
+    <loc>https://tantielorraine.pt/en/products.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/produtos.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://tantielorraine.pt/en/products.html"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://tantielorraine.pt/es/productos.html"/>
+  </url>
+  <url>
+    <loc>https://tantielorraine.pt/es/productos.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/produtos.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://tantielorraine.pt/en/products.html"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://tantielorraine.pt/es/productos.html"/>
+  </url>
+  <url>
+    <loc>https://tantielorraine.pt/publicacoes.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/publicacoes.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://tantielorraine.pt/en/posts.html"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://tantielorraine.pt/es/publicaciones.html"/>
+  </url>
+  <url>
+    <loc>https://tantielorraine.pt/en/posts.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/publicacoes.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://tantielorraine.pt/en/posts.html"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://tantielorraine.pt/es/publicaciones.html"/>
+  </url>
+  <url>
+    <loc>https://tantielorraine.pt/es/publicaciones.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/publicacoes.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://tantielorraine.pt/en/posts.html"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://tantielorraine.pt/es/publicaciones.html"/>
+  </url>
+  <url>
+    <loc>https://tantielorraine.pt/contactos.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/contactos.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://tantielorraine.pt/en/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://tantielorraine.pt/es/contacto.html"/>
+  </url>
+  <url>
+    <loc>https://tantielorraine.pt/en/contact.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/contactos.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://tantielorraine.pt/en/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://tantielorraine.pt/es/contacto.html"/>
+  </url>
+  <url>
+    <loc>https://tantielorraine.pt/es/contacto.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/contactos.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://tantielorraine.pt/en/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://tantielorraine.pt/es/contacto.html"/>
+  </url>
+  <url>
+    <loc>https://tantielorraine.pt/privacidade.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/privacidade.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://tantielorraine.pt/en/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://tantielorraine.pt/es/privacidad.html"/>
+  </url>
+  <url>
+    <loc>https://tantielorraine.pt/en/privacy.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/privacidade.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://tantielorraine.pt/en/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://tantielorraine.pt/es/privacidad.html"/>
+  </url>
+  <url>
+    <loc>https://tantielorraine.pt/es/privacidad.html</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="pt-PT" href="https://tantielorraine.pt/privacidade.html"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://tantielorraine.pt/en/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es-ES" href="https://tantielorraine.pt/es/privacidad.html"/>
+  </url>
 </urlset>

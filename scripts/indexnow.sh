@@ -14,8 +14,9 @@ else
   for f in "$@"; do
     case "$f" in
       index.html) URLS+=("$SITE/") ;;
-      404.html|*/*) ;;
-      *.html) URLS+=("$SITE/$f") ;;
+      en/index.html|es/index.html) URLS+=("$SITE/${f%index.html}") ;;
+      404.html|*/*/*) ;;
+      en/*.html|es/*.html|[!/]*.html) [[ "$f" == */* && "$f" != en/* && "$f" != es/* ]] || URLS+=("$SITE/$f") ;;
     esac
   done
 fi

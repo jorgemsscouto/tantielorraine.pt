@@ -20,6 +20,19 @@
   // Medição de visitas (Google Analytics 4) só depois de aceite no aviso de cookies: até lá não se carrega nada da
   // Google. A escolha fica no próprio browser e pode ser mudada em "Cookies", no rodapé.
   var GA = "G-PMGEGTHM1W";
+  var lingua = (document.documentElement.lang || "pt").slice(0, 2);
+  var TEXTOS = {
+    pt: { aviso: 'Com a sua autorização, usamos cookies do Google Analytics para medir as visitas e melhorar o site. ' +
+            'Pode mudar a escolha quando quiser em "Cookies", no rodapé. <a href="/privacidade.html#cookies">Saber mais</a>.',
+          aceitar: "Aceitar", recusar: "Recusar", regiao: "Aviso de cookies" },
+    en: { aviso: "With your permission, we use Google Analytics cookies to measure visits and improve the website. " +
+            'You can change your choice at any time under "Cookies" in the footer. <a href="/en/privacy.html#cookies">Find out more</a>.',
+          aceitar: "Accept", recusar: "Decline", regiao: "Cookie notice" },
+    es: { aviso: "Con su autorización, usamos cookies de Google Analytics para medir las visitas y mejorar el sitio. " +
+            'Puede cambiar su elección cuando quiera en "Cookies", en el pie de página. <a href="/es/privacidad.html#cookies">Más información</a>.',
+          aceitar: "Aceptar", recusar: "Rechazar", regiao: "Aviso de cookies" }
+  };
+  var txt = TEXTOS[lingua] || TEXTOS.pt;
   var ESCOLHA = "tl-cookies";
   var ler = function () { try { return localStorage.getItem(ESCOLHA); } catch (e) { return null; } };
   var gravar = function (v) { try { localStorage.setItem(ESCOLHA, v); } catch (e) {} };
@@ -51,12 +64,11 @@
   var aviso = document.createElement("div");
   aviso.className = "aviso-cookies";
   aviso.setAttribute("role", "region");
-  aviso.setAttribute("aria-label", "Aviso de cookies");
+  aviso.setAttribute("aria-label", txt.regiao);
   aviso.hidden = true;
-  aviso.innerHTML = '<p class="tl-text-body">Com a sua autorização, usamos cookies do Google Analytics para medir as visitas e melhorar o site. ' +
-    'Pode mudar a escolha quando quiser em "Cookies", no rodapé. <a href="/privacidade.html#cookies">Saber mais</a>.</p>' +
-    '<div class="aviso-cookies__botoes"><button class="tl-btn tl-btn--compact" type="button" data-cookies="aceite">Aceitar</button>' +
-    '<button class="tl-btn tl-btn--compact" type="button" data-cookies="recusado">Recusar</button></div>';
+  aviso.innerHTML = '<p class="tl-text-body">' + txt.aviso + '</p>' +
+    '<div class="aviso-cookies__botoes"><button class="tl-btn tl-btn--compact" type="button" data-cookies="aceite">' + txt.aceitar + '</button>' +
+    '<button class="tl-btn tl-btn--compact" type="button" data-cookies="recusado">' + txt.recusar + '</button></div>';
   document.body.appendChild(aviso);
   aviso.addEventListener("click", function (e) {
     var v = e.target.getAttribute && e.target.getAttribute("data-cookies");
@@ -91,7 +103,7 @@
       e.preventDefault();
       form.elements.t.value = Math.round((Date.now() - inicio) / 1000);
       enviar.disabled = true;
-      enviar.textContent = "A enviar...";
+      enviar.textContent = enviar.getAttribute("data-enviando") || "A enviar...";
       erro.classList.remove("visivel");
 
       fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } })

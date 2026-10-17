@@ -47,6 +47,8 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 | `index.html` | Início: hero, mensagem principal, produtos em destaque, apresentação, testemunhos |
 | `produtos.html` | Uma secção por referência: fotografia, peso, descrição, ingredientes, alergénios e informação nutricional |
 | `historia.html` | História da marca e da fundadora |
+| `en/`, `es/` | Versões em inglês e espanhol, geradas por `scripts/idiomas.py` (não editar à mão) |
+| `scripts/idiomas.py` | Gera `/en/` e `/es/`, o seletor de língua, o hreflang e o `sitemap.xml` a partir das páginas portuguesas e da tabela de traduções |
 | `publicacoes.html` | Publicações do Instagram da marca, resumidas em português, com ligação para cada uma |
 | `contactos.html`, `privacidade.html`, `404.html` | Contactos (com o formulário de pedido de informação), informação legal, erro |
 | `robots.txt`, `sitemap.xml`, `llms.txt` | Indicações para motores de busca e assistentes de IA (ver abaixo) |
@@ -70,6 +72,27 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 - Autorização escrita da Lorraine para usar a marca, o logótipo, as fotografias, os textos e os selos dos prémios, incluindo o direito de imagem do retrato dela.
 - Ficheiro original do selo Great Taste 2026 (o atual foi recortado de uma imagem), a pedir à marca.
 - Confirmar com a marca os kcal da SBJ e que a classificação Food Hygiene Rating 5 continua em vigor.
+
+## Línguas
+
+Português (principal), inglês e espanhol. As páginas portuguesas são a fonte; as outras são geradas:
+
+```bash
+python3 scripts/idiomas.py
+```
+
+O script traduz cada página portuguesa com a tabela de traduções que tem dentro (fragmentos em português e a tradução em inglês e espanhol), troca as ligações pelas da língua, traduz os dados estruturados e acrescenta a todas as páginas o seletor PT · EN · ES e as ligações hreflang. Se uma página portuguesa mudar e a tabela não acompanhar, ou se sobrar texto em português numa tradução, o script para sem escrever nada e diz o que falta. Depois, fazer commit de tudo: a publicação automática envia as três línguas.
+
+| Português | Inglês | Espanhol |
+|---|---|---|
+| `/` | `/en/` | `/es/` |
+| `/historia.html` | `/en/story.html` | `/es/historia.html` |
+| `/produtos.html` | `/en/products.html` | `/es/productos.html` |
+| `/publicacoes.html` | `/en/posts.html` | `/es/publicaciones.html` |
+| `/contactos.html` | `/en/contact.html` | `/es/contacto.html` |
+| `/privacidade.html` | `/en/privacy.html` | `/es/privacidad.html` |
+
+O formulário envia a língua da página (`idioma`): a confirmação por email segue nessa língua e o aviso à equipa indica-a. O aviso de cookies também acompanha a língua. Os ingredientes em inglês seguem o texto das fichas técnicas originais; a tradução espanhola usa "chile" para malagueta e "mermelada de chile" para "chilli jam".
 
 ## Motores de busca e assistentes de IA
 
