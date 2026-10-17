@@ -15,7 +15,7 @@ O site é só de apresentação: não há venda nem preços. A página Produtos 
 
 ## Dados dos produtos
 
-Peso, ingredientes, alergénios e informação nutricional (por 100 g) vêm das fichas técnicas de rótulo da marca (Project.Kitchen, 15 de outubro de 2026), traduzidos para português. Os ingredientes a negrito são os que a ficha assinala como fonte de sulfitos. A ficha da SBJ é a versão "copy using mash" (com pasta fermentada de Scotch Bonnet) e indica 1210 kJ / 264 kcal, valores incoerentes entre si (1210 kJ correspondem a 289 kcal). A pedido, o site mostra 1210 kJ / 289 kcal (17/10/2026); a marca deve confirmar o valor e corrigir o rótulo, porque o frasco continua a indicar 264 kcal.
+Peso, ingredientes, alergénios e informação nutricional (por 100 g) vêm das fichas técnicas de rótulo da marca (Project.Kitchen, 15 de outubro de 2026), traduzidos para português. Os ingredientes a negrito são os que a ficha assinala como fonte de sulfitos. A ficha da SBJ é a versão "copy using mash" (com pasta fermentada de Scotch Bonnet) e indica 1210 kJ / 264 kcal, valores incoerentes entre si (1210 kJ correspondem a 289 kcal). A pedido, o site mostra 1210 kJ / 289 kcal (17/10/2026); a marca deve confirmar o valor e corrigir o rótulo, porque o frasco continua a indicar 264 kcal. Peso líquido: as fichas indicam 238 g (SBJ, RPCL e TCJ) e 230 g (ACJ); por indicação do utilizador (17/10/2026), o site mostra 225 g nas quatro referências. O peso do site tem de coincidir com o do rótulo dos frascos vendidos em Portugal e Espanha.
 
 ## Imagens
 
