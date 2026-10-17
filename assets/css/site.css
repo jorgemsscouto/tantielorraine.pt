@@ -311,6 +311,34 @@ h1, h2, h3, p { margin: 0; }
 .perguntas { display: grid; gap: var(--space-card-gap); }
 .pergunta h3 { margin-bottom: var(--space-btn-compact-y); }
 
+/* Aviso de cookies: aceitar e recusar com o mesmo destaque */
+.aviso-cookies {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-btn-y) var(--space-card-gap);
+  padding: var(--space-card-gap) var(--space-gutter);
+  background: var(--paper);
+  color: var(--ink);
+  border-top: var(--border-button) solid var(--ink);
+}
+.aviso-cookies p { flex: 1 1 28rem; }
+.aviso-cookies__botoes { display: flex; gap: var(--space-btn-y); }
+.preferencias-cookies {
+  justify-self: start;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--ink);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 /* Texto legal */
 .texto-legal .tl-text-subhead { margin: var(--space-gutter) 0 var(--space-btn-y); }
 .texto-legal p + p { margin-top: var(--space-btn-y); }

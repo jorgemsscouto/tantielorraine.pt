@@ -28,7 +28,7 @@ Adaptações deste site ao sistema (manter):
 - Sem ligações para o site do Reino Unido (tantielorraine.co.uk) nem indicação de versão inglesa (hreflang).
 - Menu, por esta ordem: História, Produtos, Eventos, Publicações, Contactos. Sem páginas de Mercados nem de Receitas. Rodapé: História, Produtos, Publicações, Contactos, Privacidade, Livro de Reclamações.
 - Motores de busca e IA (ver README): os factos repetidos na página, nas perguntas frequentes de `produtos.html`, nos dados estruturados e no `llms.txt` têm de coincidir; ao mudar um, mudar todos. Perguntas frequentes só com factos já publicados.
-- Não acrescentar recursos de terceiros (fontes externas, mapas incorporados, analytics, píxeis) sem atualizar `privacidade.html` e avaliar a necessidade de aviso de cookies.
+- Não acrescentar recursos de terceiros (fontes externas, mapas incorporados, analytics, píxeis) sem atualizar `privacidade.html` e avaliar a necessidade de aviso de cookies. Único em uso: Google Analytics 4 (G-PMGEGTHM1W), carregado por `assets/js/main.js` só depois de aceite no aviso de cookies (aceitar e recusar com o mesmo destaque; "Cookies" no rodapé para mudar a escolha); descrito no ponto 6 de `privacidade.html`.
 - Logótipo e fotografias: os do site do Reino Unido, nos caminhos listados no `README.md`. Usar a função de troca já existente (`<img hidden onload=...>` seguido do espaço reservado) para imagens novas, com `alt` descritivo.
 - Entidade em Portugal: GADGETMÉTODO, LDA, NIPC 513978011, Rua das Cruzes, n.º 625, 4100-195 Porto. Email do site: info@tantielorraine.pt. O formulário de contactos (`contacto.php`) envia os pedidos para info@tantielorraine.pt e gadgetmetodo@gmail.com e uma confirmação de receção a quem escreveu, que não repete o conteúdo do pedido.
 

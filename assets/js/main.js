@@ -1,5 +1,5 @@
-// tantielorraine.pt: comportamento mínimo do site (menu móvel, ano no rodapé e envio do pedido de informação).
-// O site funciona sem JavaScript; isto apenas melhora a navegação em ecrãs pequenos e o envio do formulário.
+// tantielorraine.pt: comportamento mínimo do site (menu móvel, ano no rodapé, envio do pedido de informação e
+// medição de visitas com autorização). O site funciona sem JavaScript; sem ele, também não há medição.
 
 (function () {
   var botao = document.querySelector(".menu-botao");
@@ -16,6 +16,67 @@
   if (ano) {
     ano.textContent = new Date().getFullYear();
   }
+
+  // Medição de visitas (Google Analytics 4) só depois de aceite no aviso de cookies: até lá não se carrega nada da
+  // Google. A escolha fica no próprio browser e pode ser mudada em "Cookies", no rodapé.
+  var GA = "G-PMGEGTHM1W";
+  var ESCOLHA = "tl-cookies";
+  var ler = function () { try { return localStorage.getItem(ESCOLHA); } catch (e) { return null; } };
+  var gravar = function (v) { try { localStorage.setItem(ESCOLHA, v); } catch (e) {} };
+
+  function medir() {
+    if (window.gtag) { return; }
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    window.gtag("config", GA);
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA;
+    document.head.appendChild(s);
+  }
+
+  function apagarCookies() {
+    window["ga-disable-" + GA] = true;
+    document.cookie.split(";").forEach(function (c) {
+      var nome = c.split("=")[0].trim();
+      if (nome.indexOf("_ga") === 0) {
+        ["", "; domain=" + location.hostname, "; domain=." + location.hostname.replace(/^www\./, "")].forEach(function (d) {
+          document.cookie = nome + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/" + d;
+        });
+      }
+    });
+  }
+
+  var aviso = document.createElement("div");
+  aviso.className = "aviso-cookies";
+  aviso.setAttribute("role", "region");
+  aviso.setAttribute("aria-label", "Aviso de cookies");
+  aviso.hidden = true;
+  aviso.innerHTML = '<p class="tl-text-body">Com a sua autorização, usamos cookies do Google Analytics para medir as visitas e melhorar o site. ' +
+    'Pode mudar a escolha quando quiser em "Cookies", no rodapé. <a href="/privacidade.html#cookies">Saber mais</a>.</p>' +
+    '<div class="aviso-cookies__botoes"><button class="tl-btn tl-btn--compact" type="button" data-cookies="aceite">Aceitar</button>' +
+    '<button class="tl-btn tl-btn--compact" type="button" data-cookies="recusado">Recusar</button></div>';
+  document.body.appendChild(aviso);
+  aviso.addEventListener("click", function (e) {
+    var v = e.target.getAttribute && e.target.getAttribute("data-cookies");
+    if (!v) { return; }
+    gravar(v);
+    aviso.hidden = true;
+    if (v === "aceite") { medir(); } else { apagarCookies(); }
+  });
+
+  var links = document.querySelector(".tl-footer__links");
+  if (links) {
+    var pref = document.createElement("button");
+    pref.type = "button";
+    pref.className = "preferencias-cookies tl-text-nav";
+    pref.textContent = "Cookies";
+    pref.addEventListener("click", function () { aviso.hidden = false; });
+    links.appendChild(pref);
+  }
+
+  if (ler() === "aceite") { medir(); } else if (ler() !== "recusado") { aviso.hidden = false; }
 
   // Pedido de informação: envio sem sair da página (sem JavaScript, o formulário é enviado da forma normal)
   var form = document.querySelector("[data-formulario-pedido]");

@@ -56,7 +56,7 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 | `assets/css/tokens.css`, `components.css` | Design system da marca (cores, tipografia, componentes `.tl-*`) |
 | `assets/css/fonts.css`, `assets/fonts/` | Anton, Poppins e Work Sans alojadas no próprio site (licença OFL) |
 | `assets/css/site.css` | Composição das páginas, só com variáveis do design system |
-| `assets/js/main.js` | Menu em ecrãs pequenos, ano no rodapé e envio do formulário sem sair da página |
+| `assets/js/main.js` | Menu em ecrãs pequenos, ano no rodapé, envio do formulário sem sair da página, aviso de cookies e Google Analytics com consentimento |
 | `.claude/skills/tantie-lorraine-design-system/` | Design system original (regras, tokens, exemplos) |
 | `.htaccess` | Regras para Apache (HTTPS, domínio sem "www", página 404, cache, cabeçalhos de segurança). Sem efeito no alojamento da Amen (ver abaixo); mantido para o caso de mudança de servidor |
 | `scripts/deploy.sh` | Publicação por FTP/FTPS com o curl: testar, backup, enviar, retirar o WordPress, configurar o email |
@@ -85,7 +85,9 @@ O que o site já faz para aparecer bem em pesquisas tradicionais e em respostas 
 
 Ao mudar um facto (gama, pesos, prémios, contactos), atualizar em conjunto a página, as perguntas frequentes, os dados estruturados e o `llms.txt`, para não haver versões contraditórias.
 
-Por fazer (exige a conta do utilizador): registar o site no Google Search Console e no Bing Webmaster Tools (o Bing permite importar do Google) e submeter `https://tantielorraine.pt/sitemap.xml` em ambos.
+O Google Analytics mede as visitas (incluindo as que chegam de assistentes de IA, como chatgpt.com ou perplexity.ai, em Aquisição de tráfego), mas não influencia a indexação nem a posição nas pesquisas. Para isso conta o Google Search Console.
+
+Por fazer (exige a conta do utilizador): registar o site no Google Search Console, de preferência como propriedade de domínio (registo TXT no DNS, no painel da Amen) ou, em alternativa, com a meta tag de verificação; depois, no Bing Webmaster Tools, importar a partir do Google. Submeter `https://tantielorraine.pt/sitemap.xml` em ambos. No Google Analytics, confirmar em Administração > Recolha e modificação de dados > Retenção de dados que o prazo é 2 meses (é o que diz a política de privacidade).
 
 ## Ver localmente
 
@@ -156,6 +158,6 @@ Os pedidos chegam com o remetente info@tantielorraine.pt e "Responder para" o em
 
 ## Opções técnicas
 
-- Fontes alojadas no site em vez do Google Fonts, sem mapas incorporados nem analytics: não há transferência de dados para terceiros e não é preciso aviso de cookies.
+- Fontes alojadas no site em vez do Google Fonts e sem mapas incorporados. O único recurso de terceiros é o Google Analytics 4 (G-PMGEGTHM1W), carregado por `assets/js/main.js` só depois de aceite no aviso de cookies; recusar ou retirar o consentimento (botão "Cookies" no rodapé) não carrega nada da Google e apaga os cookies `_ga`. Política de privacidade, ponto 6.
 - As fontes DIN Neuzeit Grotesk, Avenir e DIN Next do site do Reino Unido são licenciadas pela Wix e não estão incluídas; o site usa as alternativas definidas no design system.
 - Um único formulário (pedido de informação), tratado pelo próprio alojamento: sem reCAPTCHA nem outros serviços de terceiros, sem cookies e sem guardar dados no site.
