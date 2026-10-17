@@ -69,8 +69,8 @@ Usa o `curl` que já vem com o macOS (não é preciso instalar nada) e um `.env`
 ### Primeira vez: trocar o WordPress pelo site estático
 
 1. `scripts/deploy.sh testar`: só leitura; confirma a ligação e mostra a pasta pública.
-2. `scripts/deploy.sh backup`: só leitura; descarrega a pasta pública para `backups/amen-<data>/` (fora do Git). Exportar também a base de dados no phpMyAdmin (Exportar > Rápido > SQL) e guardar junto.
-3. `scripts/deploy.sh enviar --simular` e depois `scripts/deploy.sh enviar`: põe o site estático no ar (envia todos os ficheiros do site). Não apaga nada; o `.htaccess` do site substitui o do WordPress e o `DirectoryIndex index.html` dá prioridade ao site estático.
+2. `scripts/deploy.sh backup`: só leitura; guarda `.htaccess`, `wp-config.php` e `index.php` em `backups/amen-<data>/` (fora do Git), numa só ligação. Para uma cópia integral do WordPress, usar as cópias de segurança do painel da Amen; exportar também a base de dados no phpMyAdmin (Exportar > Rápido > SQL). Não se descarrega o WordPress todo por FTP: o servidor recusa ligações quando se abrem centenas seguidas.
+3. `scripts/deploy.sh enviar --simular` e depois `scripts/deploy.sh enviar`: põe o site estático no ar (envia todos os ficheiros do site). Não apaga nada; antes de enviar, guarda o `.htaccess` atual em `backups/antes-do-envio-<data>/`; o `.htaccess` do site substitui o do WordPress e o `DirectoryIndex index.html` dá prioridade ao site estático.
 4. Abrir o site e confirmar que está tudo bem.
 5. `scripts/deploy.sh retirar-wordpress --simular` e depois `scripts/deploy.sh retirar-wordpress`: move os ficheiros do WordPress para `wordpress-desativado-<data>/`, fora da pasta pública (pede para escrever RETIRAR). Nada é apagado: para repor, mover os ficheiros de volta. A base de dados do WordPress fica intacta.
 
@@ -82,7 +82,8 @@ Usa o `curl` que já vem com o macOS (não é preciso instalar nada) e um `.env`
 
 - Erro de certificado na ligação FTP: acrescentar `FTP_VERIFICAR_CERTIFICADO=nao` ao `.env`.
 - Erro 500 depois do envio: o alojamento pode não aceitar `Options -Indexes` no `.htaccess`; retirar essa linha e voltar a enviar.
-- Repor o WordPress: mover o conteúdo de `wordpress-desativado-<data>/` de volta para a pasta pública (a cópia de `backups/` tem o `.htaccess` original).
+- Repor o WordPress: mover o conteúdo de `wordpress-desativado-<data>/` de volta para a pasta pública e repor o `.htaccess` guardado em `backups/antes-do-envio-<data>/`.
+- "Connection time-out": o servidor está a limitar ligações; esperar 10 minutos e repetir (o script já tenta de novo sozinho algumas vezes).
 
 ## Opções técnicas
 

@@ -5,13 +5,13 @@
 #
 # Uso:
 #   scripts/deploy.sh testar                  só leitura: testa a ligação e mostra a pasta de entrada e a pasta pública
-#   scripts/deploy.sh backup                  só leitura: descarrega a pasta pública para backups/amen-<data>/
+#   scripts/deploy.sh backup                  só leitura: guarda .htaccess, wp-config.php e index.php em backups/amen-<data>/
 #   scripts/deploy.sh enviar [--simular]      envia todos os ficheiros do site; não apaga nada no servidor
 #   scripts/deploy.sh retirar-wordpress [--simular]
 #                                             move os ficheiros do WordPress da pasta pública para uma pasta
 #                                             wordpress-desativado-<data> fora do site; nada é apagado
 #
-# Ordem para trocar o WordPress pelo site estático: testar, backup, enviar --simular, enviar,
+# Ordem para trocar o WordPress pelo site estático: testar, backup, enviar --simular, enviar (guarda antes o .htaccess),
 # retirar-wordpress --simular, retirar-wordpress.
 set -euo pipefail
 
@@ -48,9 +48,10 @@ BASE="ftp://$FTP_HOST:$FTP_PORT"
 esc() { printf '%s' "$1" | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g'; }
 CRED="user = \"$(esc "$FTP_USER"):$(esc "$FTP_PASS")\""
 TLS="--ssl"; [[ "$VERIFICAR" == "nao" ]] && TLS="--ssl --insecure"
-ftp() { curl --silent --show-error $TLS --connect-timeout 20 -K <(printf '%s\n' "$CRED") "$@"; }
+REPETIR="--retry 4 --retry-delay 10 --retry-connrefused"
+ftp() { curl --silent --show-error $TLS --connect-timeout 20 $REPETIR -K <(printf '%s\n' "$CRED") "$@"; }
 # Igual, com uma lista de transferências (pares url/output ou upload-file/url) no mesmo ficheiro virtual
-ftp_lote() { local lote="$1"; shift; curl --silent --show-error $TLS --connect-timeout 20 -K <(printf '%s\n' "$CRED"; cat "$lote") "$@"; }
+ftp_lote() { local lote="$1"; shift; curl --silent --show-error $TLS --connect-timeout 20 $REPETIR -K <(printf '%s\n' "$CRED"; cat "$lote") "$@"; }
 
 # Codifica um caminho para URL, byte a byte, mantendo letras, números, "/", "-", ".", "_" e "~"
 # (via od, para funcionar igual no bash 3.2 do macOS e com nomes acentuados)
@@ -77,15 +78,6 @@ listar() {
     if (n != "" && n != "." && n != "..") print t "\t" n
   }'
 }
-listar_rec() {
-  local dir="$1" t n
-  listar "$dir" | while IFS="$(printf '\t')" read -r t n; do
-    case "$t" in
-      d) listar_rec "$dir/$n" ;;
-      -) printf '%s\n' "$dir/$n" ;;
-    esac
-  done
-}
 
 # Pasta pública: FTP_DIR, ou public_html/httpdocs/www/htdocs na pasta de entrada, ou a própria pasta de entrada
 detetar_publica() {
@@ -105,6 +97,16 @@ exigir_publica() {
 }
 caminho() { if [[ -z "$PUB" ]]; then printf '%s' "$1"; else printf '%s/%s' "$PUB" "$1"; fi; }
 
+# Descarrega ficheiros da pasta pública para uma pasta local, numa só ligação; os que não existirem são ignorados
+guardar_originais() {
+  local dest="$1" f lote; shift
+  mkdir -p "$dest"; lote="$(mktemp)"
+  for f in "$@"; do printf 'url = "%s"\noutput = "%s"\n' "$(esc "$(url "$(caminho "$f")")")" "$(esc "$dest/$f")" >> "$lote"; done
+  ftp_lote "$lote" 2>/dev/null || true
+  rm -f "$lote"
+  for f in "$@"; do [[ -s "$dest/$f" ]] && echo "   guardado: $dest/$f" || rm -f "$dest/$f"; done
+}
+
 # Ficheiros do WordPress na pasta pública (o .htaccess não entra: depois do envio é o do site estático)
 WP_NOMES='^(index\.php|license\.txt|licenca\.txt|readme\.html|leiame\.html|xmlrpc\.php|wp-.+)$'
 
@@ -119,20 +121,8 @@ case "$ACAO" in
   backup)
     exigir_publica
     DEST="backups/amen-$DATA"; mkdir -p "$DEST"
-    echo "== A listar $PUB_ROTULO (pode demorar uns minutos num WordPress)..."
-    LISTA="$DEST/.ficheiros.txt"
-    if [[ -z "$PUB" ]]; then listar_rec "" | sed 's#^/##' > "$LISTA"; else listar_rec "$PUB" > "$LISTA"; fi
-    echo "   $(wc -l < "$LISTA" | tr -d ' ') ficheiros"
-    LOTE="$(mktemp)"; trap 'rm -f "$LOTE"' EXIT
-    while IFS= read -r f; do
-      rel="${f#"$PUB"/}"
-      printf 'url = "%s"\noutput = "%s"\n' "$(esc "$(url "$f")")" "$(esc "$DEST/$rel")" >> "$LOTE"
-    done < "$LISTA"
-    echo "== A descarregar para $DEST (só leitura no servidor)..."
-    ftp_lote "$LOTE" --create-dirs
-    # Alguns servidores escondem os ficheiros começados por ponto na listagem: garantir o .htaccess
-    [[ -f "$DEST/.htaccess" ]] || ftp -o "$DEST/.htaccess" "$(url "$(caminho .htaccess)")" 2>/dev/null || rm -f "$DEST/.htaccess"
-    echo "Cópia feita: $DEST ($(du -sh "$DEST" | cut -f1)). A pasta backups/ não vai para o Git."
+    guardar_originais "$DEST" .htaccess wp-config.php index.php
+    echo "Para uma cópia integral do WordPress, usar as cópias de segurança do painel da Amen."
     echo "Base de dados: exportar também no phpMyAdmin (Exportar > Rápido > SQL) e guardar junto desta cópia."
     ;;
 
@@ -143,6 +133,8 @@ case "$ACAO" in
       -print | sed 's#^\./##' | sort)"
     echo "== Ficheiros do site a enviar para $PUB_ROTULO: $(wc -l <<<"$LISTA" | tr -d ' ')"
     if [[ $SIMULAR -eq 1 ]]; then sed 's/^/   /' <<<"$LISTA"; echo "Simulação: nada foi enviado."; exit 0; fi
+    echo "== A guardar o .htaccess atual do servidor antes de o substituir:"
+    guardar_originais "backups/antes-do-envio-$DATA" .htaccess
     LOTE="$(mktemp)"; trap 'rm -f "$LOTE"' EXIT
     while IFS= read -r f; do
       printf 'upload-file = "%s"\nurl = "%s"\n' "$(esc "$f")" "$(esc "$(url "$(caminho "$f")")")" >> "$LOTE"
