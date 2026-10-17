@@ -284,6 +284,33 @@ h1, h2, h3, p { margin: 0; }
 #pedido-enviado:target ~ .formulario { display: none; }
 #pedido { scroll-margin-top: var(--space-header); }
 
+/* Publicações: grelha de textos curtos, cada um com ligação para o Instagram */
+.nota-publicacoes { margin-top: var(--space-btn-y); }
+.seccao--publicacoes { padding-top: 0; }
+.publicacoes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-column-gap);
+}
+.publicacao {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-btn-y);
+  border-top: var(--border-button) solid var(--ink);
+  padding-top: var(--space-card-gap);
+  scroll-margin-top: var(--space-header);
+}
+.publicacao .tl-btn { margin-top: auto; }
+@media (max-width: 760px) {
+  .publicacoes { grid-template-columns: 1fr; }
+}
+
+/* Perguntas frequentes (página de produtos) */
+#perguntas { scroll-margin-top: var(--space-header); }
+.perguntas { display: grid; gap: var(--space-card-gap); }
+.pergunta h3 { margin-bottom: var(--space-btn-compact-y); }
+
 /* Texto legal */
 .texto-legal .tl-text-subhead { margin: var(--space-gutter) 0 var(--space-btn-y); }
 .texto-legal p + p { margin-top: var(--space-btn-y); }

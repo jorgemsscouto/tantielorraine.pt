@@ -27,7 +27,7 @@ const SELOS = [
     ['great-taste-2019-1-estrela.png', 'Great Taste 2019, uma estrela', true],
     ['great-taste-2021-1-estrela.png', 'Great Taste 2021, uma estrela', true],
     ['great-taste-2024-2-estrelas.png', 'Great Taste 2024, duas estrelas', true],
-    ['great-taste-2026.png', 'Great Taste 2026', true],
+    ['great-taste-2026.png', 'Great Taste 2026, uma estrela', true],
 ];
 // Limites por janela de 24 horas: pedidos para o mesmo email e pedidos no total
 const LIMITE_EMAIL = 3;

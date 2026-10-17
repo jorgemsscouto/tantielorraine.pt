@@ -29,25 +29,14 @@ Logótipo e fotografias são os do site do Reino Unido (inventário de 16 de out
 | `assets/img/inicio-tantie.webp` | Página inicial, bloco "Quem é a Tantie?" |
 | `assets/img/sobre.webp` | Página História (retrato 4:5) |
 | `assets/img/eventos.webp` | Página Eventos (pelau de uma sessão Limin with Tantie) |
-| `assets/img/selos/great-taste-producer.png` | Centro do cabeçalho e rodapé |
+| `assets/img/selos/great-taste-producer.png` | Rodapé |
 | `assets/img/selos/food-hygiene-rating-5.png`, `great-taste-2019-1-estrela.png`, `great-taste-2021-1-estrela.png`, `great-taste-2024-2-estrelas.png` | Rodapé, sob "Distinções da marca no Reino Unido" |
-| `assets/img/selos/great-taste-2026.png` | Rodapé |
+| `assets/img/selos/great-taste-2026.png` | Centro do cabeçalho e rodapé (uma estrela). Recortado da imagem enviada pelo utilizador, com o fundo tornado transparente; trocar pelo ficheiro original da Guild of Fine Food quando houver |
+| `assets/img/partilha.jpg` | Pré-visualização nas partilhas em redes sociais e mensagens (1200 x 630, logótipo e Scotch Bonnet Jam) |
 
 Todos os selos Great Taste (cabeçalho, rodapé e email de confirmação) ligam ao [diretório de produtores da Guild of Fine Food](https://gff.co.uk/directory/producer/?id=25813). O Food Hygiene Rating não, porque não é atribuído pela Guild. O email de confirmação usa o logótipo e os selos que estiverem no servidor.
 
-Os selos são ficheiros originais, usados sem alterações (a Food Standards Agency não permite alterar as imagens da classificação e só deixa mostrar a classificação em vigor). Enquanto um ficheiro faltar, o selo não aparece. Os quatro primeiros estão no site do Reino Unido:
-
-```bash
-mkdir -p assets/img/selos && cd assets/img/selos
-curl -fsS -o great-taste-producer.png 'https://static.wixstatic.com/media/0e8816_8ed9b46635bc4fc6be9a014622398b08~mv2.png'
-curl -fsS -o great-taste-2019-1-estrela.png 'https://static.wixstatic.com/media/0e8816_31d838a940264e64a4700c7fd0a04d0d~mv2.png'
-curl -fsS -o great-taste-2021-1-estrela.png 'https://static.wixstatic.com/media/0e8816_e0d14e5540de4990a0f2005f40b02732~mv2.png'
-curl -fsS -o great-taste-2024-2-estrelas.png 'https://static.wixstatic.com/media/0e8816_94a846c201984143887fba1eddc27b0b~mv2.png'
-curl -fsS -o food-hygiene-rating-5.png 'https://static.wixstatic.com/media/0e8816_a869c19a6bcc4a19afb12e17d96ac6a1~mv2.png'
-cd ../../..
-```
-
-O de 2026 tem de vir da marca (kit de vencedor da Guild of Fine Food).
+Os selos são ficheiros originais, usados sem alterações (a Food Standards Agency não permite alterar as imagens da classificação e só deixa mostrar a classificação em vigor); o de 2026 só teve o fundo tornado transparente. Enquanto um ficheiro faltar, o selo não aparece. Os cinco do site do Reino Unido são obtidos sozinhos em cada publicação (`scripts/obter-selos.sh`); um ficheiro com o mesmo nome em `assets/img/selos/` tem prioridade (instruções no `README.md` dessa pasta).
 
 Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 
@@ -59,7 +48,9 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 | `produtos.html` | Uma secção por referência: fotografia, peso, descrição, ingredientes, alergénios e informação nutricional |
 | `eventos.html` | Aulas de cozinha |
 | `historia.html` | História da marca e da fundadora |
+| `publicacoes.html` | Publicações do Instagram da marca, resumidas em português, com ligação para cada uma |
 | `contactos.html`, `privacidade.html`, `404.html` | Contactos (com o formulário de pedido de informação), informação legal, erro |
+| `robots.txt`, `sitemap.xml`, `llms.txt` | Indicações para motores de busca e assistentes de IA (ver abaixo) |
 | `contacto.php` | Recebe o formulário e envia, por SMTP da Amen, o pedido para info@tantielorraine.pt e gadgetmetodo@gmail.com e uma confirmação de receção a quem escreveu |
 | `favicon.ico` | Favicon para os browsers que o pedem na raiz |
 | `assets/css/tokens.css`, `components.css` | Design system da marca (cores, tipografia, componentes `.tl-*`) |
@@ -71,13 +62,30 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 | `scripts/deploy.sh` | Publicação por FTP/FTPS com o curl: testar, backup, enviar, retirar o WordPress, configurar o email |
 | `scripts/obter-selos.sh` | Descarrega os selos em falta a partir dos originais do site do Reino Unido |
 | `.github/workflows/publicar.yml` | Publicação automática na Amen a cada alteração no ramo `main` |
+| `scripts/indexnow.sh`, `<chave>.txt` | Aviso aos motores de busca das páginas alteradas (IndexNow); o ficheiro `.txt` com nome hexadecimal na raiz é a chave pública de verificação |
 
 ## Por fazer antes de publicar
 
 - Textos marcados com `[A PREENCHER: ...]` (contorno tracejado no navegador): `grep -rn "A PREENCHER" --include=*.html .`
 - Autorização escrita da Lorraine para usar a marca, o logótipo, as fotografias, os textos e os selos dos prémios, incluindo o direito de imagem do retrato dela.
-- Ficheiros dos selos em `assets/img/selos/` (ver Imagens), incluindo o de 2026, a pedir à marca.
+- Ficheiro original do selo Great Taste 2026 (o atual foi recortado de uma imagem), a pedir à marca.
 - Confirmar com a marca os kcal da SBJ e que a classificação Food Hygiene Rating 5 continua em vigor.
+
+## Motores de busca e assistentes de IA
+
+O que o site já faz para aparecer bem em pesquisas tradicionais e em respostas de assistentes de IA (ChatGPT, Claude, Perplexity, Copilot, Gemini e vistas geradas por IA do Google):
+
+- Conteúdo em HTML simples, legível sem JavaScript, com títulos, descrições e endereço canónico em todas as páginas.
+- Dados estruturados (JSON-LD, schema.org) em todas as páginas: organização (GADGETMÉTODO, LDA, morada, contactos), marca, site, os quatro produtos (referência, peso, descrição, prémio da SBJ), perguntas frequentes e publicações.
+- Perguntas frequentes na página de produtos, escritas só com factos já publicados no site: é o formato que os assistentes de IA mais citam.
+- `robots.txt` aberto a todos os motores e assistentes de IA, com os principais indicados explicitamente; `sitemap.xml` com datas; meta `robots` com `max-snippet:-1` e `max-image-preview:large`, para permitir excertos e imagens completos.
+- `llms.txt` (proposta de norma em llmstxt.org): resumo factual do site para modelos de linguagem. Nem todos os motores o usam; custa pouco manter.
+- IndexNow: a cada publicação, o Bing e os outros motores aderentes são avisados das páginas alteradas.
+- Imagem de partilha (Open Graph) e cartão para redes sociais.
+
+Ao mudar um facto (gama, pesos, prémios, contactos), atualizar em conjunto a página, as perguntas frequentes, os dados estruturados e o `llms.txt`, para não haver versões contraditórias.
+
+Por fazer (exige a conta do utilizador): registar o site no Google Search Console e no Bing Webmaster Tools (o Bing permite importar do Google) e submeter `https://tantielorraine.pt/sitemap.xml` em ambos.
 
 ## Ver localmente
 

@@ -2,6 +2,7 @@
 # (botão "Run workflow", com a opção de enviar uma mensagem de teste pelo formulário).
 # Usa scripts/deploy.sh com os segredos guardados em Settings > Secrets and variables > Actions:
 # FTP_HOST, FTP_USER, FTP_PASS e SMTP_PASS. Sem os do FTP, a publicação é saltada com um aviso.
+# No fim, avisa os motores de busca das páginas alteradas (IndexNow, scripts/indexnow.sh).
 name: Publicar na Amen
 
 on:
@@ -36,6 +37,8 @@ jobs:
       TESTE_EMAIL: ${{ inputs.teste_email }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Confirmar os segredos
         id: segredos
@@ -64,4 +67,17 @@ jobs:
             scripts/deploy.sh configurar-email
           else
             scripts/deploy.sh configurar-email --sem-teste
+          fi
+
+      - name: Avisar os motores de busca (IndexNow)
+        if: steps.segredos.outputs.ftp == 'sim'
+        env:
+          ANTES: ${{ github.event.before }}
+        run: |
+          # Num envio normal, só as páginas alteradas; numa publicação manual ou sem histórico, todas
+          if [[ "$GITHUB_EVENT_NAME" == "push" && -n "$ANTES" ]] && git cat-file -e "$ANTES^{commit}" 2>/dev/null; then
+            mapfile -t PAGINAS < <(git diff --name-only "$ANTES" "$GITHUB_SHA" -- '*.html')
+            if [[ ${#PAGINAS[@]} -gt 0 ]]; then scripts/indexnow.sh "${PAGINAS[@]}"; else echo "Nenhuma página alterada."; fi
+          else
+            scripts/indexnow.sh
           fi

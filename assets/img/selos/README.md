@@ -9,11 +9,11 @@ Ficheiros originais dos selos, usados sem alterações no cabeçalho, no rodapé
 | `great-taste-2021-1-estrela.png` | Site do Reino Unido (obtido sozinho) |
 | `great-taste-2024-2-estrelas.png` | Site do Reino Unido (obtido sozinho) |
 | `food-hygiene-rating-5.png` | Site do Reino Unido (obtido sozinho) |
-| `great-taste-2026.png` | A pedir à marca e a carregar aqui |
+| `great-taste-2026.png` | Recortado da imagem enviada a 17/10/2026; substituir pelo original da Guild of Fine Food quando houver |
 
-## Acrescentar o selo de 2026
+## Substituir ou acrescentar um selo
 
-1. Dar ao ficheiro, no computador, o nome exato `great-taste-2026.png`.
+1. Dar ao ficheiro, no computador, o nome exato que consta na tabela (por exemplo `great-taste-2026.png`).
 2. Nesta pasta do GitHub: **Add file > Upload files**, arrastar o ficheiro e carregar em **Commit changes**, com a opção "Commit directly to the main branch".
 3. O site é publicado sozinho em um ou dois minutos (separador **Actions**).
 

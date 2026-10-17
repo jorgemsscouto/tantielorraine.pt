@@ -1,4 +1,22 @@
+# Site aberto a motores de busca e a assistentes de IA (pesquisa, respostas e citações).
+# O endereço do formulário não tem conteúdo para indexar.
 User-agent: *
 Allow: /
+Disallow: /contacto.php
+
+# Assistentes de IA, indicados explicitamente: OpenAI (ChatGPT), Anthropic (Claude), Perplexity, Google, Apple, Microsoft
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Bingbot
+Allow: /
+Disallow: /contacto.php
 
 Sitemap: https://tantielorraine.pt/sitemap.xml
