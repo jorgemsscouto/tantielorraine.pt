@@ -353,9 +353,14 @@ h1, h2, h3, p { margin: 0; }
 .escala input:focus-visible + span { outline: 3px solid var(--ink); outline-offset: 2px; }
 .degustacao .amostra { display: grid; gap: var(--space-btn-y); padding-top: var(--space-card-gap); border-top: var(--border-button) solid var(--ink); }
 .amostra__titulo { float: left; width: 100%; margin-bottom: var(--space-btn-compact-y); display: flex; align-items: center; gap: var(--space-card-gap); }
-/* Frascos em miniatura junto do nome, para orientar a escolha */
-.mini { width: 28px; height: 28px; margin: -4px 0 -4px -8px; border-radius: 50%; object-fit: cover; flex: none; }
-.amostra__foto { width: 64px; height: 64px; border-radius: var(--radius-media); object-fit: cover; flex: none; }
+/* Ingrediente principal em miniatura junto do nome, para orientar a escolha (o frasco ficava pequeno demais) */
+.mini { width: 36px; height: 36px; margin: -4px 0 -4px -8px; border-radius: 50%; object-fit: cover; flex: none; }
+/* Nome da compota com o ingrediente principal por baixo, para quem não conhece as siglas */
+.opcao__nome { display: block; text-align: left; }
+.opcao__desc { display: block; color: var(--plum-grey); }
+.opcao input:checked + .opcao__texto .opcao__desc { color: var(--paper); }
+.amostra__desc { display: block; text-transform: none; color: var(--plum-grey); }
+.amostra__foto { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex: none; }
 .nota {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;

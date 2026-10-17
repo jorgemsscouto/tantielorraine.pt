@@ -533,6 +533,18 @@ PAGINA = {
     ('for="degustacao-local">Local da degustação</label>',
      'for="degustacao-local">Tasting location</label>',
      'for="degustacao-local">Lugar de la degustación</label>'),
+    ('>Tomate cereja e malagueta</span>',
+     '>Cherry tomato and chilli</span>',
+     '>Tomate cherry y chile</span>'),
+    ('>Pimento vermelho, malagueta e lima</span>',
+     '>Red pepper, chilli and lime</span>',
+     '>Pimiento rojo, chile y lima</span>'),
+    ('>Maçã e malagueta</span>',
+     '>Apple and chilli</span>',
+     '>Manzana y chile</span>'),
+    ('>Malagueta Scotch Bonnet</span>',
+     '>Scotch Bonnet chilli</span>',
+     '>Chile Scotch Bonnet</span>'),
 ],
 }
 

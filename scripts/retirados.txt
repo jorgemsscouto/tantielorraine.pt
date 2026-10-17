@@ -2,3 +2,7 @@
 # Um caminho por linha, relativo à pasta pública.
 eventos.html
 assets/img/eventos.webp
+assets/img/produtos/mini/sbj.webp
+assets/img/produtos/mini/acj.webp
+assets/img/produtos/mini/rpcl.webp
+assets/img/produtos/mini/tcj.webp
