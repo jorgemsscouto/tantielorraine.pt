@@ -327,7 +327,9 @@ h1, h2, h3, p { margin: 0; }
 .opcao input,
 .escala input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
 .opcao__texto {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-btn-compact-y);
   padding: var(--space-btn-compact-y) var(--space-btn-compact-x);
   border: var(--border-stepper) solid var(--mist);
   border-radius: var(--radius-pill);
@@ -350,7 +352,10 @@ h1, h2, h3, p { margin: 0; }
 .opcao input:focus-visible + .opcao__texto,
 .escala input:focus-visible + span { outline: 3px solid var(--ink); outline-offset: 2px; }
 .degustacao .amostra { display: grid; gap: var(--space-btn-y); padding-top: var(--space-card-gap); border-top: var(--border-button) solid var(--ink); }
-.amostra__titulo { float: left; width: 100%; margin-bottom: var(--space-btn-compact-y); }
+.amostra__titulo { float: left; width: 100%; margin-bottom: var(--space-btn-compact-y); display: flex; align-items: center; gap: var(--space-card-gap); }
+/* Frascos em miniatura junto do nome, para orientar a escolha */
+.mini { width: 28px; height: 28px; margin: -4px 0 -4px -8px; border-radius: 50%; object-fit: cover; flex: none; }
+.amostra__foto { width: 64px; height: 64px; border-radius: var(--radius-media); object-fit: cover; flex: none; }
 .nota {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -371,6 +376,27 @@ h1, h2, h3, p { margin: 0; }
 }
 .campo-outro input:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 .aviso-escolha { color: var(--plum-grey); }
+/* Ditado por voz (botão criado por main.js só onde o navegador o suporta): pílula como as escolhas, microfone em linha
+   fina; durante a gravação, fundo ink e o ícone a pulsar */
+.ditado { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-btn-compact-y) var(--space-card-gap); }
+.ditado__botao {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-btn-compact-y);
+  padding: var(--space-btn-compact-y) var(--space-btn-compact-x);
+  background: var(--paper);
+  color: var(--ink);
+  border: var(--border-stepper) solid var(--mist);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+.ditado__botao:hover { border-color: var(--ink); }
+.ditado__botao:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.ditado__botao.ativo { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.ditado__botao.ativo svg { animation: ditado-pulso 1.2s ease-in-out infinite; }
+@keyframes ditado-pulso { 50% { opacity: 0.35; } }
+@media (prefers-reduced-motion: reduce) { .ditado__botao.ativo svg { animation: none; } }
+.ditado__estado { flex: 1 1 16em; color: var(--plum-grey); }
 @media (max-width: 600px) {
   .nota { grid-template-columns: minmax(0, 1fr); }
 }

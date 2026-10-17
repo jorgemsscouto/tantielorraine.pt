@@ -52,10 +52,12 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 | `publicacoes.html` | Publicações do Instagram da marca, resumidas em português, com ligação para cada uma |
 | `contactos.html`, `privacidade.html`, `404.html` | Contactos (com o formulário de pedido de informação), informação legal, erro |
 | `robots.txt`, `sitemap.xml`, `llms.txt` | Indicações para motores de busca e assistentes de IA (ver abaixo) |
-| `degustacao.html` | Formulário de opinião das degustações (fora do menu, do sitemap e do `llms.txt`, com `noindex`; ligação no fim de Produtos) |
+| `degustacao.html` | Formulário de opinião de degustação (fora do menu, do sitemap e do `llms.txt`, com `noindex`; ligação no fim de Produtos e códigos QR) |
 | `contacto.php` | Recebe o pedido de informação e envia-o, por SMTP da Amen, para info@tantielorraine.pt, mais uma confirmação de receção a quem escreveu |
-| `degustacao.php` | Recebe a opinião de degustação e envia-a para info@tantielorraine.pt |
-| `email-comum.php` | Código comum aos dois formulários: destinatários, configuração, envio por SMTP e limites de envios |
+| `degustacao.php` | Recebe a opinião de degustação, envia-a para info@tantielorraine.pt e envia um agradecimento a quem respondeu |
+| `email-comum.php` | Código comum aos dois formulários: destinatários, configuração, envio por SMTP, limites de envios e aspeto dos emails (faixas vermelhas, logótipo e selos) |
+| `assets/img/email/<ref>.jpg` | Frascos para os emails da degustação (192 x 192, em JPG porque o Outlook não mostra WebP) |
+| `assets/img/produtos/mini/<ref>.webp` | Frascos em miniatura no questionário de degustação (128 x 128) |
 | `favicon.ico` | Favicon para os browsers que o pedem na raiz |
 | `assets/css/tokens.css`, `components.css` | Design system da marca (cores, tipografia, componentes `.tl-*`) |
 | `assets/css/fonts.css`, `assets/fonts/` | Anton, Poppins e Work Sans alojadas no próprio site (licença OFL) |
@@ -96,7 +98,7 @@ O script traduz cada página portuguesa com a tabela de traduções que tem dent
 | `/privacidade.html` | `/en/privacy.html` | `/es/privacidad.html` |
 | `/degustacao.html` | `/en/tasting.html` | `/es/degustacion.html` |
 
-Os formulários enviam a língua da página (`idioma`): a confirmação do pedido de informação segue nessa língua e os emails para a equipa indicam-na. O aviso de cookies também acompanha a língua. Os ingredientes em inglês seguem o texto das fichas técnicas originais; a tradução espanhola usa "chile" para malagueta e "mermelada de chile" para "chilli jam".
+Os formulários enviam a língua da página (`idioma`): a confirmação do pedido de informação e o agradecimento da degustação seguem nessa língua; os emails para a equipa são em português e indicam-na. O aviso de cookies também acompanha a língua. Os ingredientes em inglês seguem o texto das fichas técnicas originais; a tradução espanhola usa "chile" para malagueta e "mermelada de chile" para "chilli jam".
 
 ## Motores de busca e assistentes de IA
 
@@ -178,13 +180,14 @@ Os pedidos chegam com o remetente info@tantielorraine.pt e "Responder para" o em
 
 ### Formulário de degustação
 
-Página `/degustacao.html` (e `/en/tasting.html`, `/es/degustacion.html`), com as perguntas da ficha em papel "Degustação de Chilli Jams". Pensada para ser aberta no telemóvel durante a degustação, por ligação ou código QR; está fora do menu, do sitemap e do `llms.txt` e tem `noindex`, para não aparecer nos motores de busca.
+Página `/degustacao.html` (e `/en/tasting.html`, `/es/degustacion.html`), com uma versão curta da ficha em papel "Degustação de Chilli Jams". Serve para as degustações (código QR) e para quem prova em casa (ligação no fim de Produtos). Está fora do menu, do sitemap e do `llms.txt` e tem `noindex`, para não aparecer nos motores de busca.
 
-- A pessoa marca primeiro as compotas que provou; só aparecem as perguntas dessas. A escolha da preferida e a comparação final só aparecem com duas ou mais. A nota global de cada compota provada é obrigatória; o resto é opcional. Sem JavaScript aparece tudo e o servidor só conta as compotas marcadas.
-- Não pede nome nem contacto e não envia confirmação.
-- O email chega a info@tantielorraine.pt, sempre em português, com o assunto "Opinião de degustação: ..." e, no fim, duas linhas separadas por ponto e vírgula (cabeçalhos e respostas) para colar numa folha de cálculo; as colunas são sempre as mesmas, por isso as opiniões podem ser juntadas numa só folha (no Excel, Dados > Texto para Colunas, separador ponto e vírgula).
-- Para saber de que degustação vem cada opinião, usar no código QR o endereço com `?evento=`, por exemplo `https://tantielorraine.pt/degustacao.html?evento=Mercado do Bolhão` (até 80 caracteres: letras, algarismos, espaços, pontos, hífenes e barras). O email indica-o na linha "Degustação".
-- Limite de 300 opiniões por dia no total; a mesma proteção contra robôs do pedido de informação.
+- Pede o local da degustação, as compotas provadas e, no fim, nome, email e telefone (opcional). Obrigatórios: local, pelo menos uma compota, a nota global de cada compota provada, nome e email.
+- Só aparecem as perguntas das compotas marcadas: sabor principal, nota global e se compraria (de 1 a 5), nível de picante e melhor utilização. A escolha da preferida e a comparação final só aparecem com duas ou mais. Frascos em miniatura junto de cada nome. Sem JavaScript aparece tudo e o servidor só conta as compotas marcadas.
+- Os campos de texto têm um botão "Ditar" (microfone): o reconhecimento de voz do navegador escreve o que a pessoa diz e o texto pode ser corrigido antes do envio. O site não recebe áudio. Funciona no Chrome, Edge e Safari (incluindo telemóveis); no Firefox e em alguns navegadores dentro de aplicações o botão não aparece, e fica o ditado do teclado do telemóvel. Descrito no ponto 2 da política de privacidade.
+- Envia dois emails: para info@tantielorraine.pt, em português, com os dados de quem respondeu, as notas em círculos, os comentários e, no fim, duas linhas separadas por ponto e vírgula para colar no Excel (Dados > Texto para Colunas; as colunas são sempre as mesmas, por isso as opiniões podem ser juntadas numa só folha); "Responder" responde a quem deu a opinião. Para quem respondeu, um agradecimento na língua da página com as notas globais, a preferida e um botão para a gama; não repete texto escrito pela pessoa, para o formulário não servir para enviar mensagens a terceiros.
+- Códigos QR: usar o endereço com `?local=`, por exemplo `https://tantielorraine.pt/degustacao.html?local=Mercado do Bolhão` (até 80 caracteres). O local fica preenchido e pode ser corrigido; quem responde em casa escreve-o.
+- Limites: 3 opiniões por dia com o mesmo email e 300 por dia no total; a mesma proteção contra robôs do pedido de informação.
 - As chaves das perguntas têm de coincidir entre `degustacao.html` e `degustacao.php`; ao mudar uma pergunta, mudar as duas e a tabela de traduções em `scripts/idiomas.py`.
 
 ### Comportamento do servidor da Amen (confirmado em 17/10/2026)

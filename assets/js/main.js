@@ -167,10 +167,115 @@
     window.addEventListener("pageshow", atualizar);
     atualizar();
 
-    // Degustação identificada no endereço (por exemplo, /degustacao.html?evento=mercado-porto, num código QR)
-    var evento = /[?&]evento=([^&#]*)/.exec(location.search);
-    if (evento) {
-      try { prova.elements.evento.value = decodeURIComponent(evento[1].replace(/\+/g, " ")).slice(0, 80); } catch (e) {}
+    // Local preenchido pelo endereço do código QR (por exemplo, /degustacao.html?local=Mercado%20do%20Bolh%C3%A3o); a
+    // pessoa pode corrigi-lo. Quem responde em casa escreve-o.
+    var local = /[?&](?:local|evento)=([^&#]*)/.exec(location.search);
+    if (local && !prova.elements.local.value) {
+      try { prova.elements.local.value = decodeURIComponent(local[1].replace(/\+/g, " ")).trim().slice(0, 80); } catch (e) {}
     }
+  }
+
+  // Ditado nos campos de texto com data-ditado: o reconhecimento de voz do próprio navegador (Web Speech API) escreve no
+  // campo o que a pessoa diz, e o texto pode ser corrigido antes do envio. O site não recebe áudio, só o texto. Onde o
+  // navegador não o suporta (Firefox, alguns navegadores dentro de aplicações), o botão não aparece.
+  var Reconhecimento = window.SpeechRecognition || window.webkitSpeechRecognition;
+  var ditaveis = document.querySelectorAll("textarea[data-ditado]");
+  if (Reconhecimento && ditaveis.length) {
+    var DITADO = {
+      pt: { ditar: "Ditar", parar: "Parar", titulo: "Ditar a resposta com o microfone",
+            ouvir: "A ouvir... Fale normalmente; a voz é transcrita pelo serviço de voz do seu navegador. Carregue em Parar quando terminar.",
+            fim: "Texto transcrito. Pode corrigi-lo antes de enviar.",
+            permissao: "Sem acesso ao microfone. Autorize-o nas definições do navegador ou escreva a resposta.",
+            silencio: "Não ouvimos nada. Carregue em Ditar e tente de novo.",
+            erro: "Não foi possível transcrever. Escreva a resposta." },
+      en: { ditar: "Dictate", parar: "Stop", titulo: "Dictate your answer with the microphone",
+            ouvir: "Listening... Speak normally; your voice is transcribed by your browser's speech service. Press Stop when you finish.",
+            fim: "Text transcribed. You can correct it before sending.",
+            permissao: "No access to the microphone. Allow it in your browser settings or type your answer.",
+            silencio: "We didn't hear anything. Press Dictate and try again.",
+            erro: "Transcription is not available. Please type your answer." },
+      es: { ditar: "Dictar", parar: "Parar", titulo: "Dictar la respuesta con el micrófono",
+            ouvir: "Escuchando... Hable con normalidad; su voz la transcribe el servicio de voz de su navegador. Pulse Parar cuando termine.",
+            fim: "Texto transcrito. Puede corregirlo antes de enviarlo.",
+            permissao: "Sin acceso al micrófono. Autorícelo en los ajustes del navegador o escriba la respuesta.",
+            silencio: "No hemos oído nada. Pulse Dictar e inténtelo de nuevo.",
+            erro: "No se ha podido transcribir. Escriba la respuesta." }
+    };
+    var dt = DITADO[lingua] || DITADO.pt;
+    var VOZ = { pt: "pt-PT", en: "en-GB", es: "es-ES" };
+    var ICONE = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" ' +
+      'stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/>' +
+      '<path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></svg>';
+    var ativo = null;
+
+    // Junta os segmentos reconhecidos. Em alguns Android cada segmento repete o anterior por inteiro: nesse caso
+    // substitui-o em vez de o somar.
+    var juntar = function (partes) {
+      var r = [];
+      partes.forEach(function (t) {
+        if (!t) { return; }
+        if (r.length && t.toLowerCase().indexOf(r[r.length - 1].toLowerCase()) === 0) { r[r.length - 1] = t; } else { r.push(t); }
+      });
+      return r.join(" ");
+    };
+
+    Array.prototype.forEach.call(ditaveis, function (campo) {
+      var botao = document.createElement("button");
+      var estado = document.createElement("span");
+      var caixa = document.createElement("div");
+      botao.type = "button";
+      botao.className = "ditado__botao tl-text-ui";
+      botao.title = dt.titulo;
+      botao.setAttribute("aria-controls", campo.id);
+      estado.className = "ditado__estado tl-text-ui-sm";
+      estado.setAttribute("aria-live", "polite");
+      caixa.className = "ditado";
+      caixa.appendChild(botao);
+      caixa.appendChild(estado);
+      campo.parentNode.insertBefore(caixa, campo);
+      var marcar = function (a) {
+        botao.innerHTML = ICONE + "<span>" + (a ? dt.parar : dt.ditar) + "</span>";
+        botao.setAttribute("aria-pressed", a ? "true" : "false");
+        botao.classList.toggle("ativo", a);
+      };
+      marcar(false);
+
+      botao.addEventListener("click", function () {
+        if (ativo && ativo.botao === botao) { ativo.rec.stop(); return; }
+        if (ativo) { ativo.rec.abort(); }
+        var rec = new Reconhecimento();
+        var base = campo.value.replace(/\s+$/, "");
+        var aviso = "";
+        rec.lang = VOZ[lingua] || "pt-PT";
+        rec.continuous = true;
+        rec.interimResults = true;
+        rec.onresult = function (e) {
+          var partes = [];
+          for (var i = 0; i < e.results.length; i++) { partes.push(e.results[i][0].transcript.trim()); }
+          var texto = juntar(partes);
+          // Maiúscula no início de uma frase
+          if (!base || /[.!?]$/.test(base)) { texto = texto.charAt(0).toUpperCase() + texto.slice(1); }
+          var valor = (base ? base + " " : "") + texto;
+          campo.value = campo.maxLength > 0 ? valor.slice(0, campo.maxLength) : valor;
+          campo.scrollTop = campo.scrollHeight;
+        };
+        rec.onerror = function (e) {
+          aviso = e.error === "aborted" ? "" : e.error === "no-speech" ? dt.silencio :
+            (e.error === "not-allowed" || e.error === "service-not-allowed" || e.error === "audio-capture") ? dt.permissao : dt.erro;
+        };
+        rec.onend = function () {
+          if (ativo && ativo.rec === rec) { ativo = null; }
+          marcar(false);
+          estado.textContent = aviso || (campo.value.replace(/\s+$/, "") !== base ? dt.fim : "");
+        };
+        try { rec.start(); } catch (x) { estado.textContent = dt.erro; return; }
+        ativo = { rec: rec, botao: botao };
+        marcar(true);
+        estado.textContent = dt.ouvir;
+      });
+    });
+
+    // Ao enviar o formulário, termina o ditado em curso
+    document.addEventListener("submit", function () { if (ativo) { ativo.rec.stop(); } }, true);
   }
 })();
