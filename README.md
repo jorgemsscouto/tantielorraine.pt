@@ -2,9 +2,9 @@
 
 Versão portuguesa do site da Tantie Lorraine's (marca de molhos picantes e compotas de malagueta de Trinidad e Tobago, feitos à mão em Surrey, Londres), baseada no site do Reino Unido, [tantielorraine.co.uk](https://www.tantielorraine.co.uk). Site estático em HTML e CSS, sem dependências nem passo de compilação, construído sobre o design system da marca.
 
-O site é só de apresentação: não há venda nem preços. A página Produtos mostra a gama com o botão "Brevemente". Entidade responsável em Portugal: GADGETMÉTODO, LDA (NIPC 513978011), Rua das Cruzes, n.º 625, 4100-195 Porto.
+O site é só de apresentação: não há venda nem preços. A página Produtos mostra a gama com o botão "Brevemente". Entidade responsável em Portugal e Espanha: GADGETMÉTODO, LDA (NIPC 513978011), Rua das Cruzes, n.º 625, 4100-195 Porto.
 
-## Gama em Portugal
+## Gama em Portugal e Espanha
 
 | Ref. | Produto | Fotografia |
 |---|---|---|
