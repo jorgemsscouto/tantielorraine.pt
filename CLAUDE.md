@@ -35,4 +35,5 @@ Adaptações deste site ao sistema (manter):
 
 - Repositório privado `jorgemsscouto/tantielorraine.pt`, ramo `main`.
 - Depois de cada alteração concluída: commit (mensagem curta em pt-PT) e `git push`.
+- Cada push para `main` publica o site na Amen (GitHub Actions, `.github/workflows/publicar.yml`): só fazer push de trabalho pronto a ser visto. Credenciais só nos segredos do repositório (FTP_HOST, FTP_USER, FTP_PASS, SMTP_PASS), nunca no ficheiro do workflow.
 - Nunca versionar credenciais (`.env`, com os dados FTP e do email; modelo em `.env.example`; `config-email.php`, que só existe no servidor) nem as cópias em `backups/`. Ficheiro sensível novo: acrescentar ao `.gitignore` antes do commit.

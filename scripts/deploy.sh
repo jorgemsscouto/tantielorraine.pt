@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Publica o site estático no alojamento da Amen por FTP (com TLS quando o servidor o aceita), usando o curl
 # que já vem instalado no macOS. Credenciais lidas do .env na raiz (FTP_HOST, FTP_USER, FTP_PASS, FTP_PORT e,
-# opcionais, FTP_DIR e FTP_VERIFICAR_CERTIFICADO=nao; para o formulário, SMTP_USER e SMTP_PASS); nunca são
-# mostradas nem escritas em disco no computador.
+# opcionais, FTP_DIR e FTP_VERIFICAR_CERTIFICADO=nao; para o formulário, SMTP_USER e SMTP_PASS) ou de variáveis
+# de ambiente com os mesmos nomes, que têm prioridade (publicação automática no GitHub, .github/workflows/publicar.yml).
+# Nunca são mostradas nem escritas em disco no computador.
 #
 # Uso:
 #   scripts/deploy.sh testar                  só leitura: testa a ligação e mostra a pasta de entrada e a pasta pública
@@ -11,7 +12,8 @@
 #   scripts/deploy.sh retirar-wordpress [--simular]
 #                                             move os ficheiros do WordPress da pasta pública para uma pasta
 #                                             wordpress-desativado-<data> fora do site; nada é apagado
-#   scripts/deploy.sh configurar-email        põe no servidor, fora da pasta pública, a configuração de envio do
+#   scripts/deploy.sh configurar-email [--sem-teste]
+#                                             põe no servidor, fora da pasta pública, a configuração de envio do
 #                                             formulário (config-email.php) e envia uma mensagem de teste
 #
 # Ordem para trocar o WordPress pelo site estático: testar, backup, enviar --simular, enviar (guarda antes o .htaccess),
@@ -22,28 +24,33 @@ set -euo pipefail
 RAIZ="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$RAIZ"
 ACAO="${1:-}"; [[ $# -gt 0 ]] && shift
-SIMULAR=0
+SIMULAR=0; SEM_TESTE=0
 for arg in "$@"; do
   case "$arg" in
     --simular) SIMULAR=1 ;;
+    --sem-teste) SEM_TESTE=1 ;;
     *) echo "Opção desconhecida: $arg" >&2; exit 1 ;;
   esac
 done
 DATA="$(date +%Y%m%d-%H%M)"
 
-# Credenciais: .env (ou .deploy.env, nome antigo)
+# Credenciais: variáveis de ambiente ou .env (ou .deploy.env, nome antigo)
 ENVF=".env"; [[ -f "$ENVF" ]] || ENVF=".deploy.env"
-[[ -f "$ENVF" ]] || { echo "Falta o ficheiro .env na raiz (ver .env.example)." >&2; exit 1; }
+[[ -f "$ENVF" || -n "${FTP_HOST:-}" ]] || { echo "Falta o ficheiro .env na raiz (ver .env.example)." >&2; exit 1; }
 # Num repositório Git, o .env tem de estar ignorado (numa cópia descarregada em ZIP não há Git, logo não há risco)
-if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+if [[ -f "$ENVF" ]] && git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   git check-ignore -q "$ENVF" || { echo "O $ENVF não está no .gitignore. Parado por segurança." >&2; exit 1; }
 fi
 command -v curl >/dev/null || { echo "Falta o curl." >&2; exit 1; }
 
-ler() { { grep -E "^$1=" "$ENVF" || true; } | tail -n 1 | cut -d= -f2- | tr -d '\r' | sed -e 's/^["'\'']//' -e 's/["'\'']$//'; }
+ler() {
+  if [[ -n "${!1:-}" ]]; then printf '%s' "${!1}"; return; fi
+  [[ -f "$ENVF" ]] || return 0
+  { grep -E "^$1=" "$ENVF" || true; } | tail -n 1 | cut -d= -f2- | tr -d '\r' | sed -e 's/^["'\'']//' -e 's/["'\'']$//'
+}
 FTP_HOST="$(ler FTP_HOST)"; FTP_USER="$(ler FTP_USER)"; FTP_PASS="$(ler FTP_PASS)"
 FTP_PORT="$(ler FTP_PORT)"; FTP_DIR="$(ler FTP_DIR)"; VERIFICAR="$(ler FTP_VERIFICAR_CERTIFICADO)"
-[[ -n "$FTP_HOST" && -n "$FTP_USER" && -n "$FTP_PASS" ]] || { echo "Faltam FTP_HOST, FTP_USER ou FTP_PASS no $ENVF." >&2; exit 1; }
+[[ -n "$FTP_HOST" && -n "$FTP_USER" && -n "$FTP_PASS" ]] || { echo "Faltam FTP_HOST, FTP_USER ou FTP_PASS (no $ENVF ou no ambiente)." >&2; exit 1; }
 FTP_PORT="${FTP_PORT:-21}"
 [[ "$FTP_PORT" == "22" ]] && { echo "Este script usa FTP (porta 21); SFTP não é suportado." >&2; exit 1; }
 BASE="ftp://$FTP_HOST:$FTP_PORT"
@@ -132,7 +139,7 @@ case "$ACAO" in
 
   enviar)
     exigir_publica
-    LISTA="$(find . \( -name .git -o -name .claude -o -name scripts -o -name backups -o -name originais -o -name node_modules \) -prune -o \
+    LISTA="$(find . \( -name .git -o -name .github -o -name .claude -o -name scripts -o -name backups -o -name originais -o -name node_modules \) -prune -o \
       -type f ! -name '.git*' ! -name '.env*' ! -name '.deploy.env*' ! -name '.DS_Store' ! -name 'README.md' ! -name 'CLAUDE.md' \
       ! -name 'config-email.php' \
       -print | sed 's#^\./##' | sort)"
@@ -197,7 +204,11 @@ case "$ACAO" in
     if [[ -n "$FORA" ]]; then
       echo "== A pôr a configuração do email fora da pasta pública ($FORA)..."
       config | ftp -T - "$(url "$FORA")"
-      if [[ "$(verificar)" == *'"configurado":true'* ]]; then ONDE="$FORA"; else
+      if [[ "$(verificar)" == *'"configurado":true'* ]]; then
+        ONDE="$FORA"
+        # Uma cópia antiga dentro da pasta pública (de quando o alojamento não deixava ler fora) deixa de ser precisa
+        ftp -Q "DELE $DENTRO" --list-only "$(url "")" > /dev/null 2>&1 || true
+      else
         echo "   O alojamento não deixa o PHP ler fora da pasta pública; passa para $DENTRO (um .php não é mostrado pelo servidor)."
         ftp -Q "DELE $FORA" --list-only "$(url "")" > /dev/null 2>&1 || true
       fi
@@ -208,6 +219,7 @@ case "$ACAO" in
       ONDE="$DENTRO"
     fi
     echo "   Configuração em $ONDE."
+    [[ $SEM_TESTE -eq 1 ]] && exit 0
     echo "== A enviar uma mensagem de teste pelo formulário do site..."
     RESP="$(curl --silent --show-error --max-time 60 -H 'Accept: application/json' \
       --data-urlencode "nome=Teste do site" --data-urlencode "email=$SMTP_USER" \
@@ -222,7 +234,7 @@ case "$ACAO" in
     ;;
 
   *)
-    sed -n '2,19p' "$0" | sed 's/^# \{0,1\}//'
+    sed -n '2,21p' "$0" | sed 's/^# \{0,1\}//'
     exit 1
     ;;
 esac

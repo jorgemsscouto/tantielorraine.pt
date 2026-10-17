@@ -1,0 +1,67 @@
+# Publica o site no alojamento da Amen sempre que o ramo main muda no GitHub, ou à mão no separador Actions
+# (botão "Run workflow", com a opção de enviar uma mensagem de teste pelo formulário).
+# Usa scripts/deploy.sh com os segredos guardados em Settings > Secrets and variables > Actions:
+# FTP_HOST, FTP_USER, FTP_PASS e SMTP_PASS. Sem os do FTP, a publicação é saltada com um aviso.
+name: Publicar na Amen
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      teste_email:
+        description: Enviar uma mensagem de teste pelo formulário (chega a info@tantielorraine.pt)
+        type: boolean
+        default: false
+
+concurrency:
+  group: publicar
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      FTP_HOST: ${{ secrets.FTP_HOST }}
+      FTP_USER: ${{ secrets.FTP_USER }}
+      FTP_PASS: ${{ secrets.FTP_PASS }}
+      FTP_PORT: "21"
+      FTP_DIR: www
+      SMTP_USER: info@tantielorraine.pt
+      SMTP_PASS: ${{ secrets.SMTP_PASS }}
+      TESTE_EMAIL: ${{ inputs.teste_email }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Confirmar os segredos
+        id: segredos
+        run: |
+          if [[ -z "$FTP_HOST" || -z "$FTP_USER" || -z "$FTP_PASS" ]]; then
+            echo "::warning::Faltam os segredos FTP_HOST, FTP_USER ou FTP_PASS (Settings > Secrets and variables > Actions). O site não foi publicado."
+            echo "ftp=nao" >> "$GITHUB_OUTPUT"
+          else
+            echo "ftp=sim" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Obter os selos que faltam
+        if: steps.segredos.outputs.ftp == 'sim'
+        run: scripts/obter-selos.sh || echo "::warning::Não foi possível obter todos os selos; os que faltam não aparecem no site."
+
+      - name: Enviar o site
+        if: steps.segredos.outputs.ftp == 'sim'
+        run: scripts/deploy.sh enviar
+
+      - name: Configurar o email do formulário
+        if: steps.segredos.outputs.ftp == 'sim'
+        run: |
+          if [[ -z "$SMTP_PASS" ]]; then
+            echo "::warning::Falta o segredo SMTP_PASS: o formulário fica sem configuração de envio."
+          elif [[ "$TESTE_EMAIL" == "true" ]]; then
+            scripts/deploy.sh configurar-email
+          else
+            scripts/deploy.sh configurar-email --sem-teste
+          fi

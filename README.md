@@ -68,7 +68,9 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 | `assets/js/main.js` | Menu em ecrãs pequenos, ano no rodapé e envio do formulário sem sair da página |
 | `.claude/skills/tantie-lorraine-design-system/` | Design system original (regras, tokens, exemplos) |
 | `.htaccess` | Regras para Apache (HTTPS, domínio sem "www", página 404, cache, cabeçalhos de segurança). Sem efeito no alojamento da Amen (ver abaixo); mantido para o caso de mudança de servidor |
-| `scripts/deploy.sh` | Publicação por FTP/FTPS com o curl: testar, backup, enviar, retirar o WordPress |
+| `scripts/deploy.sh` | Publicação por FTP/FTPS com o curl: testar, backup, enviar, retirar o WordPress, configurar o email |
+| `scripts/obter-selos.sh` | Descarrega os selos em falta a partir dos originais do site do Reino Unido |
+| `.github/workflows/publicar.yml` | Publicação automática na Amen a cada alteração no ramo `main` |
 
 ## Por fazer antes de publicar
 
@@ -88,6 +90,23 @@ Para experimentar o formulário é preciso PHP (`php -S localhost:8000`); sem `c
 Abrir http://localhost:8000.
 
 ## Publicar (alojamento da Amen)
+
+### Automática, a partir do GitHub
+
+Cada alteração no ramo `main` publica o site sozinha (`.github/workflows/publicar.yml`, separador Actions do GitHub): obtém os selos que faltam (`scripts/obter-selos.sh`), envia o site e atualiza no servidor a configuração do email do formulário. Não apaga nada no servidor.
+
+Configuração, uma única vez, em Settings > Secrets and variables > Actions > New repository secret:
+
+| Segredo | Valor |
+|---|---|
+| `FTP_HOST` | Servidor FTP da Amen |
+| `FTP_USER` | Utilizador FTP |
+| `FTP_PASS` | Palavra-passe FTP |
+| `SMTP_PASS` | Palavra-passe da caixa info@tantielorraine.pt |
+
+Os segredos ficam cifrados no GitHub e não aparecem nos registos. Sem eles, a publicação é saltada com um aviso. Para publicar sem alterar nada, ou para enviar uma mensagem de teste pelo formulário: Actions > Publicar na Amen > Run workflow (opção "Enviar uma mensagem de teste"). Ao mudar uma palavra-passe, atualizar o segredo e correr de novo.
+
+### A partir do computador
 
 Usa o `curl` que já vem com o macOS (não é preciso instalar nada) e um `.env` na raiz com os dados FTP (modelo em `.env.example`; o `.env` está no `.gitignore` e o script nunca mostra nem grava as credenciais). Funciona por FTP, com TLS quando o servidor o aceita.
 
