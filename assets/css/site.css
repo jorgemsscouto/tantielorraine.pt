@@ -183,14 +183,19 @@ h1, h2, h3, p { margin: 0; }
   .produto { grid-template-columns: 1fr; }
 }
 
-/* Faixa "Brevemente" */
+/* Faixa "Brevemente": compacta, para o primeiro produto aparecer logo no ecrã */
 .aviso {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-btn-compact-y) var(--space-btn-y);
   border: var(--border-button) solid var(--ink);
   border-radius: var(--radius-media);
-  padding: var(--space-card-gap) var(--space-gutter);
-  margin-bottom: var(--seccao-y);
+  padding: var(--space-btn-y) var(--space-card-gap);
+  margin-bottom: var(--space-card-gap);
 }
-.aviso .tl-text-section-title { margin-bottom: var(--space-btn-y); }
+.seccao--abertura { padding-bottom: var(--space-gutter); }
+.seccao--abertura + .seccao--produto { padding-top: var(--space-gutter); }
 
 /* Duas colunas: texto ao lado de fotografia */
 .duas-colunas {
