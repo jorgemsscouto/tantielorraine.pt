@@ -139,7 +139,7 @@ case "$ACAO" in
 
   enviar)
     exigir_publica
-    LISTA="$(find . \( -name .git -o -name .github -o -name .claude -o -name scripts -o -name backups -o -name originais -o -name node_modules \) -prune -o \
+    LISTA="$(find . \( -name .git -o -name .github -o -name .claude -o -name scripts -o -name backups -o -name originais -o -name node_modules -o -name testes -o -name materiais \) -prune -o \
       -type f ! -name '.git*' ! -name '.env*' ! -name '.deploy.env*' ! -name '.DS_Store' ! -name 'README.md' ! -name 'CLAUDE.md' \
       ! -name 'config-email.php' \
       -print | sed 's#^\./##' | sort)"

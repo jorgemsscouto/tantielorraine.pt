@@ -4,6 +4,15 @@ Versão portuguesa do site da Tantie Lorraine's (marca de molhos picantes e comp
 
 O site é só de apresentação: não há venda nem preços. A página Produtos mostra a gama com o botão "Brevemente". Entidade responsável em Portugal e Espanha: GADGETMÉTODO, LDA (NIPC 513978011), Rua das Cruzes, n.º 625, 4100-195 Porto.
 
+## Gestão do projeto
+
+Este repositório é a única fonte do site e de tudo o que lhe diz respeito: o código, as regras e decisões (`CLAUDE.md`), esta documentação, os materiais de apoio (`materiais/`) e os testes (`testes/`). Desde 19/10/2026 o site é gerido a partir daqui, e não a partir de sessões de outros repositórios.
+
+- Sessões novas do Claude Code: abrir com este repositório (`jorgemsscouto/tantielorraine.pt`) como repositório principal, ramo `main`. O Claude lê o `CLAUDE.md` (regras e decisões do utilizador) e este README.
+- Cada push para `main` publica o site (ver "Publicar"). Antes de publicar alterações aos formulários, correr os testes de `testes/`.
+- Credenciais: só nos segredos do repositório no GitHub (publicação) e no `.env` do computador do utilizador; nunca neste repositório.
+- Histórico das decisões: as mensagens dos commits e as datas registadas no `CLAUDE.md`.
+
 ## Gama em Portugal e Espanha
 
 | Ref. | Produto | Fotografia |
@@ -48,6 +57,8 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 | `produtos.html` | Uma secção por referência: fotografia, peso, descrição, ingredientes, alergénios e informação nutricional |
 | `historia.html` | História da marca e da fundadora |
 | `en/`, `es/` | Versões em inglês e espanhol, geradas por `scripts/idiomas.py` (não editar à mão) |
+| `materiais/` | Códigos QR da degustação e ficha de degustação em papel (não publicada; ver `materiais/README.md`) |
+| `testes/` | Teste dos formulários com servidor de email falso (não publicado; ver `testes/README.md`) |
 | `scripts/idiomas.py` | Gera `/en/` e `/es/`, o seletor de língua, o hreflang e o `sitemap.xml` a partir das páginas portuguesas e da tabela de traduções |
 | `publicacoes.html` | Publicações do Instagram da marca, resumidas em português, com ligação para cada uma |
 | `contactos.html`, `privacidade.html`, `404.html` | Contactos (com o formulário de pedido de informação), informação legal, erro |
@@ -77,6 +88,9 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 - Autorização escrita da Lorraine para usar a marca, o logótipo, as fotografias, os textos e os selos dos prémios, incluindo o direito de imagem do retrato dela.
 - Ficheiro original do selo Great Taste 2026 (o atual foi recortado de uma imagem), a pedir à marca.
 - Confirmar com a marca os kcal da SBJ e que a classificação Food Hygiene Rating 5 continua em vigor.
+- Confirmar que os rótulos dos frascos vendidos em Portugal e Espanha indicam 225 g de peso líquido (as fichas técnicas dizem 238 g, e 230 g na ACJ).
+- Fazer um envio real do formulário de degustação no site publicado e confirmar que chegam os dois emails (para info@ e o agradecimento).
+- Antes de abrir a venda em Espanha, validar com um jurista as obrigações de informação ao consumidor espanhol (a política de privacidade e o Livro de Reclamações seguem a lei portuguesa).
 
 ## Línguas
 

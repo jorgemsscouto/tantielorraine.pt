@@ -38,6 +38,11 @@ Adaptações deste site ao sistema (manter):
 - Entidade responsável (Portugal e Espanha): GADGETMÉTODO, LDA, NIPC 513978011, Rua das Cruzes, n.º 625, 4100-195 Porto. Email do site: info@tantielorraine.pt. Os formulários enviam só para info@tantielorraine.pt (decisão do utilizador, 17/10/2026; destinatários em `email-comum.php`). O de contactos (`contacto.php`, nas três línguas) envia também uma confirmação de receção a quem escreveu, na língua da página, que não repete o conteúdo do pedido.
 - Formulário de opinião de degustação (`degustacao.html` e `degustacao.php`, pedidos do utilizador, 17/10/2026): versão curta da ficha em papel da marca (por compota: sabor principal, nota global, compraria, nível de picante e melhor utilização), com a fotografia do ingrediente principal e uma linha com os ingredientes junto de cada nome (nada de siglas sozinhas); só mostra a classificação das compotas marcadas como provadas. Pede local (preenchido por `?local=` nos códigos QR), nome, email e telefone (opcional). Envia a opinião para info@ (em português, gráfico, com as linhas para o Excel) e um agradecimento a quem respondeu, na língua escolhida, sem repetir texto escrito pela pessoa. Campos de texto com ditado por voz do navegador (Web Speech API; o site não recebe áudio; ponto 2 de `privacidade.html`). É página de serviço: fora do menu, do sitemap e do `llms.txt`, com `noindex` e sem JSON-LD (exceção à regra das páginas novas); ligação no fim de `produtos.html`. As chaves dos campos têm de coincidir entre a página e o PHP.
 
+## Testes e materiais
+
+- `testes/`: teste dos formulários com servidor de email falso (`testes/arrancar.sh`, depois `cd testes && npm install && npm test`). Correr antes de publicar alterações a formulários, PHP ou `assets/js/main.js`.
+- `materiais/`: códigos QR e ficha de degustação em papel. Nem `testes/` nem `materiais/` são publicados (`scripts/deploy.sh`).
+
 ## Git
 
 - Repositório privado `jorgemsscouto/tantielorraine.pt`, ramo `main`.
