@@ -42,7 +42,17 @@ const COMPOTAS = [
         'niveis' => ['muito-suave' => 'Muito suave', 'suave' => 'Suave', 'equilibrado' => 'Equilibrado', 'picante' => 'Picante', 'demasiado' => 'Demasiado para mim'],
         'usos' => ['burger' => 'Burger', 'queijo' => 'Queijo', 'carne-grelhada' => 'Carne grelhada', 'sanduiche' => 'Sanduíche', 'ovos' => 'Ovos'],
     ],
+    // Fora da ficha em papel (acrescentada a 23/10/2026): níveis de picante da SBJ e utilizações da publicação da marca
+    'sco' => [
+        'nome' => 'Scorpion Jelly',
+        'criterios' => ['sabor' => 'Sabor do Scorpion', 'global' => 'Nota global', 'compraria' => 'Compraria'],
+        'niveis' => ['suave' => 'Suave', 'equilibrado' => 'Equilibrado', 'picante' => 'Picante', 'muito-picante' => 'Muito picante', 'demasiado' => 'Demasiado para mim'],
+        'usos' => ['queijo' => 'Queijo', 'carne' => 'Carne', 'marinada' => 'Marinada', 'sanduiche' => 'Sanduíche'],
+    ],
 ];
+// Compotas acrescentadas depois das primeiras opiniões: as colunas delas vão no fim da linha para o Excel, para as
+// linhas já guardadas continuarem a coincidir com as colunas
+const COLUNAS_NO_FIM = ['sco'];
 const COMPARACAO = [
     'primeiro' => 'Qual compraria primeiro?',
     'pouco-picante' => 'Qual recomendaria a alguém que não gosta muito de picante?',
@@ -140,8 +150,12 @@ function pontos(string $n, int $d): string
     return $r . '</tr></table>';
 }
 
+// Frasco da compota; enquanto não houver fotografia no servidor, um quadrado escuro do mesmo tamanho
 function foto(string $k, int $d, string $alt): string
 {
+    if (!is_file(__DIR__ . '/assets/img/email/' . $k . '.jpg')) {
+        return '<div style="width:' . $d . 'px;height:' . $d . 'px;border-radius:12px;background:#000000;font-size:0;line-height:0;">&nbsp;</div>';
+    }
     return '<img src="' . SITE . '/assets/img/email/' . $k . '.jpg" width="' . $d . '" height="' . $d . '" alt="' . h($alt) . '" style="display:block;border:0;width:' . $d . 'px;height:' . $d . 'px;border-radius:12px;">';
 }
 
@@ -235,14 +249,17 @@ $lista = implode(', ', array_map($nomeCompota, $provou));
 // Linhas para a folha de cálculo: colunas fixas para todas as compotas (vazias nas que não foram provadas)
 $cab = ['Data', 'Língua', 'Local', 'Nome', 'Email', 'Telefone', 'Provou', 'Preferida', 'Porquê'];
 $val = [$agora->format('Y-m-d H:i'), lingua(), $local, $nome, $email, $telefone, implode(',', $provou), $preferida, $porque];
-foreach (COMPOTAS as $k => $def) {
+$colunas = function (string $k) use ($respostas, &$cab, &$val): void {
     $r = $respostas[$k] ?? null;
-    foreach ($def['criterios'] as $ck => $rotulo) {
+    foreach (COMPOTAS[$k]['criterios'] as $ck => $rotulo) {
         $cab[] = strtoupper($k) . ' ' . $rotulo;
         $val[] = $r ? $r['notas'][$ck] : '';
     }
     array_push($cab, strtoupper($k) . ' Nível de picante', strtoupper($k) . ' Melhor utilização');
     array_push($val, $r ? $r['nivel'] : '', $r ? implode(', ', $r['usos']) : '');
+};
+foreach (array_diff(array_keys(COMPOTAS), COLUNAS_NO_FIM) as $k) {
+    $colunas($k);
 }
 foreach (COMPARACAO as $qk => $pergunta) {
     $cab[] = $pergunta;
@@ -250,6 +267,9 @@ foreach (COMPARACAO as $qk => $pergunta) {
 }
 array_push($cab, 'O que mais gostou', 'O que melhoraria');
 array_push($val, $gostou, $melhoraria);
+foreach (COLUNAS_NO_FIM as $k) {
+    $colunas($k);
+}
 $excel = implode(';', array_map('celula', $cab)) . "\n" . implode(';', array_map('celula', $val));
 
 // Email para a equipa: texto

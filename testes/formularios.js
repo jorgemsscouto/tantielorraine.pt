@@ -26,7 +26,10 @@ async function novos(antes, n) {
         // Cabeçalhos longos vêm em várias linhas e com acentos codificados (RFC 2047): juntar e descodificar
         const assunto = (bruto.replace(/\r?\n[ \t]+/g, ' ').match(/^Subject: (.*)$/m) || [])[1] || '';
         const descodificado = assunto.replace(/\?=\s+=\?/g, '?==?').replace(/=\?UTF-8\?B\?([^?]*)\?=/gi, (_, b) => Buffer.from(b, 'base64').toString('utf8'));
-        return { envelope: bruto.split('\r\n')[0], assunto: descodificado };
+        // Corpo em texto: a primeira parte em base64 (text/plain)
+        const partes = bruto.split(/Content-Transfer-Encoding: base64\r?\n\r?\n/);
+        const texto = partes.length > 1 ? Buffer.from(partes[1].split(/\r?\n--/)[0].replace(/\s+/g, ''), 'base64').toString('utf8') : '';
+        return { envelope: bruto.split('\r\n')[0], assunto: descodificado, texto };
       });
     }
     await espera(200);
@@ -79,6 +82,9 @@ window.SpeechRecognition = Falso;`;
   await e.fill('[name=local]', 'At home');
   await e.check('input[name="provou[]"][value=rpcl]');
   await nota(e, 'rpcl_global', '4');
+  await e.check('input[name="provou[]"][value=sco]');
+  await nota(e, 'sco_global', '5');
+  await e.click('label:has(input[name="sco_uso[]"][value=marinada])');
   await e.fill('[name=nome]', 'John Test');
   await e.fill('[name=email]', mail('john'));
   await espera(3200);
@@ -87,6 +93,11 @@ window.SpeechRecognition = Falso;`;
   await e.waitForSelector('#opiniao-enviada.visivel', { timeout: 15000 });
   em = await novos(antes, 2);
   verificar(em.some(x => new RegExp(mail('john')).test(x.envelope) && /thank you for your feedback/.test(x.assunto)), 'agradecimento em inglês');
+  // Scorpion Jelly: na opinião e nas colunas para o Excel, no fim da linha (as linhas antigas continuam a coincidir)
+  const equipa = em.find(x => /RCPT TO:<info@tantielorraine\.pt>/.test(x.envelope));
+  const [cab = '', val = ''] = equipa ? equipa.texto.split(/\r?\n/).filter(l => l.startsWith('Data;') || /^\d{4}-\d\d-\d\d /.test(l)) : [];
+  verificar(equipa && /Scorpion Jelly \(SCO\)/.test(equipa.texto) && cab.split(';').slice(-5).every(c => c.startsWith('SCO '))
+    && val.split(';').slice(-5).join(';') === ';5;;;Marinada', 'Scorpion Jelly na opinião, com as colunas do Excel no fim');
 
   // Espanhol sem JavaScript: erro sem email, envio completo redireciona para a mensagem de sucesso
   const semJs = await b.newContext({ javaScriptEnabled: false });
