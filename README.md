@@ -21,7 +21,7 @@ Este repositório é a única fonte do site e de tudo o que lhe diz respeito: o 
 | ACJ | Apple Chilli Jam | `assets/img/produtos/acj.webp` |
 | RPCL | Red Pepper Chilli Lime Jam | `assets/img/produtos/rpcl.webp` |
 | TCJ | Tomato Chilli Jam | `assets/img/produtos/tcj.webp` |
-| SCO | Scorpion Jelly (geleia de malagueta, acrescentada a 23/10/2026) | `assets/img/produtos/sco.webp` (em falta) |
+| SCO | Scorpion Jelly (geleia de malagueta, acrescentada a 23/10/2026) | `assets/img/produtos/sco.webp` |
 
 ## Dados dos produtos
 
@@ -33,6 +33,8 @@ Scorpion Jelly (SCO), acrescentada a 23/10/2026: ficha técnica de rótulo da Pr
 
 Logótipo e fotografias são os do site do Reino Unido (inventário de 16 de outubro de 2026), recortados e convertidos para WebP. Cada imagem substitui automaticamente o espaço reservado; se um ficheiro faltar, aparece o espaço reservado, sem ícone de imagem partida. O favicon (`assets/img/favicon.png`, `favicon.ico` na raiz e `assets/img/apple-touch-icon.png`) é o sol do logótipo oficial em `chilli-red`, como no separador do site do Reino Unido.
 
+Scorpion Jelly (SCO): fotografia do frasco enviada pelo utilizador a 23/10/2026, recortada com a escala e a posição das outras quatro (largura da tampa e altura do frasco medidas nas fotografias publicadas). Como o frasco estava mais perto da câmara, o fundo desfocado foi prolongado nas margens (cerca de 2 a 3 % de cada lado e no fundo, por baixo do frasco); o frasco e o rótulo não foram alterados. A imagem enviada tem menos definição do que as outras: trocar pelo original da marca quando houver, com o mesmo recorte. `assets/img/email/sco.jpg` é a mesma fotografia reduzida a 192 x 192, como nas outras.
+
 | Ficheiro | Onde aparece |
 |---|---|
 | `assets/img/logo.png` | Cabeçalho e rodapé (enquanto não existir, aparece o nome em texto) |
@@ -40,7 +42,7 @@ Logótipo e fotografias são os do site do Reino Unido (inventário de 16 de out
 | `assets/img/produtos/<ref>.webp` | Cartões de produto (ver tabela acima) |
 | `assets/img/inicio-tantie.webp` | Página inicial, bloco "Quem é a Tantie?" |
 | `assets/img/sobre.webp` | Página História (retrato 4:5) |
-| `assets/img/ingredientes/<ingrediente>.webp` | Círculo com o ingrediente principal no canto das fotografias de produto: `scotch-bonnet` (SBJ), `maca-verde` (ACJ), `lima` (RPCL), `tomate-cereja` (TCJ), `scorpion` (SCO, em falta). Fotografias enviadas pelo utilizador a 17/10/2026; confirmar que há licença para uso comercial |
+| `assets/img/ingredientes/<ingrediente>.webp` | Círculo com o ingrediente principal no canto das fotografias de produto: `scotch-bonnet` (SBJ), `maca-verde` (ACJ), `lima` (RPCL), `tomate-cereja` (TCJ), `scorpion` (SCO). Fotografias enviadas pelo utilizador a 17/10/2026 (a da SCO a 23/10/2026); confirmar que há licença para uso comercial |
 | `assets/img/selos/great-taste-producer.png` | Rodapé |
 | `assets/img/selos/food-hygiene-rating-5.png`, `great-taste-2019-1-estrela.png`, `great-taste-2021-1-estrela.png`, `great-taste-2024-2-estrelas.png` | Rodapé, sob "Distinções da marca no Reino Unido" |
 | `assets/img/selos/great-taste-2026.png` | Centro do cabeçalho e rodapé (uma estrela). Recortado da imagem enviada pelo utilizador, com o fundo tornado transparente; trocar pelo ficheiro original da Guild of Fine Food quando houver |
@@ -93,7 +95,7 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 - Confirmar com a marca os kcal da SBJ e que a classificação Food Hygiene Rating 5 continua em vigor.
 - Confirmar que os rótulos dos frascos vendidos em Portugal e Espanha indicam 225 g de peso líquido (as fichas técnicas dizem 238 g, e 230 g na ACJ).
 - Fazer um envio real do formulário de degustação no site publicado e confirmar que chegam os dois emails (para info@ e o agradecimento).
-- Scorpion Jelly (SCO): fotografia do frasco (`assets/img/produtos/sco.webp`, e `assets/img/email/sco.jpg` com 192 x 192 para os emails da degustação) e do ingrediente principal (`assets/img/ingredientes/scorpion.webp` e a miniatura em `ingredientes/mini/`). Até lá, aparece o espaço reservado no site e um quadrado escuro nos emails. Confirmar com a marca que o frasco vendido em Portugal e Espanha tem 235 g.
+- Scorpion Jelly (SCO): pedir à marca o original da fotografia do frasco, com mais definição, e confirmar a licença da fotografia da malagueta (ver Imagens). Confirmar com a marca que o frasco vendido em Portugal e Espanha tem 235 g.
 - Antes de abrir a venda em Espanha, validar com um jurista as obrigações de informação ao consumidor espanhol (a política de privacidade e o Livro de Reclamações seguem a lei portuguesa).
 
 ## Línguas
