@@ -21,10 +21,13 @@ Este repositório é a única fonte do site e de tudo o que lhe diz respeito: o 
 | ACJ | Apple Chilli Jam | `assets/img/produtos/acj.webp` |
 | RPCL | Red Pepper Chilli Lime Jam | `assets/img/produtos/rpcl.webp` |
 | TCJ | Tomato Chilli Jam | `assets/img/produtos/tcj.webp` |
+| SCO | Scorpion Jelly (geleia de malagueta, acrescentada a 23/10/2026) | `assets/img/produtos/sco.webp` (em falta) |
 
 ## Dados dos produtos
 
 Peso, ingredientes, alergénios e informação nutricional (por 100 g) vêm das fichas técnicas de rótulo da marca (Project.Kitchen, 15 de outubro de 2026), traduzidos para português. Os ingredientes a negrito são os que a ficha assinala como fonte de sulfitos. A ficha da SBJ é a versão "copy using mash" (com pasta fermentada de Scotch Bonnet) e indica 1210 kJ / 264 kcal, valores incoerentes entre si (1210 kJ correspondem a 289 kcal). A pedido, o site mostra 1210 kJ / 289 kcal (17/10/2026); a marca deve confirmar o valor e corrigir o rótulo, porque o frasco continua a indicar 264 kcal. Peso líquido: as fichas indicam 238 g (SBJ, RPCL e TCJ) e 230 g (ACJ); por indicação do utilizador (17/10/2026), o site mostra 225 g nas quatro referências. O peso do site tem de coincidir com o do rótulo dos frascos vendidos em Portugal e Espanha.
+
+Scorpion Jelly (SCO), acrescentada a 23/10/2026: ainda sem ficha técnica de rótulo, por isso peso, ingredientes, alergénios e informação nutricional estão marcados `[A PREENCHER]` na página Produtos e ficam fora das perguntas frequentes, dos dados estruturados e do `llms.txt`. A descrição usa só factos já confirmados: a malagueta Trinidad Moruga Scorpion (até 2 009 231 unidades de calor Scoville) e "a mais picante da gama", da primeira versão deste site (16/10/2026, a partir do site do Reino Unido), e as utilizações da publicação do Instagram sobre as geleias Scorpion e Ghost (página Publicações).
 
 ## Imagens
 
@@ -37,7 +40,7 @@ Logótipo e fotografias são os do site do Reino Unido (inventário de 16 de out
 | `assets/img/produtos/<ref>.webp` | Cartões de produto (ver tabela acima) |
 | `assets/img/inicio-tantie.webp` | Página inicial, bloco "Quem é a Tantie?" |
 | `assets/img/sobre.webp` | Página História (retrato 4:5) |
-| `assets/img/ingredientes/<ingrediente>.webp` | Círculo com o ingrediente principal no canto das fotografias de produto: `scotch-bonnet` (SBJ), `maca-verde` (ACJ), `lima` (RPCL), `tomate-cereja` (TCJ). Fotografias enviadas pelo utilizador a 17/10/2026; confirmar que há licença para uso comercial |
+| `assets/img/ingredientes/<ingrediente>.webp` | Círculo com o ingrediente principal no canto das fotografias de produto: `scotch-bonnet` (SBJ), `maca-verde` (ACJ), `lima` (RPCL), `tomate-cereja` (TCJ), `scorpion` (SCO, em falta). Fotografias enviadas pelo utilizador a 17/10/2026; confirmar que há licença para uso comercial |
 | `assets/img/selos/great-taste-producer.png` | Rodapé |
 | `assets/img/selos/food-hygiene-rating-5.png`, `great-taste-2019-1-estrela.png`, `great-taste-2021-1-estrela.png`, `great-taste-2024-2-estrelas.png` | Rodapé, sob "Distinções da marca no Reino Unido" |
 | `assets/img/selos/great-taste-2026.png` | Centro do cabeçalho e rodapé (uma estrela). Recortado da imagem enviada pelo utilizador, com o fundo tornado transparente; trocar pelo ficheiro original da Guild of Fine Food quando houver |
@@ -90,6 +93,7 @@ Formato recomendado: WebP, até cerca de 300 KB; produtos quadrados.
 - Confirmar com a marca os kcal da SBJ e que a classificação Food Hygiene Rating 5 continua em vigor.
 - Confirmar que os rótulos dos frascos vendidos em Portugal e Espanha indicam 225 g de peso líquido (as fichas técnicas dizem 238 g, e 230 g na ACJ).
 - Fazer um envio real do formulário de degustação no site publicado e confirmar que chegam os dois emails (para info@ e o agradecimento).
+- Scorpion Jelly (SCO): ficha técnica de rótulo da marca (peso, ingredientes, alergénios, informação nutricional), fotografia do frasco (`assets/img/produtos/sco.webp`) e do ingrediente principal (`assets/img/ingredientes/scorpion.webp`). Decidir se entra no formulário de degustação (a ficha em papel só tem as quatro compotas).
 - Antes de abrir a venda em Espanha, validar com um jurista as obrigações de informação ao consumidor espanhol (a política de privacidade e o Livro de Reclamações seguem a lei portuguesa).
 
 ## Línguas
