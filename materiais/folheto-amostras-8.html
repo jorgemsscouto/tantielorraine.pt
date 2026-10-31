@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <title>Cartão para as amostras, 8 por folha | Tantie Lorraine's</title>
+  <!-- Versão pequena do folheto para os sacos das amostras: oito cartões de 105 x 74,25 mm (A7 deitado) numa folha A4
+       ao alto, em duas colunas e quatro linhas, para cortar pelas linhas tracejadas. Imprimir a 100 % (tamanho real).
+       O código QR é o mesmo do folheto A6 (local "Amostra em casa"). Ver materiais/README.md. -->
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <style>
+    @font-face { font-family: "Anton"; font-weight: 400; src: url("../assets/fonts/anton-latin-400-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Poppins"; font-weight: 600; src: url("../assets/fonts/poppins-latin-600-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Work Sans"; font-weight: 600; src: url("../assets/fonts/work-sans-latin-600-normal.woff2") format("woff2"); }
+    /* Texto corrido em Work Sans Light (fonte da marca, OFL), só para impressão: fica em materiais/fontes, fora do site */
+    @font-face { font-family: "Work Sans"; font-weight: 300; src: url("fontes/work-sans-latin-300-normal.woff2") format("woff2"); }
+    @page { size: A4; margin: 0; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--paper); color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { font-family: var(--font-quote); font-weight: 300; }
+
+    .folha { position: relative; width: 210mm; height: 297mm; display: grid; grid-template-columns: repeat(2, 105mm); grid-template-rows: repeat(4, 74.25mm); }
+    /* Linhas de corte, claras: uma ao alto e três ao baixo */
+    .corte { position: absolute; border: 0 dashed var(--muted); }
+    .corte--v { left: 105mm; top: 0; bottom: 0; border-left-width: 0.2mm; }
+    .corte--h { left: 0; right: 0; border-top-width: 0.2mm; }
+
+    /* Cada cartão tem 6 mm de margem branca em toda a volta: fica igual depois de cortado e longe da margem da impressora */
+    .cartao { padding: 6mm; display: grid; grid-template-columns: 51mm 1fr; gap: 4mm; }
+    .marca { background: var(--chilli-red); padding: 4.5mm 4mm 4mm; display: flex; flex-direction: column; align-items: flex-start; }
+    .marca img { height: 12.5mm; display: block; }
+    .titulo { margin: 3mm 0 0; font-family: var(--font-display); font-weight: 400; font-size: 19pt; line-height: 1.1; text-transform: uppercase; letter-spacing: 0.01em; }
+    .texto { margin: auto 0 0; font-weight: 600; font-size: 6.3pt; line-height: 1.4; }
+    .opiniao { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .chamada { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 10pt; line-height: 1.15; text-transform: uppercase; letter-spacing: 0.02em; }
+    .qr { width: 31mm; height: 31mm; margin: 1.5mm 0 1mm; display: block; }
+    .instrucao { margin: 0; font-size: 6pt; line-height: 1.35; }
+    .endereco { margin: 0.8mm 0 0; font-family: var(--font-product); font-weight: 600; font-size: 5.6pt; }
+  </style>
+</head>
+<body>
+  <div class="folha">
+    <section class="cartao">
+      <div class="marca">
+        <img src="../assets/img/logo.png" alt="Tantie Lorraine's">
+        <h1 class="titulo">Obrigado<br>por provar</h1>
+        <p class="texto">Compotas e geleia de malagueta com sabores de Trinidad e Tobago, feitas à mão em Surrey, Londres.</p>
+      </div>
+      <div class="opiniao">
+        <h2 class="chamada">Dê-nos a sua opinião</h2>
+        <img class="qr" src="qr-amostras.svg" alt="Código QR do inquérito de degustação">
+        <p class="instrucao">Aponte a câmara do telemóvel.<br>Em português, inglês e espanhol.</p>
+        <p class="endereco">tantielorraine.pt/degustacao.html</p>
+      </div>
+    </section>
+    <!-- Os outros sete cartões são cópias deste (acrescentadas ao abrir a página) -->
+    <div class="corte corte--v"></div>
+    <div class="corte corte--h" style="top: 74.25mm"></div>
+    <div class="corte corte--h" style="top: 148.5mm"></div>
+    <div class="corte corte--h" style="top: 222.75mm"></div>
+  </div>
+  <script>
+    var c = document.querySelector('.cartao');
+    for (var i = 0; i < 7; i++) c.parentNode.insertBefore(c.cloneNode(true), c.nextElementSibling);
+  </script>
+</body>
+</html>
