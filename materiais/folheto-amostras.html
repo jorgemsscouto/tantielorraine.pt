@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <title>Folheto para as amostras | Tantie Lorraine's</title>
+  <!-- Folheto para os sacos das amostras: quatro A6 numa folha A4, para cortar ao meio nos dois sentidos.
+       Imprimir a 100 % (tamanho real), sem margens da impressora a reduzir a página. O PDF é gerado a partir deste
+       ficheiro (ver materiais/README.md). O código QR abre o inquérito com o local "Amostra em casa" já preenchido. -->
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <style>
+    @font-face { font-family: "Anton"; font-weight: 400; src: url("../assets/fonts/anton-latin-400-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Poppins"; font-weight: 600; src: url("../assets/fonts/poppins-latin-600-normal.woff2") format("woff2"); }
+    /* Texto corrido em Work Sans Light (fonte da marca, OFL), só para impressão: fica em materiais/fontes, fora do site */
+    @font-face { font-family: "Work Sans"; font-weight: 300; src: url("fontes/work-sans-latin-300-normal.woff2") format("woff2"); }
+    @page { size: A4; margin: 0; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--paper); color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { font-family: var(--font-quote); font-weight: 300; }
+
+    .folha { position: relative; width: 210mm; height: 297mm; display: grid; grid-template-columns: 105mm 105mm; grid-template-rows: 148.5mm 148.5mm; }
+    /* Linhas de corte, claras, ao meio da folha */
+    .corte { position: absolute; border: 0 dashed var(--muted); }
+    .corte--v { left: 105mm; top: 0; bottom: 0; border-left-width: 0.2mm; }
+    .corte--h { top: 148.5mm; left: 0; right: 0; border-top-width: 0.2mm; }
+
+    /* Cada folheto tem 7 mm de margem branca em toda a volta: fica igual depois de cortado e longe da margem da impressora */
+    .folheto { padding: 7mm; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .topo { width: 100%; background: var(--chilli-red); padding: 6mm 5mm 5mm; display: flex; flex-direction: column; align-items: center; gap: 3.5mm; }
+    .topo img { height: 19mm; display: block; }
+    .titulo { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 21pt; line-height: 1.2; text-transform: uppercase; letter-spacing: 0.01em; }
+    .texto { margin: 4.5mm 2mm 0; font-size: 8.5pt; line-height: 1.45; }
+    .traco { width: 12mm; height: 0.8mm; background: var(--chilli-red); margin: 4mm 0 3.5mm; }
+    .chamada { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 13pt; line-height: 1.2; text-transform: uppercase; letter-spacing: 0.02em; }
+    .qr { width: 37mm; height: 37mm; margin: 2mm 0 1.5mm; display: block; }
+    .instrucao { margin: 0; font-size: 7.5pt; line-height: 1.4; }
+    .endereco { margin: 1mm 0 0; font-family: var(--font-product); font-weight: 600; font-size: 7pt; letter-spacing: 0.01em; }
+    .rodape { margin-top: auto; width: 100%; padding-top: 2.5mm; border-top: 0.25mm solid var(--ink); font-size: 6.5pt; line-height: 1.35; color: var(--plum-grey); }
+  </style>
+</head>
+<body>
+  <div class="folha">
+    <section class="folheto">
+      <div class="topo">
+        <img src="../assets/img/logo.png" alt="Tantie Lorraine's">
+        <h1 class="titulo">Obrigado por provar</h1>
+      </div>
+      <p class="texto">Compotas e geleia de malagueta com sabores de Trinidad e Tobago, feitas à mão em pequenos lotes em Surrey, Londres.</p>
+      <div class="traco"></div>
+      <h2 class="chamada">Dê-nos a sua opinião</h2>
+      <img class="qr" src="qr-amostras.svg" alt="Código QR do inquérito de degustação">
+      <p class="instrucao">Aponte a câmara do telemóvel ao código.<br>Inquérito em português, inglês e espanhol.</p>
+      <p class="endereco">tantielorraine.pt/degustacao.html</p>
+      <p class="rodape">Brevemente em Portugal e Espanha · Instagram @tantielorraine</p>
+    </section>
+    <!-- Os outros três folhetos são cópias deste (acrescentadas ao abrir a página) -->
+    <div class="corte corte--v"></div>
+    <div class="corte corte--h"></div>
+  </div>
+  <script>
+    var f = document.querySelector('.folheto');
+    for (var i = 0; i < 3; i++) f.parentNode.insertBefore(f.cloneNode(true), f.nextElementSibling);
+  </script>
+</body>
+</html>
