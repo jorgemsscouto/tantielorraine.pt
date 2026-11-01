@@ -53,6 +53,9 @@ const COMPOTAS = [
 // Compotas acrescentadas depois das primeiras opiniões: as colunas delas vão no fim da linha para o Excel, para as
 // linhas já guardadas continuarem a coincidir com as colunas
 const COLUNAS_NO_FIM = ['sco'];
+// Valor que a pessoa daria por uma compota de 225 g (pergunta acrescentada a 01/11/2026; coluna a seguir às da SCO)
+const VALORES = ['6-8' => '6 € a 8 €', '8-10' => '8 € a 10 €', '10-12' => '10 € a 12 €'];
+const PERGUNTA_VALOR = 'Que valor daria por uma compota Tantie Lorraine de 225 g?';
 const COMPARACAO = [
     'primeiro' => 'Qual compraria primeiro?',
     'pouco-picante' => 'Qual recomendaria a alguém que não gosta muito de picante?',
@@ -242,6 +245,8 @@ $comparacao = [];
 foreach (COMPARACAO as $qk => $pergunta) {
     $comparacao[$qk] = $varias ? escolha('comp_' . $qk, $provou) : '';
 }
+$valor = escolha('valor', array_keys(VALORES));
+$valor = $valor !== '' ? VALORES[$valor] : '';
 $agora = new DateTime('now', new DateTimeZone('Europe/Lisbon'));
 $nomeCompota = function (string $k): string { return COMPOTAS[$k]['nome'] . ' (' . strtoupper($k) . ')'; };
 $lista = implode(', ', array_map($nomeCompota, $provou));
@@ -270,6 +275,8 @@ array_push($val, $gostou, $melhoraria);
 foreach (COLUNAS_NO_FIM as $k) {
     $colunas($k);
 }
+$cab[] = 'Valor que daria (225 g)';
+$val[] = $valor;
 $excel = implode(';', array_map('celula', $cab)) . "\n" . implode(';', array_map('celula', $val));
 
 // Email para a equipa: texto
@@ -294,7 +301,8 @@ if ($varias) {
         $texto .= '  ' . $pergunta . ' ' . ($comparacao[$qk] !== '' ? $nomeCompota($comparacao[$qk]) : '-') . "\n";
     }
 }
-$texto .= "\nO que mais gostou na degustação?\n" . ($gostou !== '' ? $gostou : '-') . "\n"
+$texto .= "\n" . PERGUNTA_VALOR . ' ' . ($valor !== '' ? $valor : '-') . "\n"
+    . "\nO que mais gostou na degustação?\n" . ($gostou !== '' ? $gostou : '-') . "\n"
     . "\nO que melhoraria em alguma das compotas?\n" . ($melhoraria !== '' ? $melhoraria : '-') . "\n"
     . "\n--\nPara colar no Excel (colunas separadas por \";\"):\n" . $excel . "\n";
 
@@ -341,7 +349,9 @@ if ($varias) {
     $html .= '<p style="margin:24px 0 4px;padding-top:16px;border-top:2px solid #000000;' . ESTILO_TITULO . 'font-size:20px;line-height:26px;">Comparação final</p>'
         . '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">' . $linhas . '</table>';
 }
-$html .= '<p style="margin:24px 0 4px;padding-top:16px;border-top:2px solid #000000;' . ESTILO_TITULO . 'font-size:20px;line-height:26px;">Comentários</p>'
+$html .= '<p style="margin:24px 0 4px;padding-top:16px;border-top:2px solid #000000;' . ESTILO_TITULO . 'font-size:20px;line-height:26px;">Valor</p>'
+    . $rotulo(PERGUNTA_VALOR) . '<p style="margin:0 0 12px;">' . ($valor !== '' ? '<strong>' . h($valor) . '</strong>' : '-') . '</p>'
+    . '<p style="margin:24px 0 4px;padding-top:16px;border-top:2px solid #000000;' . ESTILO_TITULO . 'font-size:20px;line-height:26px;">Comentários</p>'
     . $rotulo('O que mais gostou na degustação') . '<p style="margin:0 0 12px;">' . $livre($gostou) . '</p>'
     . $rotulo('O que melhoraria em alguma das compotas') . '<p style="margin:0 0 12px;">' . $livre($melhoraria) . '</p>'
     . '<p style="margin:24px 0 4px;padding-top:16px;border-top:2px solid #000000;' . ESTILO_TITULO . 'font-size:20px;line-height:26px;">Para colar no Excel</p>'

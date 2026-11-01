@@ -566,6 +566,15 @@ PAGINA = {
     ('>Malagueta Scorpion</span>', '>Scorpion chilli</span>', '>Chile Scorpion</span>'),
     ('>Sabor do Scorpion</span><div class="escala"', '>Scorpion flavour</span><div class="escala"', '>Sabor del Scorpion</span><div class="escala"'),
     ('<span class="opcao__texto">Marinada</span>', '<span class="opcao__texto">Marinade</span>', '<span class="opcao__texto">Adobo</span>'),
+    ('<strong>Ordem sugerida:</strong> prove da menos picante para a mais picante, pela ordem em que aparecem abaixo: Apple Chilli Jam, Tomato Chilli Jam, Red Pepper Chilli Lime Jam, Scotch Bonnet Jam e, por fim, Scorpion Jelly.',
+     '<strong>Suggested order:</strong> taste them from the mildest to the hottest, in the order shown below: Apple Chilli Jam, Tomato Chilli Jam, Red Pepper Chilli Lime Jam, Scotch Bonnet Jam and, last of all, Scorpion Jelly.',
+     '<strong>Orden sugerido:</strong> pruébelas de la menos picante a la más picante, en el orden en que aparecen abajo: Apple Chilli Jam, Tomato Chilli Jam, Red Pepper Chilli Lime Jam, Scotch Bonnet Jam y, por último, Scorpion Jelly.'),
+    ('>Que valor daria por uma compota Tantie Lorraine de 225 g?</legend>',
+     '>How much would you pay for a 225 g jar of Tantie Lorraine jam?</legend>',
+     '>¿Cuánto pagaría por un tarro de mermelada Tantie Lorraine de 225 g?</legend>'),
+    ('<span class="opcao__texto">6 € a 8 €</span>', '<span class="opcao__texto">€6 to €8</span>', '<span class="opcao__texto">6 € a 8 €</span>'),
+    ('<span class="opcao__texto">8 € a 10 €</span>', '<span class="opcao__texto">€8 to €10</span>', '<span class="opcao__texto">8 € a 10 €</span>'),
+    ('<span class="opcao__texto">10 € a 12 €</span>', '<span class="opcao__texto">€10 to €12</span>', '<span class="opcao__texto">10 € a 12 €</span>'),
 ],
 }
 

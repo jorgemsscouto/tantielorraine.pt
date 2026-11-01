@@ -353,6 +353,9 @@ h1, h2, h3, p { margin: 0; }
 .escala input:focus-visible + span { outline: 3px solid var(--ink); outline-offset: 2px; }
 .degustacao .amostra { display: grid; gap: var(--space-btn-y); padding-top: var(--space-card-gap); border-top: var(--border-button) solid var(--ink); }
 .amostra__titulo { float: left; width: 100%; margin-bottom: var(--space-btn-compact-y); display: flex; align-items: center; gap: var(--space-card-gap); }
+/* Degustação: ordem de prova sugerida, separada da escala das notas */
+.ordem-prova { margin-top: var(--space-btn-y); }
+
 /* Ingrediente principal em miniatura junto do nome, para orientar a escolha (o frasco ficava pequeno demais) */
 .mini { width: 36px; height: 36px; margin: -4px 0 -4px -8px; border-radius: 50%; object-fit: cover; flex: none; }
 /* Nome da compota com o ingrediente principal por baixo, para quem não conhece as siglas */

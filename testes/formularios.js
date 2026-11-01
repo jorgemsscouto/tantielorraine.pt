@@ -54,6 +54,9 @@ window.SpeechRecognition = Falso;`;
   await p.goto(BASE + '/degustacao.html?local=Mercado%20do%20Bolh%C3%A3o', { waitUntil: 'networkidle' });
   verificar(await p.inputValue('[name=local]') === 'Mercado do Bolhão', 'local preenchido pelo endereço (?local=)');
   verificar(await p.locator('[data-amostra]:visible').count() === 0, 'sem compotas marcadas, não aparece nenhuma classificação');
+  verificar((await p.$$eval('input[name="provou[]"]', l => l.map(i => i.value))).join() === 'acj,tcj,rpcl,sbj,sco'
+    && (await p.$$eval('[data-amostra]', l => l.map(f => f.dataset.amostra))).join() === 'acj,tcj,rpcl,sbj,sco', 'compotas pela ordem sugerida, da menos para a mais picante');
+  verificar(await p.isVisible('input[name=valor][value="6-8"]'), 'pergunta do valor visível mesmo sem compotas marcadas');
   await p.check('input[name="provou[]"][value=sbj]');
   verificar(await p.locator('[data-amostra]:visible').count() === 1 && !(await p.isVisible('[data-varias]')), 'uma compota: só a sua classificação, sem preferida nem comparação');
   await p.check('input[name="provou[]"][value=tcj]');
@@ -85,6 +88,7 @@ window.SpeechRecognition = Falso;`;
   await e.check('input[name="provou[]"][value=sco]');
   await nota(e, 'sco_global', '5');
   await e.click('label:has(input[name="sco_uso[]"][value=marinada])');
+  await e.click('label:has(input[name=valor][value="8-10"])');
   await e.fill('[name=nome]', 'John Test');
   await e.fill('[name=email]', mail('john'));
   await espera(3200);
@@ -96,8 +100,10 @@ window.SpeechRecognition = Falso;`;
   // Scorpion Jelly: na opinião e nas colunas para o Excel, no fim da linha (as linhas antigas continuam a coincidir)
   const equipa = em.find(x => /RCPT TO:<info@tantielorraine\.pt>/.test(x.envelope));
   const [cab = '', val = ''] = equipa ? equipa.texto.split(/\r?\n/).filter(l => l.startsWith('Data;') || /^\d{4}-\d\d-\d\d /.test(l)) : [];
-  verificar(equipa && /Scorpion Jelly \(SCO\)/.test(equipa.texto) && cab.split(';').slice(-5).every(c => c.startsWith('SCO '))
-    && val.split(';').slice(-5).join(';') === ';5;;;Marinada', 'Scorpion Jelly na opinião, com as colunas do Excel no fim');
+  verificar(equipa && /Scorpion Jelly \(SCO\)/.test(equipa.texto) && cab.split(';').slice(-6, -1).every(c => c.startsWith('SCO '))
+    && val.split(';').slice(-6, -1).join(';') === ';5;;;Marinada', 'Scorpion Jelly na opinião, com as colunas do Excel no fim');
+  verificar(equipa && cab.split(';').pop() === 'Valor que daria (225 g)' && val.split(';').pop() === '8 € a 10 €'
+    && /de 225 g\? 8 € a 10 €/.test(equipa.texto), 'valor que daria: no email e na última coluna do Excel');
 
   // Espanhol sem JavaScript: erro sem email, envio completo redireciona para a mensagem de sucesso
   const semJs = await b.newContext({ javaScriptEnabled: false });
